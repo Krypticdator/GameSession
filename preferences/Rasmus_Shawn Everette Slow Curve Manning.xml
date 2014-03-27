@@ -1,0 +1,217 @@
+<Character>
+	<info>
+		<player>Rasmus</player>
+		<first_name>Shawn</first_name>
+		<second_name>Everette</second_name>
+		<last_name>Manning</last_name>
+		<alias>Slow Curve</alias>
+		<age>26</age>
+	</info>
+	<family>
+		<family_rank>Rich</family_rank>
+		<parents>Father</parents>
+		<parent_status>Something has happened to one or both parents.</parent_status>
+		<parent_event>Your parent(s) died in warfare</parent_event>
+		<family_status>Family status in danger</family_status>
+		<family_event>Family is involved in a longterm conspiracy, organization or association</family_event>
+		<childhood_enviroment>Under the supervision of older sibling or relative.</childhood_enviroment>
+		<childhood_trauma_fortune>Held hostage for short period of time.</childhood_trauma_fortune>
+		<family_contact>Only annual contact with one family member.</family_contact>
+		<siblings>
+		<sibling age="27" gender="Male" relation="They hero  worship you">Marlon Ike Bloody Split Manning</sibling>
+		<sibling age="28" gender="Female" relation="They hate you">Lieselotte Helena Blue Arm Manning</sibling>
+		<sibling age="29" gender="Male" relation="They hero  worship you">Donn Dudley Shy Stone Manning</sibling>
+		</siblings>
+	</family>
+	<personality>
+		<prime_motivation>Knowledge</prime_motivation>
+		<most_valued_person>A personal hero</most_valued_person>
+		<most_valued_posession>photograph</most_valued_posession>
+		<feels_about_people>People are untrustworthy. Don't depend on anyone</feels_about_people>
+		<inmode>Driven</inmode>
+		<exmode>Sober/Secretive</exmode>
+		<quirk>Impatient</quirk>
+		<quirk>Cunning</quirk>
+		<quirk>Obsessive</quirk>
+		<quirk>Insomniac</quirk>
+		<disorder>None</disorder>
+		<phobia>Onomatophobia (hearing a certain word)</phobia>
+		<clothes>Corporate Suits</clothes>
+		<clothes>Utilitarian</clothes>
+		<clothes>Normal Clothes</clothes>
+		<clothes>Leathers</clothes>
+	</personality>
+	<skills>
+		<skill type="Gyro Tech">0</skill>
+		<skill type="Heavy Weapons">0</skill>
+		<skill type="Pick Lock">0</skill>
+		<skill type="Perform">0</skill>
+		<skill type="Lipreading">0</skill>
+		<skill type="Bribery">0</skill>
+		<skill type="Interview">3</skill>
+		<skill type="Shadow / Track">0</skill>
+		<skill type="Disguise">2</skill>
+		<skill type="Medical Tech">0</skill>
+		<skill type="Education &amp; Gen Know">2</skill>
+		<skill type="Botany">0</skill>
+		<skill type="Power Armor">0</skill>
+		<skill type="Rifle">0</skill>
+		<skill type="Awarness / Notice">5</skill>
+		<skill type="AV Tech">0</skill>
+		<skill type="Motorcycle">0</skill>
+		<skill type="Physics">0</skill>
+		<skill type="Inferface">0</skill>
+		<skill type="Submachinegun">5</skill>
+		<skill type="Dodge &amp; Escape">3</skill>
+		<skill type="Endurance">0</skill>
+		<skill type="Archery">0</skill>
+		<skill type="Demolitions">0</skill>
+		<skill type="Streetwise">0</skill>
+		<skill type="CyberTech">0</skill>
+		<skill type="Pilot (Vect. Thrust)">0</skill>
+		<skill type="Surveillance">0</skill>
+		<skill type="Elect. Security">0</skill>
+		<skill type="Resistance">3</skill>
+		<skill type="Melee">0</skill>
+		<skill type="Anthropology">3</skill>
+		<skill type="Brawling / Hand To Hand">0</skill>
+		<skill type="Pilot (Fixed Wing)">0</skill>
+		<skill type="Personal Grooming">2</skill>
+		<skill type="Gunnery">0</skill>
+		<skill type="Fencing">0</skill>
+		<skill type="Mecha Tech">0</skill>
+		<skill type="Stealth">0</skill>
+		<skill type="Teaching">0</skill>
+		<skill type="Dance">0</skill>
+		<skill type="Pick Pocket">0</skill>
+		<skill type="Photo &amp; Film">0</skill>
+		<skill type="Handgun">0</skill>
+		<skill type="Weaponsmith">0</skill>
+		<skill type="Expert">0</skill>
+		<skill type="Wilderness Survival">0</skill>
+		<skill type="Athletics">0</skill>
+		<skill type="Swimming">0</skill>
+		<skill type="Animal Handling">0</skill>
+		<skill type="First Aid">0</skill>
+		<skill type="Human Perception">4</skill>
+		<skill type="Link (mecha)">0</skill>
+		<skill type="Interrogation">4</skill>
+		<skill type="Pilot (Gyro)">0</skill>
+		<skill type="Library Search">3</skill>
+		<skill type="Pharmaceuticals">0</skill>
+		<skill type="Driving" chipped="yes">3</skill>
+		<skill type="Leadership">0</skill>
+		<skill type="Coding">0</skill>
+		<skill type="Cryotank Operation">0</skill>
+		<skill type="Play Instrument">0</skill>
+		<skill type="Oratory">0</skill>
+		<skill type="Piloting">0</skill>
+		<skill type="Social Etiquette">0</skill>
+		<skill type="Strength Feat">0</skill>
+		<skill type="Diagnose Illness">0</skill>
+		<skill type="Ventriloquist">0</skill>
+		<skill type="Paint or Draw">0</skill>
+		<skill type="Hide / Evade">2</skill>
+		<skill type="Chemistry">0</skill>
+		<skill type="Forgery">0</skill>
+		<skill type="Hvy. Machinery">0</skill>
+		<skill type="Intimidate">0</skill>
+		<skill type="Language">0</skill>
+		<skill type="Geology">0</skill>
+		<skill type="Gamble">0</skill>
+		<skill type="Seduction">3</skill>
+		<skill type="Basic Tech">2</skill>
+		<skill type="Composition">0</skill>
+		<skill type="Subjock">0</skill>
+		<skill type="Accounting">0</skill>
+		<skill type="Pilot (Dirigible)">0</skill>
+		<skill type="Electronics">0</skill>
+		<skill type="Wardrobe &amp; Style">0</skill>
+		<skill type="Market Trading">0</skill>
+		<skill type="Aero Tech">0</skill>
+		<skill type="Jury Rig">0</skill>
+		<skill type="Mathematics">0</skill>
+		<skill type="Zoology">0</skill>
+		<skill type="Persuasion &amp; Fast Talk">4</skill>
+		<skill type="Biology">0</skill>
+		<skill type="History">0</skill>
+	</skills>
+	<attributes>
+		<attribute type="Will">7</attribute>
+		<attribute type="Tech">4</attribute>
+		<attribute type="Move">4</attribute>
+		<attribute type="Str">3</attribute>
+		<attribute type="Con">4</attribute>
+		<attribute type="End">8</attribute>
+		<attribute type="Stun">30</attribute>
+		<attribute type="Fun">0</attribute>
+		<attribute type="Run">8</attribute>
+		<attribute type="Tiredness">0</attribute>
+		<attribute type="Res">21</attribute>
+		<attribute type="Pre">9</attribute>
+		<attribute type="Swim">4</attribute>
+		<attribute type="Hits">30</attribute>
+		<attribute type="SD">8</attribute>
+		<attribute type="Body">6</attribute>
+		<attribute type="Hunger">0</attribute>
+		<attribute type="Dex">5</attribute>
+		<attribute type="Rec">3.5</attribute>
+		<attribute type="Ref">5</attribute>
+		<attribute type="Luck">6.5</attribute>
+		<attribute type="Sprint">12</attribute>
+		<attribute type="Int">8</attribute>
+		<attribute type="Hum">70</attribute>
+		<attribute type="Leap">4</attribute>
+	</attributes>
+	<perks>
+		<perk type="Membership">2</perk>
+		<perk type="Contact(Tamisha Kathlyn Huge Hole Tucker)">3</perk>
+		<perk type="Credibility">3</perk>
+		<perk type="Streetdeal">2</perk>
+	</perks>
+	<talents>
+		<talent type="Beatiful / Handsome">1</talent>
+		<talent type="Light sleeper">1</talent>
+		<talent type="Acute Senses">1</talent>
+		<talent type="Speed Reeder">1</talent>
+		<talent type="Intuition">1</talent>
+	</talents>
+	<complications>
+		<complication frequency="5" importance="2" intensity="5" type="Susceptibility">5.0</complication>
+		<complication frequency="10" importance="2" intensity="5" type="Vow">7.5</complication>
+		<complication frequency="5" importance="5" intensity="10" type="Addiction">3.0</complication>
+		<complication frequency="10" importance="2" intensity="10" type="Obsessed">10.0</complication>
+	</complications>
+	<cyberwears>
+		<cyberwear name="Processor">1.0
+		<option name="Chipware Socket">6.0</option>
+		</cyberwear>
+		<cyberwear name="Cyberoptic">4.0
+		<option name="Digital Camera">0.5</option>
+		</cyberwear>
+	</cyberwears>
+	<items>
+		<item type="weapon">Arasaka WMA (Silenced)</item>
+		<item type="armor">fibremesh ballistic cloth fashionware body/surf/wetsuit</item>
+		<item type="item">Agent (Basic)</item>
+		<item type="item">Armored Trenchcoat (Sp10)</item>
+		<item type="item">Datachips (3 Total; You Decide What&#8217;s In &#8216;Em)</item>
+		<item type="item">Light Submachinegun (Choose Type)</item>
+		<item type="item">Ammo (50 Rounds)</item>
+		<item type="item">Bivvybag (For Nights On The Street/Road)</item>
+	</items>
+	<lifepath>
+		<event age="15" betrayel_type="your secret was exposed" disaster_type="betrayel" type="disaster" />
+		<event age="16" cause="You just didn't like each other" enemy_type="Boostergang member" reaction="Avoid the scum" relation="You hate them" resources="An entire Gang" type="enemy" />
+		<event age="17" cause="Caused the loss of a lover, friend or relative" enemy_type="Neo-Corporate Exec" reaction="Backstab him indirectly" relation="The feeling's mutual" resources="A small Corp or Local Altcult" type="enemy" />
+		<event age="18" type="Nothing Happened That Year" />
+		<event age="19" love_type="with problems" problem="Your friends/family hate your lover" type="love" />
+		<event age="20" love_type="happy" type="love" />
+		<event age="21" love_type="tragic love" mutual_feelings="You hate them" tragic_type="Lover died in accident" type="love" />
+		<event age="22" type="Nothing Happened That Year" />
+		<event age="23" type="Nothing Happened That Year" />
+		<event age="24" love_type="happy" type="love" />
+		<event age="25" type="Nothing Happened That Year" />
+		<event age="26" disaster_type="drugs/illness" effect="-1 ref" type="disaster" />
+	</lifepath>
+</Character>
