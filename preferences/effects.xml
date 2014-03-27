@@ -1,0 +1,11 @@
+<effects>
+	<effect>
+		<source>beatiful / handsome</source>
+		<duration>permanent</duration>
+		<modifier type="positive" counted="every_source_lvl">1</modifier>
+		<target_type>skill</target_type>
+		<target_name>seduction</target_name>
+		<target_name>personal grooming</target_name>
+	</effect>
+
+</effects>

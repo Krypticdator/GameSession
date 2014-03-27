@@ -44,6 +44,7 @@ class XmlController(object):
             return tree
         except Exception:
             print('error')
+          
             return 'error'
     
     def read_table_names(self):
@@ -109,7 +110,10 @@ class XmlController(object):
             for cell in data:
                 temp = []
                 for param in tag_params:
-                    temp.append(cell.get(param))
+                    try:
+                        temp.append(cell.get(param))
+                    except Exception:
+                        pass
                 set.append(temp)
             return set
 

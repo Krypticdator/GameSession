@@ -51,6 +51,12 @@ class Preferences(FileControl):
             sources = [array[1], array[2]]
             derived = Stat(name=array[0],type='derived',source_stats=sources, multiplier=array[3], divider=array[4])
             self.__derived_stats[array[0]]=derived
+
+    def load_effects(self):
+        x = XmlController()
+        x.load_file('preferences/effects.xml')
+        params = ['type', 'counted']
+        temp = x.get_dataset('effect', False,False, True, tag_params=params)
         
 
     def load_skills(self):
@@ -124,6 +130,8 @@ class Preferences(FileControl):
         character.add_stat_collection(skills)
 
         #print(stats)
+   
+
 
 
     def get_stat(self, name):

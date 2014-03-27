@@ -102,6 +102,12 @@ class Character(GameObject):
     def save(self):
         pass
 
+    def __str__(self):
+        returned = ''
+        for key, value in self.get_all_attributes().items():
+            returned = returned + str(value) + '\n'
+        return returned
+
 class Stat(GameObject):
     def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0, importance=0, intensity=0, original=0, description='undefined', category='undefined', isChippable=False, source_stats=[], divider=1, multiplier=1):
         super().__init__()
