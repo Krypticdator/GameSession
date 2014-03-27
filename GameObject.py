@@ -31,11 +31,14 @@ class GameObject(object):
             except Exception:
                 return 0
     def destroy_attribute(self, name):
-        if self.dictionary:
-            pass
-        else:
-            self.__keys.remove(name)
-            self.__attributes.remove(name)
+        try:
+            if self.dictionary:
+                del self.__attributes[name]
+            else:
+                self.__keys.remove(name)
+                self.__attributes.remove(name)
+        except Exception:
+            print('could not delete')
                 
 
     def get_all_attributes(self):
