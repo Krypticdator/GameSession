@@ -118,7 +118,11 @@ class Preferences(FileControl):
         x=XmlController()
         x.load_file('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         stats = x.get_dataset('attributes', dictionary = True, dict_tag_name='type')
+        skills = x.get_dataset('skills',True, dict_tag_name='type')
+
         character.add_stat_collection(stats)
+        character.add_stat_collection(skills)
+
         #print(stats)
 
 
@@ -147,6 +151,14 @@ class Preferences(FileControl):
     def commit_to_master(self, dictionary):
         for key, value in dictionary.items():
             self.__master_directory[key]=value
+
+    def get_from_master(self, name):
+        attribute = Stat()
+        try:
+            attribute = self.__master_directory[name]
+        except Exception:
+            pass
+        return attribute
 
     def load_probabilities(self):
         file = self.read_file_to_segments('preferences/math_results.txt',';',True)

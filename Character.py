@@ -21,10 +21,27 @@ class Character(GameObject):
         stat = self.get_attribute(name)
         return stat.get_attribute(attribute)
 
+    def clean_skills(self):
+        dict = self.get_all_attributes()
+        deletable = []
+        for key, value in dict.items():
+            try:
+                type = value.get_attribute('type')
+                if type=='skill':
+                    lvl = value.get_attribute('lvl')
+                    if lvl ==0:
+                        deletable.append(value.get_attribute('name'))
+            except Exception:
+                pass
+        for item in deletable:
+            del self.
+
+
     def add_stat_collection(self, collection):
         for key, value in collection.items():
             name = str.lower(key)
-            stat = self.prefs.get_stat(name)
+            #stat = self.prefs.get_stat(name)
+            stat = self.prefs.get_from_master(name)
             #print(stat)
             if stat.get_attribute('name')!='undefined':  
                 try:
@@ -35,6 +52,9 @@ class Character(GameObject):
                     pass
                 #print(value)
         self.calc_derived_stats()
+        self.clean_skills()
+
+    
                 
 
     def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
