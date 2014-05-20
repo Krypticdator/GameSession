@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Character.py" />
+    <Compile Include="Controller.py" />
     <Compile Include="FileController.py" />
     <Compile Include="GameObject.py" />
     <Compile Include="GUIFactory.py" />

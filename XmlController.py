@@ -111,17 +111,16 @@ class XmlController(object):
                 temp = []
                 for param in tag_params:
                     try:
-                        temp.append(cell.get(param))
+                        tag = cell.get(param)
+                        if str(tag)!='None':
+                            temp.append(cell.get(param))
+
                     except Exception:
                         pass
-                set.append(temp)
+                if temp:
+                    set.append(temp)
             return set
 
 
         return data
         
-        
-
-
-
-

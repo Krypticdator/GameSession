@@ -1,7 +1,7 @@
-from Preferences import Preferences
-from Preferences import Dice
+from Controller import Controller
 from Character import Character
+#from GUIFactory import ModifyDvValues
 
-p = Preferences()
+con = Controller()
 c = Character(p)
 

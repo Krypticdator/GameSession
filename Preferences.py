@@ -1,6 +1,7 @@
 from XmlController import XmlController
 import copy
 from Character import Stat
+from Character import Effect
 from random import randrange
 from FileController import FileControl
 class Preferences(FileControl):
@@ -15,6 +16,7 @@ class Preferences(FileControl):
         self.__master_directory={}
         self.__tables = {}
         self.__probability_tables = {}
+        self.__effects = {}
 
         self.load_stats()
         self.load_skills()
@@ -31,9 +33,6 @@ class Preferences(FileControl):
         self.load_tables()
 
         self.load_probabilities()
-
-        
-        
 
 
     def load_stats(self):
@@ -55,8 +54,15 @@ class Preferences(FileControl):
     def load_effects(self):
         x = XmlController()
         x.load_file('preferences/effects.xml')
-        params = ['type', 'counted']
-        temp = x.get_dataset('effect', False,False, True, tag_params=params)
+        
+        effects = x.get_dataset('effects',False,True)
+        num = 0
+        for array in effects:
+            pass
+
+
+        print(effects)
+
         
 
     def load_skills(self):
@@ -99,11 +105,11 @@ class Preferences(FileControl):
         x.load_file('preferences/preferences.xml')
         table = x.read_table(table_name)
         t = Table() 
-        print(table_name)
+        #print(table_name)
         for option in table:
             t.add_option(option[0], option[1],option[2],True)
 
-        print(t)
+        #print(t)
         return copy.deepcopy(t)
 
     def load_tables(self):
