@@ -5,7 +5,7 @@ class XmlController(object):
     def __init__(self):
         self.__elements = {}
 
-    def create_root(self):
+    def create_root(self, name):
         name = str(name)
         self.__elements["root"] = ET.Element(name)
     def get_root(self):

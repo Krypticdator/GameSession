@@ -135,6 +135,7 @@ class Preferences(FileControl):
         character.add_stat_collection(stats)
         character.add_stat_collection(skills)
 
+
         #print(stats)
    
 
