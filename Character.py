@@ -20,6 +20,20 @@ class Character(GameObject):
     def get_stat(self, name, attribute):
         stat = self.get_attribute(name)
         return stat.get_attribute(attribute)
+    
+    def get_stat_list(self, type):
+        stat_list = {}
+        attribute_list = self.get_all_attributes()
+
+        for key, value in attribute_list.items():
+            try:
+                stat_type = value.get_attribute('type')
+                if stat_type==type:
+                    stat_list[key]=value
+            except Exception:
+                pass
+        return stat_list
+                
 
     def clean_skills(self):
         dictionary = self.get_all_attributes()

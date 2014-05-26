@@ -16,6 +16,9 @@ class Controller(object):
         
     def get_char_stat(self, name, attribute):
         return self.c.get_stat(name, attribute)
+
+    def get_char_stat_list(self, stat_type):
+        return self.c.get_stat_list(stat_type)
         
 
     def add_ui_component(self, comp_name, component):

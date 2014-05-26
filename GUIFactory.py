@@ -114,9 +114,43 @@ class CharacterSheet(UIObject):
 
          self.Move = label_and_value(self.movement_group, self.contr, 'Move')
 
+         #DERIVED STATS
+         derived_frame = ttk.Labelframe(self.frame, text='Derived stats')
+         self.Luck = label_and_value(derived_frame, self.contr, 'Luck')
+         self.Hum = label_and_value(derived_frame, self.contr, 'Hum')
+         self.Rec = label_and_value(derived_frame, self.contr, 'Rec')
+         self.End = label_and_value(derived_frame, self.contr, 'End')
+
+         self.Run = label_and_value(derived_frame, self.contr, 'Run')
+         self.Sprint = label_and_value(derived_frame, self.contr, 'Sprint')
+         self.Swim = label_and_value(derived_frame, self.contr, 'Swim')
+         self.Leap = label_and_value(derived_frame, self.contr, 'Leap')
+
+         self.Stun = label_and_value(derived_frame, self.contr, 'Stun')
+         self.Hits = label_and_value(derived_frame, self.contr, 'Hits')
+         self.Sd = label_and_value(derived_frame, self.contr, 'SD')
+         self.Res = label_and_value(derived_frame, self.contr, 'Res')
+
+         self.load_character()
+
+         #SKILLS
+         self.skill_frame = ttk.Labelframe(self.frame, text='Skills')
+         self.skill_group = ttk.Panedwindow(self.skill_frame, orient=VERTICAL)
+         skill_list = self.contr.get_char_stat_list('skill')
+         self.skill_ui_components = {}
+
+         for key, value in skill_list.items():
+             self.skill_ui_components[key] = label_and_value(self.skill_group, self.contr, key)
+             self.skill_ui_components[key].set(value.get_attribute('lvl'))
+             self.skill_group.add(self.skill_ui_components[key].frame)
+
+
         
 
          basic_stats_frame.grid(column=0, row=0)
+         derived_frame.grid(column=0, row=1, sticky=(W))
+         self.skill_frame.grid(column=0, row=2, sticky=(W))
+         self.skill_group.grid(column=0, row=0)
          stats_group.grid(column=0, row=0)
          self.mental_frame.grid(column=0, row=0)
          self.mental_group.grid(column=0, row=0)
@@ -146,10 +180,25 @@ class CharacterSheet(UIObject):
 
          self.movement_group.add(self.Move.frame)
 
-         self.contr.add_ui_component('character_sheet', self)
-         #self.frame.pack()
+         self.Luck.frame.grid(column=0, row=0)
+         self.Hum.frame.grid(column=0, row=1)
+         self.Rec.frame.grid(column=0, row=2)
+         self.End.frame.grid(column=0, row=3)
 
-         self.load_character()
+         self.Run.frame.grid(column=1, row=0)
+         self.Sprint.frame.grid(column=1, row=1)
+         self.Swim.frame.grid(column=1, row=2)
+         self.Leap.frame.grid(column=1, row=3)
+
+         self.Stun.frame.grid(column=2, row=0)
+         self.Hits.frame.grid(column=2, row=1)
+         self.Sd.frame.grid(column=2, row=2)
+         self.Res.frame.grid(column=2, row=3)
+
+         self.contr.add_ui_component('character_sheet', self)
+
+
+         
 
     def load_character(self):
         self.contr.load_character('null')
@@ -164,6 +213,19 @@ class CharacterSheet(UIObject):
         Tech= self.contr.get_char_stat('tech','lvl')
         Move= self.contr.get_char_stat('move','lvl')
 
+        Luck = self.contr.get_char_stat('luck', 'lvl')
+        Hum = self.contr.get_char_stat('hum', 'lvl')
+        Rec = self.contr.get_char_stat('rec', 'lvl')
+        End = self.contr.get_char_stat('end', 'lvl')
+        Run = self.contr.get_char_stat('run', 'lvl')
+        Sprint = self.contr.get_char_stat('sprint', 'lvl')
+        Swim = self.contr.get_char_stat('swim', 'lvl')
+        Leap = self.contr.get_char_stat('leap', 'lvl')
+        Stun = self.contr.get_char_stat('stun', 'lvl')
+        Hits = self.contr.get_char_stat('hits', 'lvl')
+        Sd = self.contr.get_char_stat('sd', 'lvl')
+        Res = self.contr.get_char_stat('res', 'lvl')
+
         self.Int.set(str(Int))
         self.Ref.set(str(Ref))
         self.Tech.set(str(Tech))
@@ -174,6 +236,19 @@ class CharacterSheet(UIObject):
         self.Move.set(str(Move))
         self.Body.set(str(Body))
         self.Will.set(str(Will))
+
+        self.Luck.set(str(Luck))
+        self.Hum.set(str(Hum))
+        self.Rec.set(str(Rec))
+        self.End.set(str(End))
+        self.Run.set(str(Run))
+        self.Sprint.set(str(Sprint))
+        self.Swim.set(str(Swim))
+        self.Leap.set(str(Leap))
+        self.Stun.set(str(Stun))
+        self.Hits.set(str(Hits))
+        self.Sd.set(str(Sd))
+        self.Res.set(str(Res))
 
         
          
