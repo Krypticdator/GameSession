@@ -25,10 +25,10 @@ class text_and_inputfield:
         self.entry.grid(column=1, row=0)
 
 class label_and_value(UIObject):
-    def __init__(self, master, controller, label_text):
+    def __init__(self, master, controller, label_text, label_length=10):
         super().__init__(master, controller)
         self.variable = StringVar()
-        self.lbl_text = ttk.Label(self.frame, text=label_text)
+        self.lbl_text = ttk.Label(self.frame, text=label_text, width=label_length)
         self.lbl_value = ttk.Label(self.frame, textvariable=self.variable)
         self.lbl_text.grid(column=0, row=0)
         self.lbl_value.grid(column = 1, row = 0)
@@ -40,7 +40,7 @@ class label_and_value(UIObject):
         return self.variable.get()
         
 
-class entry_field(UIObject):
+class EntryField(UIObject):
     def __init__(self, master, width_num=15):
         super().__init__(master)
         self.variable = StringVar()
@@ -66,6 +66,7 @@ class StartMenu(object):
         menubar.add_cascade(menu=menu_settings, label='Settings')
         menu_file.add_command(label='Load Character', command=self.load_char)
         menu_settings.add_command(label='DV table', command=self.dv_settings)
+        menu_edit.add_command(label='Task handler', command=self.task_handler)
         self.root.mainloop()
 
     def load_char(self):
@@ -74,6 +75,9 @@ class StartMenu(object):
     def dv_settings(self):
         window = Toplevel(self.root)
         dv = ModifyDvValues(window, self.contr)
+    def task_handler(self):
+        window = Toplevel(self.root)
+        th = TaskHandler(window, self.contr)
 
 class CharacterSheet(UIObject):
     def __init__(self, master, controller):
@@ -88,48 +92,48 @@ class CharacterSheet(UIObject):
          self.mental_frame = ttk.Labelframe(stats_group, text='Mental')
          self.mental_group = ttk.Panedwindow(self.mental_frame, orient=VERTICAL)
 
-         self.Int = label_and_value(self.mental_group, self.contr, 'Int')
-         self.Will = label_and_value(self.mental_group, self.contr, 'Will')
-         self.Pre = label_and_value(self.mental_group, self.contr, 'Pre')
+         self.Int = label_and_value(self.mental_group, self.contr, 'Int', 5)
+         self.Will = label_and_value(self.mental_group, self.contr, 'Will', 5)
+         self.Pre = label_and_value(self.mental_group, self.contr, 'Pre', 5)
 
          #Physical group
          self.physical_frame = ttk.Labelframe(stats_group, text='Physical')
          self.physical_group = ttk.Panedwindow(self.physical_frame, orient=VERTICAL)
 
-         self.Con = label_and_value(self.physical_group, self.contr, 'Con')
-         self.Str = label_and_value(self.physical_group, self.contr, 'Str')
-         self.Body = label_and_value(self.physical_group, self.contr, 'Body')
+         self.Con = label_and_value(self.physical_group, self.contr, 'Con', 5)
+         self.Str = label_and_value(self.physical_group, self.contr, 'Str', 5)
+         self.Body = label_and_value(self.physical_group, self.contr, 'Body', 5)
 
          #Combat group
          self.combat_frame = ttk.Labelframe(stats_group, text='Combat')
          self.combat_group = ttk.Panedwindow(self.combat_frame, orient=VERTICAL)
 
-         self.Ref = label_and_value(self.combat_group, self.contr, 'Ref')
-         self.Dex = label_and_value(self.combat_group, self.contr, 'Dex')
-         self.Tech = label_and_value(self.combat_group, self.contr, 'Tech')
+         self.Ref = label_and_value(self.combat_group, self.contr, 'Ref', 5)
+         self.Dex = label_and_value(self.combat_group, self.contr, 'Dex', 5)
+         self.Tech = label_and_value(self.combat_group, self.contr, 'Tech', 5)
 
          #Movement
          self.movement_frame = ttk.Labelframe(stats_group, text='Movement')
          self.movement_group = ttk.Panedwindow(self.movement_frame, orient = VERTICAL)
 
-         self.Move = label_and_value(self.movement_group, self.contr, 'Move')
+         self.Move = label_and_value(self.movement_group, self.contr, 'Move', 5)
 
          #DERIVED STATS
          derived_frame = ttk.Labelframe(self.frame, text='Derived stats')
-         self.Luck = label_and_value(derived_frame, self.contr, 'Luck')
-         self.Hum = label_and_value(derived_frame, self.contr, 'Hum')
-         self.Rec = label_and_value(derived_frame, self.contr, 'Rec')
-         self.End = label_and_value(derived_frame, self.contr, 'End')
+         self.Luck = label_and_value(derived_frame, self.contr, 'Luck', 5)
+         self.Hum = label_and_value(derived_frame, self.contr, 'Hum', 5)
+         self.Rec = label_and_value(derived_frame, self.contr, 'Rec', 5)
+         self.End = label_and_value(derived_frame, self.contr, 'End', 5)
 
-         self.Run = label_and_value(derived_frame, self.contr, 'Run')
-         self.Sprint = label_and_value(derived_frame, self.contr, 'Sprint')
-         self.Swim = label_and_value(derived_frame, self.contr, 'Swim')
-         self.Leap = label_and_value(derived_frame, self.contr, 'Leap')
+         self.Run = label_and_value(derived_frame, self.contr, 'Run', 5)
+         self.Sprint = label_and_value(derived_frame, self.contr, 'Sprint', 5)
+         self.Swim = label_and_value(derived_frame, self.contr, 'Swim', 5)
+         self.Leap = label_and_value(derived_frame, self.contr, 'Leap', 5)
 
-         self.Stun = label_and_value(derived_frame, self.contr, 'Stun')
-         self.Hits = label_and_value(derived_frame, self.contr, 'Hits')
-         self.Sd = label_and_value(derived_frame, self.contr, 'SD')
-         self.Res = label_and_value(derived_frame, self.contr, 'Res')
+         self.Stun = label_and_value(derived_frame, self.contr, 'Stun', 5)
+         self.Hits = label_and_value(derived_frame, self.contr, 'Hits', 5)
+         self.Sd = label_and_value(derived_frame, self.contr, 'SD', 5)
+         self.Res = label_and_value(derived_frame, self.contr, 'Res', 5)
 
          self.load_character()
 
@@ -139,9 +143,15 @@ class CharacterSheet(UIObject):
          skill_list = self.contr.get_char_stat_list('skill')
          self.skill_ui_components = {}
 
+         sorted_list = []
          for key, value in skill_list.items():
-             self.skill_ui_components[key] = label_and_value(self.skill_group, self.contr, key)
+             self.skill_ui_components[key] = label_and_value(self.skill_group, self.contr, key, 20)
              self.skill_ui_components[key].set(value.get_attribute('lvl'))
+             sorted_list.append(key)
+             #self.skill_group.add(self.skill_ui_components[key].frame)
+         sorted_list.sort()
+
+         for key in sorted_list:
              self.skill_group.add(self.skill_ui_components[key].frame)
 
 
@@ -201,7 +211,7 @@ class CharacterSheet(UIObject):
          
 
     def load_character(self):
-        self.contr.load_character('null')
+        self.contr.load_character('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         Int  = self.contr.get_char_stat('int','lvl')
         Will  = self.contr.get_char_stat('will','lvl')
         Pre  = self.contr.get_char_stat('pre','lvl')
@@ -305,6 +315,73 @@ class ModifyDvValues(UIObject):
         self.heroic.variable.set(str(dict['hard']))
         self.incredible.variable.set(str(dict['incredible']))
         self.legendary.variable.set(str(dict['extreme']))
+
+class TaskHandler(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.vertical_group = ttk.Panedwindow(self.frame, orient=VERTICAL)
+        self.horizontal_group = ttk.Panedwindow(self.frame, orient=HORIZONTAL)
+
+        self.header_group = ttk.Panedwindow(self.vertical_group, orient=HORIZONTAL)
+        
+        self.make_header()
+
+        self.vertical_group.add(self.header_group)
+
+        player_roster = self.contr.get_pc_roster()
+        #player_elements_dictionary = {}
+        for player, character in player_roster.items():
+            player_group = ttk.Panedwindow(self.vertical_group, orient=HORIZONTAL)
+            
+            player_name = character.get_attribute('player')
+            char_name = character.get_attribute('fname')
+
+            lbl_player = ttk.Label(player_group, text=player_name, width=7)
+            lbl_char = ttk.Label(player_group, text=char_name, width=10)
+            lbl_search = ttk.Label(player_group, text = 'search',width=7)
+            lbl_skill = ttk.Label(player_group, text='skill',width=6)
+            lbl_bp = ttk.Label(player_group, text='bp',width=3)
+            lbl_mod=ttk.Label(player_group, text='mod',width=4)
+            lbl_dv=ttk.Label(player_group, text='dv', width=3)
+            lbl_prob=ttk.Label(player_group, text='prob', width=5)
+
+            player_group.add(lbl_player)
+            player_group.add(lbl_char)
+            player_group.add(lbl_search)
+            player_group.add(lbl_skill)
+            player_group.add(lbl_bp)
+            player_group.add(lbl_mod)
+            player_group.add(lbl_dv)
+            player_group.add(lbl_prob)
+
+
+            #player_group.grid(column=0, row=0)
+            self.vertical_group.add(player_group)
+
+        #self.header_group.grid(column=0, row=0)
+        self.vertical_group.grid(column=0, row=0)
+        self.horizontal_group.grid(column=0, row=0)
+
+    def make_header(self):
+        lbl_player = ttk.Label(self.header_group, text='player', width=7)
+        lbl_char = ttk.Label(self.header_group, text='character', width=10)
+        lbl_search = ttk.Label(self.header_group, text = 'search',width=7)
+        lbl_skill = ttk.Label(self.header_group, text='skill',width=6)
+        lbl_bp = ttk.Label(self.header_group, text='bp',width=3)
+        lbl_mod=ttk.Label(self.header_group, text='mod',width=4)
+        lbl_dv=ttk.Label(self.header_group, text='dv', width=3)
+        lbl_prob=ttk.Label(self.header_group, text='prob', width=5)
+
+        self.header_group.add(lbl_player)
+        self.header_group.add(lbl_char)
+        self.header_group.add(lbl_search)
+        self.header_group.add(lbl_skill)
+        self.header_group.add(lbl_bp)
+        self.header_group.add(lbl_mod)
+        self.header_group.add(lbl_dv)
+        self.header_group.add(lbl_prob)
+
+
 
 
 

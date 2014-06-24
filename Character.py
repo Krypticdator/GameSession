@@ -93,9 +93,12 @@ class Character(GameObject):
         attribute_dict = self.get_all_attributes()
         derived_stats = []
         for key, value in attribute_dict.items():
-            if value.get_attribute('type')!=0:
-                if value.get_attribute('type')=='derived':
-                    derived_stats.append(value)
+            try:
+                if value.get_attribute('type')!=0:
+                    if value.get_attribute('type')=='derived':
+                        derived_stats.append(value)
+            except Exception:
+                pass
         
         for stat in derived_stats:
             sum=0

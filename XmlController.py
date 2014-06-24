@@ -78,6 +78,14 @@ class XmlController(object):
 
         return copy.deepcopy(t)
 
+    def get_node_value(self, collection_name, node_name):
+        data = []
+        for node in self.root.iter(collection_name):
+            data = list(node)
+
+        for cell in data:
+            if cell.tag==node_name:
+                return cell.text
 
     def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = [], dict_tag_name='name'):
         data = []

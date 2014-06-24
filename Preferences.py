@@ -18,6 +18,7 @@ class Preferences(FileControl):
         self.__probability_tables = {}
         self.__effects = {}
 
+
         self.load_stats()
         self.load_skills()
         self.load_complications()
@@ -34,6 +35,7 @@ class Preferences(FileControl):
 
         self.load_probabilities()
 
+   
 
     def load_stats(self):
         x = XmlController()
@@ -128,12 +130,20 @@ class Preferences(FileControl):
 
     def load_character(self, filepath, character):
         x=XmlController()
-        x.load_file('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
+        x.load_file(filepath)
+        player = x.get_node_value('info','player')
+        fname = x.get_node_value('info', 'first_name')
         stats = x.get_dataset('attributes', dictionary = True, dict_tag_name='type')
         skills = x.get_dataset('skills',True, dict_tag_name='type')
 
+
+        character.set_attribute('player',player)
+        character.set_attribute('fname', fname)
         character.add_stat_collection(stats)
         character.add_stat_collection(skills)
+
+
+
 
 
         #print(stats)

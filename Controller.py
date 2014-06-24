@@ -5,10 +5,27 @@ from Character import Character
 class Controller(object):
     """description of class"""
     def __init__(self):
-        self.__ui_components = {}
         self.prefs = Preferences()
+        self.__ui_components = {}
+        self.__pc_roster = {}
+        pc_filepaths = []
+        pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
+        self.load_pc_roster(pc_filepaths)
+        
+        
+        
+        
         start = StartMenu(self)
         
+    def load_pc_roster(self, filepath_table):
+        for path in filepath_table:
+            c = Character(self.prefs)
+            self.prefs.load_character(path, c)
+            player = c.get_attribute('player')
+            self.__pc_roster[player] = c
+
+    def get_pc_roster(self):
+        return self.__pc_roster
 
     def load_character(self, filepath):
         self.c = Character(self.prefs)
