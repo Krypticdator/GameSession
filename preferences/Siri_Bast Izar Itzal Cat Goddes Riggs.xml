@@ -1,0 +1,152 @@
+<Character>
+	<info>
+		<player>Siri</player>
+		<first_name>Bast</first_name>
+		<second_name>Izar Itzal</second_name>
+		<last_name>Riggs</last_name>
+		<alias>Cat Goddes</alias>
+		<age>28</age>
+	</info>
+	<family>
+		<family_rank>Poor</family_rank>
+		<parents>Both Parents</parents>
+		<parent_status>Something has happened to one or both parents.</parent_status>
+		<parent_event>Your parent(s) gave you up for adoption</parent_event>
+		<family_status>Family status is OK</family_status>
+		<family_event>nothing bad happened to family</family_event>
+		<childhood_enviroment>Grew up in boarding school.</childhood_enviroment>
+		<childhood_trauma_fortune>Home destroyed in fire/war/riots/disaster.</childhood_trauma_fortune>
+		<family_contact>years no contact with any family members.</family_contact>
+		<siblings />
+		<sibling age="27" gender="Male" relation="Sibling neutral">Ross Jarvis Dandy Melon Riggs</sibling>
+		<sibling age="26" gender="Male" relation="They hero  worship you">Millard Jordon Angry Asparagus Riggs</sibling>
+		<sibling age="29" gender="Female" relation="Sibling likes you">Kaylene Cathryn Silver Apple Riggs</sibling>
+	</family>
+	<personality>
+		<prime_motivation>Personal Egotism</prime_motivation>
+		<most_valued_person>Yourself</most_valued_person>
+		<most_valued_posession>photograph</most_valued_posession>
+		<feels_about_people>People must earn my respect! No free rides here</feels_about_people>
+		<inmode>Hedonist</inmode>
+		<exmode>Assured/Stylish</exmode>
+		<quirk>Passionate</quirk>
+		<quirk>Cynical</quirk>
+		<quirk>Musical</quirk>
+		<quirk>Eccentric</quirk>
+		<quirk>Rebellious</quirk>
+		<disorder>Multiple Personalities</disorder>
+		<phobia>Ombrophobia (rain or of being rained on)</phobia>
+		<phobia>Ataxophobia (disorder or untidiness)</phobia>
+		<phobia>Kakarrophiaphobia (failure)</phobia>
+		<hair>Tinted/Dyed</hair>
+		<hair>Striped</hair>
+		<hair>Dreads</hair>
+		<clothes>Leathers</clothes>
+		<clothes>High Fashion</clothes>
+		<affection>Jewellery</affection>
+		<affection>Make-up/Face Paint</affection>
+		<affection>Long Fingernails</affection>
+	</personality>
+	<skills>
+		<skill type="Disguise">5</skill>
+		<skill type="Dodge &amp; Escape">4</skill>
+		<skill type="Personal Grooming">5</skill>
+		<skill type="Pick Lock">2</skill>
+		<skill type="Athletics">5</skill>
+		<skill type="Dance">8</skill>
+		<skill type="Brawling / Hand To Hand">2</skill>
+		<skill type="Education &amp; Gen Know">3</skill>
+		<skill type="Human Perception">3</skill>
+		<skill type="Melee">3</skill>
+		<skill type="Pick Pocket">3</skill>
+		<skill type="Wardrobe &amp; Style">6</skill>
+		<skill type="Persuasion &amp; Fast Talk">3</skill>
+		<skill type="Awarness / Notice">5</skill>
+		<skill type="Stealth">3</skill>
+		<skill type="Perform">6</skill>
+		<skill type="Social Etiquette">4</skill>
+		<skill type="Motorcycle">2</skill>
+		<skill type="Seduction">3</skill>
+	</skills>
+	<attributes>
+		<attribute type="Stun">20</attribute>
+		<attribute type="Sprint">15</attribute>
+		<attribute type="Body">4</attribute>
+		<attribute type="Ref">5</attribute>
+		<attribute type="Hunger">0</attribute>
+		<attribute type="Swim">5</attribute>
+		<attribute type="Pre">7</attribute>
+		<attribute type="Rec">4.5</attribute>
+		<attribute type="Res">18</attribute>
+		<attribute type="Tech">4</attribute>
+		<attribute type="Hits">20</attribute>
+		<attribute type="Luck">5.0</attribute>
+		<attribute type="Dex">10</attribute>
+		<attribute type="Tiredness">0</attribute>
+		<attribute type="Int">5</attribute>
+		<attribute type="Will">6</attribute>
+		<attribute type="SD">10</attribute>
+		<attribute type="Hum">60</attribute>
+		<attribute type="End">10</attribute>
+		<attribute type="Run">10</attribute>
+		<attribute type="Fun">0</attribute>
+		<attribute type="Con">5</attribute>
+		<attribute type="Move">5</attribute>
+		<attribute type="Leap">5</attribute>
+		<attribute type="Str">4</attribute>
+	</attributes>
+	<perks />
+	<talents>
+		<talent type="Beatiful / Handsome">1</talent>
+		<talent type="Light sleeper">1</talent>
+		<talent type="Ambidexterity">1</talent>
+		<talent type="Double Jointed">1</talent>
+		<talent type="Night Vision">1</talent>
+	</talents>
+	<complications>
+		<complication frequency="10" importance="2" intensity="5" type="Lecherous">7.5</complication>
+		<complication frequency="15" importance="5" intensity="5" type="Vocal Impairment">4.0</complication>
+		<complication frequency="5" importance="5" intensity="5" type="Bipolar">2.0</complication>
+		<complication frequency="10" importance="5" intensity="5" type="Kleptomania">3.0</complication>
+		<complication frequency="15" importance="2" intensity="10" type="Impulsiveness">12.5</complication>
+		<complication frequency="5" importance="2" intensity="5" type="Secret Identity">5.0</complication>
+	</complications>
+	<cyberwears>
+		<cyberwear name="Cyberaudio">10.0
+			<option name="Enhanced Hearing Range">2.0</option>
+			<option name="Level Damper">0.5</option>
+			<option name="Amplified Hearing">1.0</option>
+			<option name="Sound Editing">0.5</option>
+		</cyberwear>
+		<cyberwear name="Shift-tacts">0.5</cyberwear>
+		<cyberwear name="Light Tattoo">0.5</cyberwear>
+		<cyberwear name="Techhair">2.0</cyberwear>
+	</cyberwears>
+	<items>
+		<item type="armor">fibremesh ballistic cloth fashionware pants/skirt</item>
+		<item type="armor">fibremesh ballistic cloth fashionware shirt/top</item>
+		<item type="item">Bivvybag (For Nights On The Street/Road)</item>
+		<item type="item">Fibremesh Fashionware (Sp8&#8212; You Pick The Type)</item>
+		<item type="item">Hand Taser</item>
+		<item type="item">Monoblade (Choose Type)</item>
+		<item type="item">Agent (Basic)</item>
+	</items>
+	<lifepath>
+		<event age="15" friend_type="Like a big brother/sister to you" type="friend" />
+		<event age="16" love_type="tragic love" mutual_feelings="They still love you" tragic_type="A personal goal or vendetta came between you" type="love" />
+		<event age="17" type="Nothing Happened That Year" />
+		<event age="18" type="Nothing Happened That Year" />
+		<event age="19" cause="Caused a physical disability" enemy_type="Boostergang member" reaction="Go into a murderous, killing rage and rip his face off!" relation="They hate you" resources="A large Corp or entire Enclave" type="enemy" />
+		<event age="20" lucky_type="" type="lucky" />
+		<event age="21" type="Nothing Happened That Year" />
+		<event age="22" lucky_type="nomads" type="lucky" />
+		<event age="23" type="Nothing Happened That Year" />
+		<event age="24" type="Nothing Happened That Year" />
+		<event age="25" cause="You just didn't like each other" enemy_type="Boostergang member" reaction="Ignore the scum" relation="The feeling's mutual" resources="Themselves and a few friends" type="enemy" />
+		<event age="26" love_type="hot dates" type="love" />
+		<event age="27" friend_type="An old lover (choose which one)" type="friend" />
+		<event age="28" type="Nothing Happened That Year" />
+		<event age="24" friend_type="Like a big brother/sister to you" type="friend" />
+		<event age="18" love_type="happy" type="love" />
+	</lifepath>
+</Character>

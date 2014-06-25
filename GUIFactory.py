@@ -12,8 +12,9 @@ class UIObject(object):
 
         self.frame.grid(column=0, row=0)
 
-class text_and_inputfield:
-    def __init__(self, master, topic, width_label=15, width_num=2):
+class text_and_inputfield(UIObject):
+    def __init__(self, master, topic, width_label=15, width_num=2, controller='None'):
+        super().__init__(master, controller)
         self.variable = StringVar()
         self.frame = ttk.Frame(master)
         self.textlabel = ttk.Label(self.frame, text=topic,width=width_label)
@@ -47,6 +48,48 @@ class EntryField(UIObject):
         self.frame = ttk.Frame(master)
         self.entry = ttk.Entry(self.frame, textvariable=variable, width = width_num)
 
+class TextBox(UIObject):
+    def __init__(self, master, controller, header, width_num, height_num, column_num=0, row_num=0, ):
+        super().__init__(master, controller)
+        self.frame = ttk.LabelFrame(master, text=header)
+        self.box = Text(self.frame, width=width_num, height=height_num, wrap = 'word')
+        s1 = ttk.Scrollbar(self.frame, orient=VERTICAL, command=self.box.yview)
+        self.box['yscrollcommand'] = s1.set
+        self.frame.grid(column=column_num, row=row_num)
+        self.box.grid(column = 0, row=0)
+        s1.grid(column = 1, row = 0, sticky=(N,S))
+    def new_text(self, text):
+        self.box.delete(1.0, 'end')
+        self.box.insert(1.0, text)
+
+class CustomListBox(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.box = Listbox(self.frame, height=10, width=40)
+        s1 = ttk.Scrollbar(self.frame, orient=VERTICAL, command=self.box.yview)
+        self.box['yscrollcommand'] = s1.set
+
+        self.box.grid(column=0, row=0)
+        s1.grid(column = 1, row = 0, sticky=(N,S))
+
+    def add(self, text):
+        self.box.insert(END, text)
+        self.box.selection_set(0)
+
+class CustomPanedWindow(UIObject):
+    def __init__(self, master, controller, vertical=True):
+        super().__init__(master, controller)
+        self.components = {}
+        if vertical:
+            self.group = ttk.Panedwindow(self.frame, orient=VERTICAL)
+        else:
+            self.group = ttk.Panedwindow(self.frame, orient=HORIZONAL)
+
+    def add(self, component):
+        pass
+
+
+
 
 class StartMenu(object):
     def __init__(self, contr):
@@ -66,6 +109,7 @@ class StartMenu(object):
         menubar.add_cascade(menu=menu_settings, label='Settings')
         menu_file.add_command(label='Load Character', command=self.load_char)
         menu_settings.add_command(label='DV table', command=self.dv_settings)
+        menu_settings.add_command(label='Skills', command=self.skill_manager)
         menu_edit.add_command(label='Task handler', command=self.task_handler)
         self.root.mainloop()
 
@@ -75,6 +119,9 @@ class StartMenu(object):
     def dv_settings(self):
         window = Toplevel(self.root)
         dv = ModifyDvValues(window, self.contr)
+    def skill_manager(self):
+        window = Toplevel(self.root)
+        skills = SkillManager(window, self.contr)
     def task_handler(self):
         window = Toplevel(self.root)
         th = TaskHandler(window, self.contr)
@@ -329,34 +376,21 @@ class TaskHandler(UIObject):
         self.vertical_group.add(self.header_group)
 
         player_roster = self.contr.get_pc_roster()
-        #player_elements_dictionary = {}
+        self.player_entry_dict = {}
         for player, character in player_roster.items():
             player_group = ttk.Panedwindow(self.vertical_group, orient=HORIZONTAL)
             
+            print('here player is ' +player)
             player_name = character.get_attribute('player')
             char_name = character.get_attribute('fname')
 
-            lbl_player = ttk.Label(player_group, text=player_name, width=7)
-            lbl_char = ttk.Label(player_group, text=char_name, width=10)
-            lbl_search = ttk.Label(player_group, text = 'search',width=7)
-            lbl_skill = ttk.Label(player_group, text='skill',width=6)
-            lbl_bp = ttk.Label(player_group, text='bp',width=3)
-            lbl_mod=ttk.Label(player_group, text='mod',width=4)
-            lbl_dv=ttk.Label(player_group, text='dv', width=3)
-            lbl_prob=ttk.Label(player_group, text='prob', width=5)
+            self.player_entry_dict[player] = PlayerLine(self.vertical_group, self.contr, player_name, character)
 
-            player_group.add(lbl_player)
-            player_group.add(lbl_char)
-            player_group.add(lbl_search)
-            player_group.add(lbl_skill)
-            player_group.add(lbl_bp)
-            player_group.add(lbl_mod)
-            player_group.add(lbl_dv)
-            player_group.add(lbl_prob)
+            
 
 
             #player_group.grid(column=0, row=0)
-            self.vertical_group.add(player_group)
+            self.vertical_group.add(self.player_entry_dict[player].frame)
 
         #self.header_group.grid(column=0, row=0)
         self.vertical_group.grid(column=0, row=0)
@@ -380,6 +414,198 @@ class TaskHandler(UIObject):
         self.header_group.add(lbl_mod)
         self.header_group.add(lbl_dv)
         self.header_group.add(lbl_prob)
+
+class PlayerLine(UIObject):
+    def __init__(self, master, controller, player, character):
+        super().__init__(master, controller)
+        self.player_group = ttk.Panedwindow(self.frame, orient=HORIZONTAL)
+        self.player = player
+        self.character = character
+        
+        lbl_player = ttk.Label(self.player_group, text=player, width=7)
+        lbl_char   = ttk.Label(self.player_group, text=character.get_attribute('fname'), width=10)
+
+        self.search_var = StringVar()
+        self.dv_var = StringVar()
+
+        self.search_var.trace_variable('w',self.search_skill)
+        self.dv_var.trace_variable('w',self.calc_probs)
+
+        self.entry_search = ttk.Entry(self.player_group, width=7,textvariable=self.search_var)
+        self.entry_dv     = ttk.Entry(self.player_group, width=3, textvariable=self.dv_var)
+
+        self.skill_var = StringVar()
+        self.bp_var = StringVar()
+        self.mod_var = StringVar()
+        self.prob_var = StringVar()
+
+        lbl_skill  = ttk.Label(self.player_group, textvariable=self.skill_var,width=6)
+        lbl_bp     = ttk.Label(self.player_group, textvariable=self.bp_var,width=3)
+        lbl_mod    = ttk.Label(self.player_group, textvariable=self.mod_var,width=4)
+        
+        lbl_prob   = ttk.Label(self.player_group, textvariable=self.prob_var, width=5)
+
+        self.player_group.add(lbl_player)
+        self.player_group.add(lbl_char)
+        self.player_group.add(self.entry_search)
+        self.player_group.add(lbl_skill)
+        self.player_group.add(lbl_bp)
+        self.player_group.add(lbl_mod)
+        self.player_group.add(self.entry_dv)
+        self.player_group.add(lbl_prob)
+
+        self.player_group.grid(column=0, row=0)
+
+    def search_skill(self, *args):
+        input = self.search_var.get()
+        skill = self.contr.get_skill_from_short(input)
+        bp = self.contr.get_char_bp_points(self.player, skill)
+        self.bp_var.set(str(bp))
+        self.skill_var.set(skill)
+        self.calc_probs()
+
+    def calc_probs(self, *args):
+        dv = 0
+        bp = 0
+
+        try:
+            dv = int(self.dv_var.get())
+            bp = int(self.bp_var.get())
+        except BaseException:
+            pass
+        percent = self.contr.calc_dv_probabilities(bp, dv)
+
+        self.prob_var.set(str(percent))
+
+
+
+class SkillManager(UIObject):
+    def load_skills(self):
+        self.skills = []
+
+        for key, value in self.contr.prefs.get_skills_dictionary().items():
+            self.skills.append(key)
+
+        self.skills.sort()
+
+        for skill in self.skills:
+            self.skillslist.add(self.contr.prefs.get_skill_attribute(skill, 'name'))
+
+    
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.skillslist = CustomListBox(self.frame, controller)
+        self.edit_group = ttk.Panedwindow(self.frame, orient=VERTICAL)
+        self.name = text_and_inputfield(self.edit_group, 'name', 15, 15)
+        self.stat = text_and_inputfield(self.edit_group, 'stat', 6, 6)
+        self.short = text_and_inputfield(self.edit_group, 'short', 6,6)
+        self.category = text_and_inputfield(self.edit_group, 'category', 15, 15)
+        self.description = TextBox(self.edit_group, controller, 'description', 40, 10)
+        self.chippable = text_and_inputfield(self.edit_group, 'chip', 6,6)
+        self.diff = text_and_inputfield(self.edit_group, 'diff', 6,6)
+
+        self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
+
+        self.var_short_info = StringVar()
+
+        self.short_info = ttk.Label(self.edit_group, textvariable=self.var_short_info)
+
+        self.name.variable.trace('w', self.save_changes)
+        self.stat.variable.trace('w', self.save_changes)
+        self.short.variable.trace('w', self.short_changes)
+        self.category.variable.trace('w', self.save_changes)
+        self.chippable.variable.trace('w', self.save_changes)
+        self.diff.variable.trace('w', self.save_changes)
+
+        self.skillslist.box.bind('<<ListboxSelect>>', self.get_skill_details)
+
+        self.edit_group.add(self.name.frame)
+        self.edit_group.add(self.stat.frame)
+        self.edit_group.add(self.short.frame)
+        self.edit_group.add(self.category.frame)
+        self.edit_group.add(self.description.frame)
+        self.edit_group.add(self.chippable.frame)
+        self.edit_group.add(self.diff.frame)
+        self.edit_group.add(self.short_info)
+
+        self.skillslist.frame.grid(column=0, row=0, sticky=(N, S))
+        self.edit_group.grid(column=1, row=0, sticky=(E))
+        self.name.frame.grid(column=0, row=0)
+        self.stat.frame.grid(column=0, row=1)
+        self.short.frame.grid(column=0, row=2)
+        self.category.frame.grid(column=0, row=3)
+        self.chippable.frame.grid(column=0, row=4)
+        self.diff.frame.grid(column=0, row=5)
+        self.short_info.grid(column=0, row=6)
+        self.btn_save.grid(column=1, row =8)
+        self.description.frame.grid(column=0,row=7)
+
+        self.load_skills()
+
+    def save_changes(self, *args):
+        name = self.name.variable.get()
+        stat = self.stat.variable.get()
+        short = self.short.variable.get()
+        category = self.category.variable.get()
+        chip = self.chippable.variable.get()
+        diff = self.diff.variable.get()
+        self.contr.prefs.set_skill_attribute(name, 'name',name)
+        self.contr.prefs.set_skill_attribute(name, 'stat', stat)
+        self.contr.prefs.set_skill_attribute(name, 'short', short)
+        self.contr.prefs.set_skill_attribute(name, 'category', category)
+        self.contr.prefs.set_skill_attribute(name, 'ischippable', chip)
+        self.contr.prefs.set_skill_attribute(name, 'diff', diff)
+
+    def short_changes(self, *args):
+        short = self.short.variable.get()
+        print('variable short is ' + short)
+        
+        number_of_same = 0
+        saved_short = ''
+        for skill in self.skills:
+            try:
+                saved_short = self.contr.prefs.get_skill_attribute(skill, 'short')
+            except Exception:
+                saved_short = 'null'
+            #print('saved short is ' + saved_short)
+            if saved_short !='null':
+                if short==saved_short:
+                    print('saved and local short are the same')
+                    number_of_same = number_of_same + 1
+                    print(str(number_of_same))
+                else:
+                    pass
+        self.var_short_info.set(str(number_of_same))
+        self.save_changes()
+
+
+    def get_skill_details(self, *args):
+        id = self.skillslist.box.curselection()
+        luku = int(id[0])
+        skill = self.skillslist.box.get(luku)
+
+        name = self.contr.prefs.get_skill_attribute(skill, 'name')
+        stat = self.contr.prefs.get_skill_attribute(skill, 'stat')
+        category = self.contr.prefs.get_skill_attribute(skill, 'category')
+        chip = self.contr.prefs.get_skill_attribute(skill, 'ischippable')
+        diff = self.contr.prefs.get_skill_attribute(skill, 'diff')
+        description = self.contr.prefs.get_skill_attribute(skill, 'description')
+        short = self.contr.prefs.get_skill_attribute(skill, 'short')
+
+        self.name.variable.set(name)
+        self.stat.variable.set(stat)
+        self.category.variable.set(category)
+        self.chippable.variable.set(chip)
+        self.diff.variable.set(diff)
+        self.description.new_text(description)
+        self.short.variable.set(short)
+
+    def save(self):
+        self.contr.prefs.save_skills()
+
+
+        
+
 
 
 

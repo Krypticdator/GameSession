@@ -1,4 +1,5 @@
 from GameObject import GameObject
+import copy
 class Character(GameObject):
     """description of class"""
 
@@ -57,7 +58,7 @@ class Character(GameObject):
         for key, value in collection.items():
             name = str.lower(key)
             #stat = self.prefs.get_stat(name)
-            stat = self.prefs.get_from_master(name)
+            stat = copy.deepcopy(self.prefs.get_from_master(name))
             #print(stat)
             if stat.get_attribute('name')!='undefined':  
                 try:
@@ -73,7 +74,7 @@ class Character(GameObject):
     def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
         skill = object()
         if isDefault:
-            skill = self.prefs.getSkill(name)
+            skill = copy.deepcopy(self.prefs.getSkill(name))
             skill.set_attribute('lvl',lvl)
         else:
             skill = Stat(name, stat=stat, lvl=lvl, isChippable=isChippable, category=category, diff=diff)
@@ -81,12 +82,32 @@ class Character(GameObject):
         self.set_attribute(name, skill)
 
     def get_bpoints(self, skill_name):
-        skill = self.get_attribute(skill_name)
-        lvl = skill.get_attribute('lvl')
+        lvl=0
+        stat_points=0
+        print('beginning bp function with character ' +self.get_attribute('player'))
+        try:
+            skill = self.get_attribute(skill_name)
+            lvl = skill.get_attribute('lvl')
+            print('1. '+ str(skill) + ' with lvl ' +str(lvl))
+        except Exception:
+            try:
+                required_stat = self.prefs.get_skill_attribute(skill_name, 'stat')
+                print('required_stat is ' +str(required_stat))
+                #print('required_stat is ' +required_stat)
+                stat_points = self.get_stat(required_stat, 'lvl')
+                print('1. stat_points are ' + str(stat_points))
+            except Exception:
+                pass
 
-        stat_name = skill.get_attribute('stat')
-        stat_points = self.get_stat(stat_name,'lvl')
+        try:
+            stat_name = skill.get_attribute('stat')
+            print('stat_name is ' +str(stat_name))
+            stat_points = self.get_stat(stat_name,'lvl')
+            print('2. statpoints are ' +str(stat_points))
+        except Exception:
+            pass
         bp = lvl + stat_points
+        print('skill + stat is ' + str(bp) + ' (' + str(lvl) + '+'+str(stat_points)+')')
         return bp
         
     def calc_derived_stats(self):

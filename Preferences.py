@@ -65,15 +65,67 @@ class Preferences(FileControl):
 
         print(effects)
 
-        
+    def save_skills(self):
+        x = XmlController()
+        system = 'modified fuzion'
+        x.create_root('skills')
+        x.set_value('system', system,'root')
+        for name, skill in self.__skills.items():
+            x.create_sub_element('skill', 'root')
+            x.create_sub_element('name','skill')
+            x.set_text(name,'name')
+
+            x.create_sub_element('stat','skill')
+            try:
+                x.set_text(skill.get_attribute('stat'),'stat')
+            except Exception:
+                x.set_text('not found','stat')
+
+            x.create_sub_element('category','skill')
+            try:
+                x.set_text(skill.get_attribute('category'),'category')
+            except Exception:
+                x.set_text('not found','category')
+
+            x.create_sub_element('description','skill')
+            try:
+                x.set_text(skill.get_attribute('description'),'description')
+            except Exception:
+                x.set_text('not found','description')
+
+            x.create_sub_element('chippable','skill')
+            try:
+                x.set_text(skill.get_attribute('ischippable'),'chippable')
+            except Exception:
+                x.set_text('not found','chippable')
+
+            x.create_sub_element('diff_modifier','skill')
+            try:
+                x.set_text(skill.get_attribute('diff'),'diff_modifier')
+            except Exception:
+                x.set_text('not found','diff_modifier')
+
+            x.create_sub_element('short', 'skill')
+            try:
+                x.set_text(skill.get_attribute('short'), 'short')
+            except Exception:
+                x.set_text('not found','short')
+        x.save_file('preferences/skills.xml')
 
     def load_skills(self):
         x = XmlController()
-        x.load_file('preferences/preferences.xml')
+        try:
+            x.load_file('preferences/skills.xml')
+        except Exception:
+            x.load_file('preferences/preferences.xml')
         extract = x.get_dataset('skills', False, True)
         #print(extract)
         for array in extract:
             skill = Stat(name=str.lower(array[0]), stat=str.lower(array[1]), category=str.lower(array[2]), description=array[3], isChippable=array[4], diff=array[5])
+            try:
+                skill.set_attribute('short', array[6])
+            except Exception:
+                skill.set_attribute('short', 'not found') 
             self.__skills[str.lower(array[0])]=skill
 
 
@@ -172,6 +224,22 @@ class Preferences(FileControl):
             pass
 
         return returned
+
+    def get_skills_dictionary(self):
+        return self.__skills
+
+    def get_skill_attribute(self, skill_name, attribute):
+        try:
+            skill = self.__skills[skill_name]
+            return skill.get_attribute(attribute)
+        except Exception:
+            return 'error'
+    def set_skill_attribute(self,skill_name, attribute, value):
+        try:
+            skill = self.__skills[skill_name]
+            skill.set_attribute(attribute, value)
+        except Exception:
+            pass
 
     def commit_to_master(self, dictionary):
         for key, value in dictionary.items():

@@ -8,9 +8,13 @@ class Controller(object):
         self.prefs = Preferences()
         self.__ui_components = {}
         self.__pc_roster = {}
+        self.__skill_shorts = {}
         pc_filepaths = []
         pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
+        pc_filepaths.append('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
         self.load_pc_roster(pc_filepaths)
+
+        self.prepare_skill_shorts()
         
         
         
@@ -23,6 +27,24 @@ class Controller(object):
             self.prefs.load_character(path, c)
             player = c.get_attribute('player')
             self.__pc_roster[player] = c
+            print(str(c))
+
+    def prepare_skill_shorts(self):
+        skills = self.prefs.get_skills_dictionary()
+
+        for key, value in skills.items():
+            try:
+                short = value.get_attribute('short')
+                name = value.get_attribute('name')
+                self.__skill_shorts[short] = name
+            except Exception:
+                pass
+    def get_skill_from_short(self, short):
+        try:
+            skill = self.__skill_shorts[short]
+            return skill
+        except Exception:
+            return 'error'
 
     def get_pc_roster(self):
         return self.__pc_roster
@@ -36,6 +58,20 @@ class Controller(object):
 
     def get_char_stat_list(self, stat_type):
         return self.c.get_stat_list(stat_type)
+
+    def get_char_bp_points(self, player, skill, detailed=False):
+        character = self.__pc_roster[player]
+        array = []
+        if detailed:
+            source_stat_name = character.get_stat(skill, 'stat')
+            source_stat_lvl = character.get_stat(source_stat_name, 'lvl')
+            skill_lvl = character.get_stat(skill, 'lvl')
+            array.append(source_stat_lvl)
+            array.append(skill_lvl)
+            return array
+        
+        bp = character.get_bpoints(skill)
+        return bp
         
 
     def add_ui_component(self, comp_name, component):
@@ -55,6 +91,10 @@ class Controller(object):
         x = XmlController()
         x.load_file(filename)
         return x.get_dataset(root_name, True, dict_tag_name='type')
+
+    def calc_dv_probabilities(self, bp, dv):
+        percent = self.prefs.get_probability(bp, dv)
+        return percent
 
 
 
