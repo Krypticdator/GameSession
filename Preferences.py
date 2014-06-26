@@ -185,24 +185,44 @@ class Preferences(FileControl):
         x.load_file(filepath)
         player = x.get_node_value('info','player')
         fname = x.get_node_value('info', 'first_name')
+        sname = x.get_node_value('info', 'second_name')
+        lname = x.get_node_value('info', 'last_name')
+        alias = x.get_node_value('info', 'alias')
+        age = x.get_node_value('info', 'age')
+
+        personality_array = x.get_dataset('personality',False, simple=True, simple_no_dict=True)
+        
+        for i in range(0,len(personality_array[0])):
+            key =personality_array[0][i]
+            value = personality_array[1][i]
+
+            character.add_personality(value, key)
+
+        family_dict = x.get_dataset('family', False, simple=True)
+
+        for key, value in family_dict.items():
+            #print('key is ' +str(key)+ ' and value is ' +str(value))
+
+            
+            
+            character.set_attribute(str(key), str(value))
+
         stats = x.get_dataset('attributes', dictionary = True, dict_tag_name='type')
         skills = x.get_dataset('skills',True, dict_tag_name='type')
 
 
         character.set_attribute('player',player)
         character.set_attribute('fname', fname)
+        character.set_attribute('sname', sname)
+        character.set_attribute('lname', lname)
+        character.set_attribute('alias', alias)
+        character.set_attribute('age', age)
         character.add_stat_collection(stats)
         character.add_stat_collection(skills)
 
 
-
-
-
         #print(stats)
    
-
-
-
     def get_stat(self, name):
         returned=Stat();
         try:
@@ -269,6 +289,10 @@ class Preferences(FileControl):
         table = self.__probability_tables[bp]
         prob = table.get_option(dv)
         return prob
+
+    def get_new_dice(self, dices, sides, fuzion=False):
+        d = Dice(dices, sides, fuzion)
+        return copy.deepcopy(d)
             
 
 class Table(object):
@@ -315,15 +339,18 @@ class Option(object):
         return str(self.__from) + '-' + str(self.__to) + ' ' + str(self.__return_value)
 
 class Dice(object):
-    def __init__(self, dices, sides):
+    def __init__(self, dices, sides, fuzion=False):
         self.__dices=dices
         self.__sides=sides
         self.__resultset = []
         self.__result=0
+        self.__fuzion=fuzion
 
     def roll(self, method='default'):
         resultset = []
         total = 0
+        if self.__fuzion:
+            method='fuzion'
         if method=='default':
             self.__result = sum(randrange(self.__sides)+1 for die in range(self.__dices))
         else:
@@ -332,11 +359,30 @@ class Dice(object):
                 resultset.append(random_num)
                 total += random_num
             self.__result = total
-            self.__resultset.append(resultset)
+            
+        if self.__fuzion:
+            if self.__result == 18:
+                for i in range(0, 2):
+                    random_num=randrange(self.__sides)+1
+                    self.__result +=random_num
+                    resultset.append(random_num)
+            if self.__result == 3:
+                for i in range(0, 2):
+                    random_num=randrange(self.__sides)+1
+                    self.__result -=random_num
+                    resultset.append(random_num*-1)
+        self.__resultset.append(resultset)
+                    
+                        
         return self.__result
 
     def get_roll(self):
         return self.__result
+
+    def latest_resultset(self):
+        latest = len(self.__resultset)
+        latest = latest -1
+        return self.__resultset[latest]
     
     def set_dices(self, dices):
         self.__dices=dices

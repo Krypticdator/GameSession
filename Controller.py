@@ -27,7 +27,7 @@ class Controller(object):
             self.prefs.load_character(path, c)
             player = c.get_attribute('player')
             self.__pc_roster[player] = c
-            print(str(c))
+            #print(str(c))
 
     def prepare_skill_shorts(self):
         skills = self.prefs.get_skills_dictionary()
@@ -52,6 +52,13 @@ class Controller(object):
     def load_character(self, filepath):
         self.c = Character(self.prefs)
         self.prefs.load_character(filepath,self.c)
+
+    def get_player_fuz_roll(self, player, detailed=False):
+        
+        search_for = str.strip(player)
+        return self.__pc_roster[search_for].fuz_roll(detailed)
+    
+            
         
     def get_char_stat(self, name, attribute):
         return self.c.get_stat(name, attribute)

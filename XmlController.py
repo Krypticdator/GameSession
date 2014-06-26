@@ -87,13 +87,29 @@ class XmlController(object):
             if cell.tag==node_name:
                 return cell.text
 
-    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = [], dict_tag_name='name'):
+    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = [], dict_tag_name='name', simple=False, simple_no_dict=False):
         data = []
         dict = {}
+
         for node in self.root.iter(collection_name):
             sub_elements = list(node)
             data = sub_elements
-
+        
+        if simple:
+            if simple_no_dict:
+                keys = []
+                values = []
+                for cell in data:
+                    keys.append(cell.tag)
+                    values.append(cell.text)
+                array = []
+                array.append(keys)
+                array.append(values)
+                return array    
+            else:
+                for cell in data:
+                    dict[cell.tag] = cell.text
+            return dict
         if dictionary:
             for cell in data:
                 dict[cell.get(dict_tag_name)] = cell.text

@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import decimal
 class GUIFactory(object):
     """description of class"""
     def __init__(self):
@@ -364,10 +365,41 @@ class ModifyDvValues(UIObject):
         self.legendary.variable.set(str(dict['extreme']))
 
 class TaskHandler(UIObject):
+    
     def __init__(self, master, controller):
         super().__init__(master, controller)
         self.vertical_group = ttk.Panedwindow(self.frame, orient=VERTICAL)
         self.horizontal_group = ttk.Panedwindow(self.frame, orient=HORIZONTAL)
+
+        self.tools_group = ttk.Panedwindow(self.vertical_group, orient=HORIZONTAL)
+
+        self.skill_var = StringVar()
+        self.entry_skill = ttk.Entry(self.tools_group, textvariable=self.skill_var) 
+        self.skill_var.trace('w', self.change_skill)
+
+        self.dv_group =ttk.Panedwindow(self.tools_group, orient=VERTICAL)
+        self.dv_var = StringVar()
+
+
+        self.btn_roll_all = ttk.Button(self.tools_group, text='Roll all', command=self.roll_all)
+
+        #Must bind with global dv table
+        everyday = ttk.Radiobutton(self.dv_group, text='everyday', variable=self.dv_var, value=14, command=self.change_dv)
+        challenging = ttk.Radiobutton(self.dv_group, text='challenging', variable=self.dv_var, value=18, command=self.change_dv)
+        hard = ttk.Radiobutton(self.dv_group, text='hard', variable=self.dv_var, value=22, command=self.change_dv)
+        verhard = ttk.Radiobutton(self.dv_group, text='very hard', variable=self.dv_var, value=26, command=self.change_dv)
+        impossible = ttk.Radiobutton(self.dv_group, text='impossible', variable=self.dv_var, value=30, command=self.change_dv)
+
+        self.dv_group.add(everyday)
+        self.dv_group.add(challenging)
+        self.dv_group.add(hard)
+        self.dv_group.add(verhard)
+        self.dv_group.add(impossible)
+
+        self.tools_group.add(self.entry_skill)
+        self.tools_group.add(self.dv_group)
+        self.tools_group.add(self.btn_roll_all)
+        self.vertical_group.add(self.tools_group)
 
         self.header_group = ttk.Panedwindow(self.vertical_group, orient=HORIZONTAL)
         
@@ -396,6 +428,18 @@ class TaskHandler(UIObject):
         self.vertical_group.grid(column=0, row=0)
         self.horizontal_group.grid(column=0, row=0)
 
+    def change_dv(self, *args):
+        dv = self.dv_var.get()
+        for key, value in self.player_entry_dict.items():
+            value.dv_var.set(dv)
+    def change_skill(self, *args):
+        skill = self.skill_var.get()
+        for key, value in self.player_entry_dict.items():
+            value.search_var.set(skill)
+    def roll_all(self, *args):
+        for key, value in self.player_entry_dict.items():
+            value.roll()
+
     def make_header(self):
         lbl_player = ttk.Label(self.header_group, text='player', width=7)
         lbl_char = ttk.Label(self.header_group, text='character', width=10)
@@ -406,6 +450,9 @@ class TaskHandler(UIObject):
         lbl_dv=ttk.Label(self.header_group, text='dv', width=3)
         lbl_prob=ttk.Label(self.header_group, text='prob', width=5)
 
+        lbl_roll = ttk.Label(self.header_group, text='roll', width=5)
+        lbl_result = ttk.Label(self.header_group, text='result', width=20)
+
         self.header_group.add(lbl_player)
         self.header_group.add(lbl_char)
         self.header_group.add(lbl_search)
@@ -414,6 +461,8 @@ class TaskHandler(UIObject):
         self.header_group.add(lbl_mod)
         self.header_group.add(lbl_dv)
         self.header_group.add(lbl_prob)
+        self.header_group.add(lbl_roll)
+        self.header_group.add(lbl_result)
 
 class PlayerLine(UIObject):
     def __init__(self, master, controller, player, character):
@@ -438,12 +487,16 @@ class PlayerLine(UIObject):
         self.bp_var = StringVar()
         self.mod_var = StringVar()
         self.prob_var = StringVar()
+        self.result_var = StringVar()
 
         lbl_skill  = ttk.Label(self.player_group, textvariable=self.skill_var,width=6)
         lbl_bp     = ttk.Label(self.player_group, textvariable=self.bp_var,width=3)
         lbl_mod    = ttk.Label(self.player_group, textvariable=self.mod_var,width=4)
         
         lbl_prob   = ttk.Label(self.player_group, textvariable=self.prob_var, width=5)
+
+        btn_roll = ttk.Button(self.player_group, text='roll', command=self.roll, width=5)
+        lbl_result = ttk.Label(self.player_group, textvariable=self.result_var, width=20)
 
         self.player_group.add(lbl_player)
         self.player_group.add(lbl_char)
@@ -453,8 +506,27 @@ class PlayerLine(UIObject):
         self.player_group.add(lbl_mod)
         self.player_group.add(self.entry_dv)
         self.player_group.add(lbl_prob)
+        self.player_group.add(btn_roll)
+        self.player_group.add(lbl_result)
 
         self.player_group.grid(column=0, row=0)
+
+    def roll(self):
+        fuz_set = self.contr.get_player_fuz_roll(self.player, True)
+        dice_sum = sum(fuz_set)
+        bp = int(self.bp_var.get())
+        result = dice_sum + bp
+        dv = int(self.dv_var.get())
+        margin = result - dv
+
+        if result >= dv:
+            text = str(margin) + ' = ' + str(result) + '(' + str(bp) + '+' + str(dice_sum) + str(fuz_set) + ')'
+            self.result_var.set(text)
+            print(self.result_var.get())
+        if result < dv:
+            text = str(margin) + ' = ' + str(result) + '(' + str(bp) + '+' + str(dice_sum) + str(fuz_set) + ')'
+            self.result_var.set(text)
+            print('failure')
 
     def search_skill(self, *args):
         input = self.search_var.get()
@@ -474,6 +546,7 @@ class PlayerLine(UIObject):
         except BaseException:
             pass
         percent = self.contr.calc_dv_probabilities(bp, dv)
+        percent = '%.2f' % percent
 
         self.prob_var.set(str(percent))
 

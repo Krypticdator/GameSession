@@ -6,6 +6,7 @@ class Character(GameObject):
     def __init__(self, preferences=object()):
         super().__init__()
         self.prefs = preferences
+        self.__fuz_dice = self.prefs.get_new_dice(3, 6, True)
 
         stat_dict=self.prefs.get_stats()
         d_stat_dict = self.prefs.get_derived_stats()
@@ -17,6 +18,13 @@ class Character(GameObject):
             self.set_attribute(key, value)
 
         self.calc_derived_stats()
+
+    def fuz_roll(self, detailed=False):
+        if detailed:
+            self.__fuz_dice.roll()
+            return self.__fuz_dice.latest_resultset()
+        else:
+            return self.__fuz_dice.roll()
 
     def get_stat(self, name, attribute):
         stat = self.get_attribute(name)
@@ -81,10 +89,14 @@ class Character(GameObject):
 
         self.set_attribute(name, skill)
 
+    def add_personality(self, name, category, type='personality' ):
+        stat = Stat(name = name, category= category, type=type)
+        self.set_attribute(name, stat)
+
     def get_bpoints(self, skill_name):
         lvl=0
         stat_points=0
-        print('beginning bp function with character ' +self.get_attribute('player'))
+        #print('beginning bp function with character ' +self.get_attribute('player'))
         try:
             skill = self.get_attribute(skill_name)
             lvl = skill.get_attribute('lvl')
@@ -92,10 +104,10 @@ class Character(GameObject):
         except Exception:
             try:
                 required_stat = self.prefs.get_skill_attribute(skill_name, 'stat')
-                print('required_stat is ' +str(required_stat))
+                #print('required_stat is ' +str(required_stat))
                 #print('required_stat is ' +required_stat)
                 stat_points = self.get_stat(required_stat, 'lvl')
-                print('1. stat_points are ' + str(stat_points))
+         
             except Exception:
                 pass
 
@@ -103,11 +115,11 @@ class Character(GameObject):
             stat_name = skill.get_attribute('stat')
             print('stat_name is ' +str(stat_name))
             stat_points = self.get_stat(stat_name,'lvl')
-            print('2. statpoints are ' +str(stat_points))
+            #print('2. statpoints are ' +str(stat_points))
         except Exception:
             pass
         bp = lvl + stat_points
-        print('skill + stat is ' + str(bp) + ' (' + str(lvl) + '+'+str(stat_points)+')')
+        #print('skill + stat is ' + str(bp) + ' (' + str(lvl) + '+'+str(stat_points)+')')
         return bp
         
     def calc_derived_stats(self):
@@ -147,7 +159,7 @@ class Character(GameObject):
         return returned
 
 class Stat(GameObject):
-    def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0, importance=0, intensity=0, original=0, description='undefined', category='undefined', isChippable=False, source_stats=[], divider=1, multiplier=1):
+    def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0, importance=0, intensity=0, original=0, description='undefined', category='undefined', isChippable=False, source_stats=[], divider=1, multiplier=1, age=0, gender='male', relation='undefined'):
         super().__init__()
         self.set_attribute('name', str.lower(name))
         self.set_attribute('type', type)
@@ -175,6 +187,12 @@ class Stat(GameObject):
             pass
         elif type=='talent':
             pass
+        elif type=='sibling':
+            self.set_attribute('age', age)
+            self.set_attribute('relation', relation)
+            self.set_attribute('gender', gender)
+        else:
+            self.set_attribute('category', category)
 
     def increase_experience(self, exp):
         pool = self.get_attribute('ip')
