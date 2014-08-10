@@ -1,11 +1,13 @@
 from GUIFactory import StartMenu
 from Preferences import Preferences
 from XmlController import XmlController
+from SQLController import SQLController
 from Character import Character
 class Controller(object):
     """description of class"""
     def __init__(self):
         self.prefs = Preferences()
+        self.sql = SQLController()
         self.__ui_components = {}
         self.__pc_roster = {}
         self.__skill_shorts = {}
@@ -15,9 +17,6 @@ class Controller(object):
         self.load_pc_roster(pc_filepaths)
 
         self.prepare_skill_shorts()
-        
-        
-        
         
         start = StartMenu(self)
         

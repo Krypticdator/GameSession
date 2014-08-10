@@ -202,13 +202,39 @@ class Preferences(FileControl):
 
         for key, value in family_dict.items():
             #print('key is ' +str(key)+ ' and value is ' +str(value))
-
-            
-            
             character.set_attribute(str(key), str(value))
+        
+        tag_params = ['age', 'gender', 'relation']
+        siblings_array = x.get_dataset('family', False, False, True, tag_params)
+        #print(str(siblings_array))
+
+        siblings_names = x.get_dataset('family', False, simple=True, simple_no_dict=True)
+        #print(str(siblings_names))
+        names = []
+        for i in range(len(siblings_names[0])):
+            key = siblings_names[0][i]
+            value = siblings_names[1][i]
+
+            if key=='sibling':
+                names.append(value)
+        sibling_num=0
+        for array in siblings_array:
+            if len(array)!=0:
+                print(sibling_num)
+                character.add_sibling(names[sibling_num], array[1], array[0], array[2])
+                    
+                sibling_num = sibling_num + 1
 
         stats = x.get_dataset('attributes', dictionary = True, dict_tag_name='type')
         skills = x.get_dataset('skills',True, dict_tag_name='type')
+        talents = x.get_dataset('talents', True, dict_tag_name='type')
+        perks = x.get_dataset('perks', True, dict_tag_name='type')
+
+        comp_params = ['type', 'frequency', 'importance', 'intensity']
+        complications = x.get_dataset('complications', False, False, True, comp_params)
+
+        for array in complications:
+            character.add_complication(array[0], array[3], array[1], array[2])
 
 
         character.set_attribute('player',player)
@@ -219,6 +245,11 @@ class Preferences(FileControl):
         character.set_attribute('age', age)
         character.add_stat_collection(stats)
         character.add_stat_collection(skills)
+        character.add_stat_collection(talents)
+        character.add_stat_collection(perks)
+
+        cyberwear = x.get_cyberwear_from_character()
+        character.add_cyberwear_collection(copy.deepcopy(cyberwear))
 
 
         #print(stats)

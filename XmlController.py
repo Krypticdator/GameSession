@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import copy
+from GameObject import CyberItem
 class XmlController(object):
     """description of class"""
     def __init__(self):
@@ -87,13 +88,44 @@ class XmlController(object):
             if cell.tag==node_name:
                 return cell.text
 
-    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = [], dict_tag_name='name', simple=False, simple_no_dict=False):
+    def get_cyberwear_from_character(self):
+        sub_elements = []
+        for node in self.root.iter('cyberwears'):
+            sub_elements = list(node)
+        
+        item = CyberItem('None')
+        itemlist = []
+        for cell in sub_elements:
+            for element in cell.iter():
+                type= element.tag
+                name = element.get('name')
+                hum = element.text
+                print(hum)
+                if type is not None:
+                    #print(type)
+                    if str(type) == 'cyberwear':
+                        #print('test2')
+                        item = CyberItem(name, hum)
+                        itemlist.append(item)
+                    else:
+                        item.add_option(name, hum)
+        #print(itemlist)
+        return itemlist
+
+
+    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = None, dict_tag_name='name', simple=False, simple_no_dict=False):
         data = []
         dict = {}
+        
+        if tag_params is None:
+            tag_params=[]
 
         for node in self.root.iter(collection_name):
             sub_elements = list(node)
             data = sub_elements
+
+        '''if undefined_tags:
+            pass'''
         
         if simple:
             if simple_no_dict:

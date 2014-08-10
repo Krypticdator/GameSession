@@ -184,10 +184,10 @@
 	</complications>
 	<cyberwears>
 		<cyberwear name="Processor">1.0
-		<option name="Chipware Socket">6.0</option>
+			<option name="Chipware Socket">6.0</option>
 		</cyberwear>
 		<cyberwear name="Cyberoptic">4.0
-		<option name="Digital Camera">0.5</option>
+			<option name="Digital Camera">0.5</option>
 		</cyberwear>
 	</cyberwears>
 	<items>

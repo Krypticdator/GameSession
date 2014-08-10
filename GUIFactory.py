@@ -675,22 +675,3 @@ class SkillManager(UIObject):
 
     def save(self):
         self.contr.prefs.save_skills()
-
-
-        
-
-
-
-
-
-
-
-
-
-         
-
-
-
-
-
-

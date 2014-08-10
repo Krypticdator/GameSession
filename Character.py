@@ -7,6 +7,7 @@ class Character(GameObject):
         super().__init__()
         self.prefs = preferences
         self.__fuz_dice = self.prefs.get_new_dice(3, 6, True)
+        self.__inventory = {}
 
         stat_dict=self.prefs.get_stats()
         d_stat_dict = self.prefs.get_derived_stats()
@@ -77,7 +78,15 @@ class Character(GameObject):
                     pass
                 #print(value)
         self.calc_derived_stats()
-        self.clean_skills()            
+        self.clean_skills()
+    
+    def add_cyberwear_collection(self, cyberwearlist):
+        for cyberwear in cyberwearlist:
+            name = cyberwear.get_attribute('name')
+            #print('name is ' + name)
+            self.__inventory[name] = cyberwear
+        for key, value in self.__inventory.items():
+            print(str(value))            
 
     def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
         skill = object()
@@ -92,6 +101,15 @@ class Character(GameObject):
     def add_personality(self, name, category, type='personality' ):
         stat = Stat(name = name, category= category, type=type)
         self.set_attribute(name, stat)
+    
+    def add_sibling(self, name, gender, age, relation, type='sibling', category='relative'):
+        sibling = Stat(name=name, gender=gender, age=age, relation=relation, type=type, category=category)
+        #print(str(sibling.get_all_attributes()))
+        self.set_attribute(name, sibling)
+
+    def add_complication(self, name, inten, freq, impor, type='complication'):
+        complication = Stat(name=name, intensity=inten, frequency=freq, importance=impor, type=type)
+        self.set_attribute(name, complication)
 
     def get_bpoints(self, skill_name):
         lvl=0
@@ -159,8 +177,10 @@ class Character(GameObject):
         return returned
 
 class Stat(GameObject):
-    def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0, importance=0, intensity=0, original=0, description='undefined', category='undefined', isChippable=False, source_stats=[], divider=1, multiplier=1, age=0, gender='male', relation='undefined'):
+    def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0, importance=0, intensity=0, original=0, description='undefined', category='undefined', isChippable=False, source_stats=None, divider=1, multiplier=1, age=0, gender='male', relation='undefined'):
         super().__init__()
+        if source_stats is None:
+            source_stats=[]
         self.set_attribute('name', str.lower(name))
         self.set_attribute('type', type)
         self.set_attribute('lvl', int(lvl))
