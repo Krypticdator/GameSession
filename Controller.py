@@ -12,7 +12,7 @@ class Controller(object):
         self.__pc_roster = {}
         self.__skill_shorts = {}
         pc_filepaths = []
-        pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
+        #pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         pc_filepaths.append('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
         self.load_pc_roster(pc_filepaths)
 
@@ -59,11 +59,19 @@ class Controller(object):
     
             
         
-    def get_char_stat(self, name, attribute):
+    def get_char_stat(self, name, attribute, search_category=False, return_all=False):
+        if search_category:
+            return self.c.get_stat(name, name, True, return_all)
         return self.c.get_stat(name, attribute)
+    
+    def get_char_attribute(self, name):
+        return self.c.get_attribute(name)
 
     def get_char_stat_list(self, stat_type):
         return self.c.get_stat_list(stat_type)
+
+    def get_char_inventory(self):
+        return self.c.get_inventory()
 
     def get_char_bp_points(self, player, skill, detailed=False):
         character = self.__pc_roster[player]

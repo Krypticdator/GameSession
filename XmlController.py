@@ -100,7 +100,7 @@ class XmlController(object):
                 type= element.tag
                 name = element.get('name')
                 hum = element.text
-                print(hum)
+                #print(hum)
                 if type is not None:
                     #print(type)
                     if str(type) == 'cyberwear':
@@ -113,7 +113,7 @@ class XmlController(object):
         return itemlist
 
 
-    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = None, dict_tag_name='name', simple=False, simple_no_dict=False):
+    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = None, dict_tag_name='name', simple=False, simple_no_dict=False, tag_collection_with_dict=False):
         data = []
         dict = {}
         
@@ -162,20 +162,36 @@ class XmlController(object):
             return set
 
         if tag_collection:
-            set = []
-            for cell in data:
-                temp = []
-                for param in tag_params:
-                    try:
-                        tag = cell.get(param)
-                        if str(tag)!='None':
-                            temp.append(cell.get(param))
+            if tag_collection_with_dict:
+                set = []
+                for cell in data:
+                    temp={}
+                    for param in tag_params:
+                        try:
+                            tag = cell.get(param)
+                            if str(tag)!='None':
+                                temp[param] = cell.get(param)
+                        except Exception:
+                            pass
+                    if temp:
+                        set.append(temp)
+                return set
+                 
+            else:
+                set = []
+                for cell in data:
+                    temp = []
+                    for param in tag_params:
+                        try:
+                            tag = cell.get(param)
+                            if str(tag)!='None':
+                                temp.append(cell.get(param))
 
-                    except Exception:
-                        pass
-                if temp:
-                    set.append(temp)
-            return set
+                        except Exception:
+                            pass
+                    if temp:
+                        set.append(temp)
+                return set
 
 
         return data

@@ -1570,13 +1570,11 @@
 			<choice from="7" to="7">An old enemy of theirs just showed up</choice>
 		</table>
 		<table name="love_events">
-			<choice from="1" to="1">YOU GET LUCKY</choice>
-			<choice from="2" to="2">DISASTER STRIKES</choice>
-			<choice from="3" to="3">Happy love affair</choice>
-			<choice from="4" to="4">Tragic love affair</choice>
-			<choice from="5" to="5">Love Affair with problems</choice>
-			<choice from="6" to="6">Fast Affairs and Hot Dates</choice>
-			<choice from="7" to="7">Life got complicated</choice>
+			<choice from="1" to="1">Happy love affair</choice>
+			<choice from="2" to="2">Tragic love affair</choice>
+			<choice from="3" to="3">Love Affair with problems</choice>
+			<choice from="4" to="4">Fast Affairs and Hot Dates</choice>
+			<choice from="5" to="5">Life got complicated</choice>
 		</table>
 		<table name="love_mutual">
 			<choice from="1" to="1">They still love you</choice>
@@ -1615,23 +1613,61 @@
 			<choice from="10" to="10">Lover imprisoned or exile</choice>
 		</table>
 		<table name="lucky_table">
-			<choice from="1" to="1">YOU GET LUCKY</choice>
-			<choice from="2" to="2">DISASTER STRIKES</choice>
-			<choice from="3" to="3">Happy love affair</choice>
-			<choice from="4" to="4">Tragic love affair</choice>
-			<choice from="5" to="5">Love Affair with problems</choice>
-			<choice from="6" to="6">Fast Affairs and Hot Dates</choice>
-			<choice from="7" to="7">Life got complicated</choice>
-			<choice from="8" to="8">Make a Powerful Connection in Local Government</choice>
-			<choice from="9" to="9">Financial Windfall</choice>
-			<choice from="10" to="10">Big Score on job or deal</choice>
-			<choice from="11" to="11">Find a Sensei</choice>
-			<choice from="12" to="12">Find a Teacher</choice>
-			<choice from="13" to="13">Powerful Altcult member owes you one favor</choice>
-			<choice from="14" to="14">Local Nomad Pack befriends you</choice>
-			<choice from="15" to="15">Make a Friend in a local Altcult</choice>
-			<choice from="16" to="16">Local Boostergang likes you</choice>
-			<choice from="17" to="17">Find a Combat Teacher</choice>
+			<choice from="1" to="1">Make a Powerful Connection in Local Government</choice>
+			<choice from="2" to="2">Financial Windfall</choice>
+			<choice from="3" to="3">Big Score on job or deal</choice>
+			<choice from="4" to="4">Find a Sensei</choice>
+			<choice from="5" to="5">Find a Teacher</choice>
+			<choice from="6" to="6">Powerful Altcult member owes you one favor</choice>
+			<choice from="7" to="7">Local Nomad Pack befriends you</choice>
+			<choice from="8" to="8">Make a Friend in a local Altcult</choice>
+			<choice from="9" to="9">Local Boostergang likes you</choice>
+			<choice from="10" to="10">Find a Combat Teacher</choice>
+		</table>
+		<table name="powerful_connection">
+			<choice from="1" to="1"> It's in a local Security Force.</choice>
+            <choice from="2" to="2"> It's in a local Altcult Leader's Office.</choice>
+            <choice from="3" to="3"> It's in the City Mgr's Office.</choice>
+		</table>
+		<table name="betrayel_type">
+			<choice from="1" to="1"> you are being blackmailed.</choice>
+			<choice from="2" to="2"> your secret was exposed</choice>
+			<choice from="3" to="3"> you were betrayed by a close friend in either romance or career (you choose).</choice>
+		</table>
+		<table name="accident_type">
+			<choice from="1" to="1"> you were terribly maimed and must subtract -2 from your DEX.</choice>
+			<choice from="2" to="2"> you were hospitalized for x months that year.</choice>
+			<choice from="3" to="3"> you have lost x months of memory of that year.</choice>
+			<choice from="4" to="4"> you constantly relive nightmares of the accident and wake up screaming.</choice>
+		</table>
+		<table name="death_type">
+			<choice from="1" to="1"> They died accidentally.</choice>
+			<choice from="2" to="2"> They were murdered by unknown parties.</choice>
+			<choice from="3" to="3"> They were murdered and you know who did it. You just need the proof.</choice>
+		</table>
+		<table name="accusation_type">
+			<choice from="1" to="1">The accusation is theft</choice>
+			<choice from="2" to="2">The accusation is cowardice</choice>
+			<choice from="3" to="3">The accusation is murder</choice>
+			<choice from="4" to="4">The accusation is rape</choice>
+			<choice from="5" to="5">The accusation is lying or betrayel</choice>
+		</table>
+		<table name="crime_type">
+			<choice from="1" to="1">Only a couple local renta-cops want you</choice>
+			<choice from="2" to="2">It's an entire local Security force</choice>
+			<choice from="3" to="3">It's an Altcult Militia</choice>
+			<choice from="4" to="4">It's the FBI or equivalent national police force</choice>
+		</table>
+		<table name="corporation_type">
+			<choice from="1" to="1">It's a small, local firm</choice>
+			<choice from="2" to="2">It's a larger corp with offices Citywide</choice>
+			<choice from="3" to="3">It's a big, national corp with agents in most major cities</choice>
+			<choice from="4" to="4">It's a huge multinational megacorp with armies, ninja and spies everywhere</choice>
+		</table>
+		<table name="breakdown_type">
+			<choice from="1" to="1">It is some type of nervous disorder, probably from a bioplague- lose 1 pt. REF</choice>
+			<choice from="2" to="2">It is some kind of mental problem; you suffer anxiety attacks and phobias. Lose 1 pt from your PRE Stat</choice>
+			<choice from="3" to="3">It is a major psychosis. You hear voices, are violent, irrational, depressive. Lose 1 pt from your PRE, 1 from REF</choice>
 		</table>
 	</tables>
 </preferences>

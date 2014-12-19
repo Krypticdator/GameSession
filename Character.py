@@ -27,7 +27,22 @@ class Character(GameObject):
         else:
             return self.__fuz_dice.roll()
 
-    def get_stat(self, name, attribute):
+    def get_stat(self, name, attribute, category_search=False, return_all=False):
+        if category_search:
+            all_results = []
+            for key, value in self.get_all_attributes().items():
+                try:
+                    category = value.get_attribute('category')
+                    if category == name:
+                        if return_all:
+                            all_results.append(value.get_attribute('name'))
+                        else:
+                            return value.get_attribute('name')
+            
+                except Exception:
+                    pass
+            if return_all:
+                return all_results
         stat = self.get_attribute(name)
         return stat.get_attribute(attribute)
     
@@ -43,6 +58,9 @@ class Character(GameObject):
             except Exception:
                 pass
         return stat_list
+
+    def get_inventory(self):
+        return self.__inventory
                 
 
     def clean_skills(self):
@@ -63,20 +81,23 @@ class Character(GameObject):
         for item in deletable:
             self.destroy_attribute(item)
 
-    def add_stat_collection(self, collection):
+    def add_stat_collection(self, collection, collection_type='type'):
         for key, value in collection.items():
             name = str.lower(key)
             #stat = self.prefs.get_stat(name)
             stat = copy.deepcopy(self.prefs.get_from_master(name))
             #print(stat)
-            if stat.get_attribute('name')!='undefined':  
-                try:
-                    stat.set_attribute('name',name)
-                    stat.set_attribute('lvl',int(value))
-                    self.set_attribute(name, stat)
-                except Exception:
-                    pass
-                #print(value)
+            #print('key is ' +key)
+            #if stat.get_attribute('name')!='undefined':  
+            try:
+                #print('key is ' + key)
+                stat.set_attribute('type', collection_type)
+                stat.set_attribute('name',name)
+                stat.set_attribute('lvl',int(value))
+                self.set_attribute(name, stat)
+            except Exception:
+                pass
+                #print(str(stat))
         self.calc_derived_stats()
         self.clean_skills()
     
@@ -86,7 +107,8 @@ class Character(GameObject):
             #print('name is ' + name)
             self.__inventory[name] = cyberwear
         for key, value in self.__inventory.items():
-            print(str(value))            
+            #print(str(value))  
+            pass          
 
     def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
         skill = object()

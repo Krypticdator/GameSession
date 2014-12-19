@@ -49,6 +49,13 @@ class GameObject(object):
             print(str(key) + ' ' + str(value))'''
         return self.__attributes
 
+class Item(GameObject):
+    def __init__(self, name, value=0, weight=0):
+        super().__init__()
+        self.set_attribute('name', name)
+        self.set_attribute('value', value)
+        self.set_attribute('weight', weight)
+
 class CyberItem(GameObject):
     def __init__(self, name, hum_cost=0, value=0, children=None):
         super().__init__()
@@ -60,6 +67,7 @@ class CyberItem(GameObject):
         self.set_attribute('hum_cost', float(hum))
         self.set_attribute('value', value)
         self.set_attribute('options', children)
+        self.set_attribute('type', 'cyber')
 
     def add_option(self, name, hum_cost=0, value=0):
         dictionary = self.get_attribute('options')

@@ -37,6 +37,7 @@ class label_and_value(UIObject):
 
     def set(self, value):
         self.variable.set(value)
+        #self.frame.update()
 
     def get(self):
         return self.variable.get()
@@ -83,11 +84,49 @@ class CustomPanedWindow(UIObject):
         self.components = {}
         if vertical:
             self.group = ttk.Panedwindow(self.frame, orient=VERTICAL)
+            self.group.grid(column=0, row=0)
         else:
             self.group = ttk.Panedwindow(self.frame, orient=HORIZONAL)
+            self.group.grid(column=0, row=0)
 
-    def add(self, component):
-        pass
+    def add(self, name, component='none', from_array_to_labels=False, array='none'):
+        if from_array_to_labels:
+            for cell in array:
+                self.components[cell] = ttk.Label(self.group, text=cell)
+                self.group.add(self.components[cell])
+        else:
+            self.components[name] = component
+            self.group.add(component)
+
+class ListTable(UIObject):
+    def __init__(self, master, controller, headers='none', read_only=True):
+        super().__init__(master, controller)
+        if headers == 'none':
+            headers = []
+        self.columns = {}
+        self.groups = {}
+
+        if read_only:
+            for header in headers:
+                self.columns[header] = ttk.Labelframe(self.frame, text=header)
+                self.groups[header] = CustomPanedWindow(self.columns[header], self.contr)
+                self.groups[header].frame.grid(column=0, row=0)
+
+            column_num = 0
+            row_num = 0
+
+            for header in headers:
+                self.columns[header].grid(column=column_num, row=row_num, sticky=(W,N))
+                column_num = column_num +1
+
+    def add(self, data):
+        for key, value in data.items():
+            label = ttk.Label(self.groups[key].frame, text = value)
+            self.groups[key].add(key, label)
+
+
+
+
 
 
 
@@ -127,66 +166,414 @@ class StartMenu(object):
         window = Toplevel(self.root)
         th = TaskHandler(window, self.contr)
 
+class BasicStatsComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.contr = controller
+        #BASIC STATS
+        self.basic_stats_frame = ttk.Labelframe(master, text='Primary stats')
+        stats_group = ttk.Panedwindow(self.basic_stats_frame, orient = HORIZONTAL)
+        
+        #Mental group
+        self.mental_frame = ttk.Labelframe(stats_group, text='Mental')
+        self.mental_group = ttk.Panedwindow(self.mental_frame, orient=VERTICAL)
+
+        self.Int = label_and_value(self.mental_group, self.contr, 'Int', 5)
+        self.Will = label_and_value(self.mental_group, self.contr, 'Will', 5)
+        self.Pre = label_and_value(self.mental_group, self.contr, 'Pre', 5)
+
+        #Physical group
+        self.physical_frame = ttk.Labelframe(stats_group, text='Physical')
+        self.physical_group = ttk.Panedwindow(self.physical_frame, orient=VERTICAL)
+
+        self.Con = label_and_value(self.physical_group, self.contr, 'Con', 5)
+        self.Str = label_and_value(self.physical_group, self.contr, 'Str', 5)
+        self.Body = label_and_value(self.physical_group, self.contr, 'Body', 5)
+
+        #Combat group
+        self.combat_frame = ttk.Labelframe(stats_group, text='Combat')
+        self.combat_group = ttk.Panedwindow(self.combat_frame, orient=VERTICAL)
+
+        self.Ref = label_and_value(self.combat_group, self.contr, 'Ref', 5)
+        self.Dex = label_and_value(self.combat_group, self.contr, 'Dex', 5)
+        self.Tech = label_and_value(self.combat_group, self.contr, 'Tech', 5)
+
+        #Movement
+        self.movement_frame = ttk.Labelframe(stats_group, text='Movement')
+        self.movement_group = ttk.Panedwindow(self.movement_frame, orient = VERTICAL)
+
+        self.Move = label_and_value(self.movement_group, self.contr, 'Move', 5)
+
+        self.basic_stats_frame.grid(column=0, row=0)
+        stats_group.grid(column=0, row=0)
+        self.mental_frame.grid(column=0, row=0)
+        self.mental_group.grid(column=0, row=0)
+        self.physical_frame.grid(column=0, row=0)
+        self.physical_group.grid(column=0, row=0)
+        self.combat_frame.grid(column=0, row=0)
+        self.combat_group.grid(column=0, row=0)
+        self.movement_frame.grid(column=0, row=0)
+        self.movement_group.grid(column=0, row=0)
+
+        stats_group.add(self.mental_frame)
+        stats_group.add(self.physical_frame)
+        stats_group.add(self.combat_frame)
+        stats_group.add(self.movement_frame)
+
+        self.mental_group.add(self.Int.frame)
+        self.mental_group.add(self.Will.frame)
+        self.mental_group.add(self.Pre.frame)
+
+        self.physical_group.add(self.Con.frame)
+        self.physical_group.add(self.Str.frame)
+        self.physical_group.add(self.Body.frame)
+
+        self.combat_group.add(self.Ref.frame)
+        self.combat_group.add(self.Dex.frame)
+        self.combat_group.add(self.Tech.frame)
+
+        self.movement_group.add(self.Move.frame)
+
+        self.update()
+
+    def update(self):
+        #print('updating basic stats')
+        self.contr.load_character('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
+        Int  = self.contr.get_char_stat('int','lvl')
+        Will  = self.contr.get_char_stat('will','lvl')
+        Pre  = self.contr.get_char_stat('pre','lvl')
+        Con= self.contr.get_char_stat('con','lvl')
+        Str= self.contr.get_char_stat('str','lvl')
+        Body= self.contr.get_char_stat('body','lvl')
+        Ref= self.contr.get_char_stat('ref','lvl')
+        Dex= self.contr.get_char_stat('dex','lvl')
+        Tech= self.contr.get_char_stat('tech','lvl')
+        Move= self.contr.get_char_stat('move','lvl')
+
+        self.Int.set(str(Int))
+        self.Ref.set(str(Ref))
+        self.Tech.set(str(Tech))
+        self.Dex.set(str(Dex))
+        self.Pre.set(str(Pre))
+        self.Con.set(str(Con))
+        self.Str.set(str(Str))
+        self.Move.set(str(Move))
+        self.Body.set(str(Body))
+        self.Will.set(str(Will))
+
+class DerivedStatsComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.frame = ttk.Labelframe(master, text='Derived stats')
+        self.Luck = label_and_value(self.frame, self.contr, 'Luck', 5)
+        self.Hum = label_and_value(self.frame, self.contr, 'Hum', 5)
+        self.Rec = label_and_value(self.frame, self.contr, 'Rec', 5)
+        self.End = label_and_value(self.frame, self.contr, 'End', 5)
+
+        self.Run = label_and_value(self.frame, self.contr, 'Run', 5)
+        self.Sprint = label_and_value(self.frame, self.contr, 'Sprint', 5)
+        self.Swim = label_and_value(self.frame, self.contr, 'Swim', 5)
+        self.Leap = label_and_value(self.frame, self.contr, 'Leap', 5)
+
+        self.Stun = label_and_value(self.frame, self.contr, 'Stun', 5)
+        self.Hits = label_and_value(self.frame, self.contr, 'Hits', 5)
+        self.Sd = label_and_value(self.frame, self.contr, 'SD', 5)
+        self.Res = label_and_value(self.frame, self.contr, 'Res', 5)
+
+        self.Luck.frame.grid(column=0, row=0, sticky=(W))
+        self.Hum.frame.grid(column=0, row=1, sticky=(W))
+        self.Rec.frame.grid(column=0, row=2, sticky=(W))
+        self.End.frame.grid(column=0, row=3, sticky=(W))
+
+        self.Run.frame.grid(column=1, row=0, sticky=(W))
+        self.Sprint.frame.grid(column=1, row=1, sticky=(W))
+        self.Swim.frame.grid(column=1, row=2, sticky=(W))
+        self.Leap.frame.grid(column=1, row=3, sticky=(W))
+
+        self.Stun.frame.grid(column=2, row=0, sticky=(W))
+        self.Hits.frame.grid(column=2, row=1, sticky=(W))
+        self.Sd.frame.grid(column=2, row=2, sticky=(W))
+        self.Res.frame.grid(column=2, row=3, sticky=(W))
+
+        self.frame.grid(column=0, row=0)
+        
+class SkillComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.skill_categories = []
+        self.category_frames = {}
+        self.category_group = {}
+        self.skill_components = {}
+        self.skill_list = self.contr.get_char_stat_list('skill')
+        for key, value in self.skill_list.items():
+            if value.get_attribute('category') in self.skill_categories:
+                pass
+            else:
+                self.skill_categories.append(value.get_attribute('category'))
+        self.skill_categories.sort()
+        #print(str(self.skill_categories))
+        for category in self.skill_categories:
+            self.category_frames[category] = ttk.Labelframe(self.frame, text=category)
+            self.category_group[category] = ttk.Panedwindow(self.category_frames[category], orient = VERTICAL)
+            self.category_group[category].grid(column=0, row=0)
+        for key, value in self.skill_list.items():
+            category = value.get_attribute('category')
+            self.skill_components[key] = label_and_value(self.category_group[category], self.contr, key, 30)
+            self.skill_components[key].set(value.get_attribute('lvl'))
+            #print(str(skill_component.get()))
+            self.category_group[category].add(self.skill_components[key].frame)
+
+        row_num =0
+        col_num=0
+        for key, value in self.category_frames.items():
+            value.grid(column=col_num, row=row_num)
+            col_num = col_num +1
+            if col_num==2:
+                col_num = 0
+                row_num = row_num+1
+        #print('wow')
+        #self.frame.grid(column=0, row=0)
+
+class PersonalityComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.personality_frame = ttk.Labelframe(self.frame, text='personality')
+        self.frame2 = ttk.Frame(self.frame)
+        self.frame3 = ttk.Frame(self.frame)
+
+        self.quirks_frame = ttk.Labelframe(self.frame2, text='quirks')
+        self.disorders_frame = ttk.Labelframe(self.frame2, text='disorders')
+        self.phobias_frame = ttk.Labelframe(self.frame2, text='phobias')
+        self.clothes_frame = ttk.Labelframe(self.frame3, text='clothes')
+        self.hair_frame = ttk.Labelframe(self.frame3, text='hair')
+        self.affections_frame = ttk.Labelframe(self.frame3, text='affections')
+
+        self.personality_group = ttk.Panedwindow(self.personality_frame, orient = VERTICAL)
+        self.quirks_group = ttk.Panedwindow(self.quirks_frame, orient = VERTICAL)
+        self.disorders_group = ttk.Panedwindow(self.disorders_frame, orient = VERTICAL)
+        self.phobias_group = ttk.Panedwindow(self.phobias_frame, orient = VERTICAL)
+        self.clothes_group = ttk.Panedwindow(self.clothes_frame, orient = VERTICAL)
+        self.hair_group = ttk.Panedwindow(self.hair_frame, orient = VERTICAL)
+        self.affections_group = ttk.Panedwindow(self.affections_frame, orient = VERTICAL)
+
+
+        self.motivation = label_and_value(self.personality_group, self.contr, 'prime motivation', 25)
+        self.person = label_and_value(self.personality_group, self.contr, 'most valued person', 25)
+        self.posession = label_and_value(self.personality_group, self.contr, 'most valued posession', 25)
+        self.people = label_and_value(self.personality_group, self.contr, 'feels about most people', 25)
+        self.inmode = label_and_value(self.personality_group, self.contr, 'inmode', 25)
+        self.exmode = label_and_value(self.personality_group, self.contr, 'exmode', 25)
+
+        self.personality_group.add(self.motivation.frame)
+        self.personality_group.add(self.person.frame)
+        self.personality_group.add(self.posession.frame)
+        self.personality_group.add(self.people.frame)
+        self.personality_group.add(self.inmode.frame)
+        self.personality_group.add(self.exmode.frame)
+
+        quirks = self.contr.get_char_stat('quirk', 'quirk', True, True)
+        disorders = self.contr.get_char_stat('disorder', 'disorder', True, True)
+        phobias = self.contr.get_char_stat('phobia', 'phobia', True, True)
+
+        clothes = self.contr.get_char_stat('clothes', 'clothes', True, True)
+        hair = self.contr.get_char_stat('hair', 'hair', True, True)
+        affes = self.contr.get_char_stat('affection', 'affection', True, True)
+
+        for quirk in quirks:
+            self.quirks_group.add(ttk.Label(self.quirks_group, text=quirk))
+
+        for disorder in disorders:
+            self.disorders_group.add(ttk.Label(self.disorders_group, text=disorder))
+
+        for phobia in phobias:
+            self.phobias_group.add(ttk.Label(self.phobias_group, text=phobia))
+
+        for cloth in clothes:
+            self.clothes_group.add(ttk.Label(self.clothes_group, text=cloth))
+
+        for style in hair:
+            self.hair_group.add(ttk.Label(self.hair_group, text=style))
+
+        for affe in affes:
+            self.affections_group.add(ttk.Label(self.affections_group, text=affe))
+
+        self.personality_group.grid(column=0, row=0)
+        self.personality_frame.grid(column=0, row=0)
+        self.frame2.grid(column=0, row=1, sticky=(W))
+        self.frame3.grid(column=0, row=2, sticky=(W))
+        self.quirks_group.grid(column=0, row=0)
+        self.quirks_frame.grid(column=0, row=0, sticky=(W))
+        self.disorders_group.grid(column=0, row=0)
+        self.disorders_frame.grid(column=1, row=0, sticky=(W, N))
+        self.phobias_group.grid(column=0, row=0)
+        self.phobias_frame.grid(column=2, row=0, sticky=(W, N))
+
+        self.clothes_frame.grid(column=0, row=0, sticky=(W,N))
+        self.hair_frame.grid(column=1, row=0, sticky=(W,N))
+        self.affections_frame.grid(column=2, row=0, sticky=(W,N))
+
+        self.clothes_group.grid(column=0, row=0)
+        self.hair_group.grid(column=0, row=0)
+        self.affections_group.grid(column=0, row=0)
+
+        self.update()
+
+    def update(self):
+        
+        motivation = self.contr.get_char_stat('prime_motivation', 'prime_motivation', True)
+        person = self.contr.get_char_stat('most_valued_person', 'most_valued_person', True)
+        posession = self.contr.get_char_stat('most_valued_posession', 'most_valued_posession', True)
+        people = self.contr.get_char_stat('feels_about_people', 'feels_about_people', True)
+        inmode = self.contr.get_char_stat('inmode', 'inmode', True)
+        exmode = self.contr.get_char_stat('exmode', 'exmode', True)
+
+
+        self.motivation.set(motivation)
+        self.person.set(person)
+        self.posession.set(posession)
+        self.people.set(people)
+        self.inmode.set(inmode)
+        self.exmode.set(exmode)
+
+
+class MeritsComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.merits_frame = ttk.Labelframe(self.frame, text='Talents')
+        self.flaws_frame = ttk.Labelframe(self.frame, text='Complications')
+
+        meritsGroup = CustomPanedWindow(self.merits_frame, self.contr, True)
+        merits = self.contr.get_char_stat_list('talent')
+
+        flawsGroup = CustomPanedWindow(self.flaws_frame, self.contr, True)
+        flaws = self.contr.get_char_stat_list('complication')
+        #print('merits' +str(merits))
+
+        for key, value in merits.items():
+            label = ttk.Label(meritsGroup.group, text=key)
+            meritsGroup.add(key, label)
+
+        for key, value in flaws.items():
+            label = ttk.Label(flawsGroup.group, text=key)
+            flawsGroup.add(key, label)
+
+        
+
+        self.merits_frame.grid(column=0, row=0, sticky=(W, N))
+        self.flaws_frame.grid(column=1, row=0, sticky=(W, N))
+        #table.frame.grid(column=0, row=1, sticky=(W,N))
+
+class ItemsComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.items_frame = ttk.Labelframe(self.frame, text='items')
+        self.wpns_frame = ttk.Labelframe(self.frame, text='weapons')
+        self.cyber_frame = ttk.Labelframe(self.frame, text='cyberwear')
+
+        self.item_table = ListTable(self.items_frame, self.contr, ['name', 'location', 'cost', 'weight', 'quantity'])
+        self.wpns_table = ListTable(self.wpns_frame, self.contr, ['name', 'wa', 'con', 'av', 'dmg', 'shts', 'rof', 'rel', 'range', 'cost'])
+        self.cyber_table = ListTable(self.cyber_frame, self.contr, ['name', 'hl', 'cost'])
+
+        #itemlist ...
+        inventory  = self.contr.get_char_inventory()
+        cyberlist = []
+
+        for key, value in inventory.items():
+            type = value.get_attribute('type')
+            if type=='cyber':
+                cyberlist.append(value)
+                options = value.get_attribute('options')
+                for name, option in options.items():
+                    cyberlist.append(option)
+
+        for cyber in cyberlist:
+            name = cyber.get_attribute('name')
+            hl = cyber.get_attribute('hum_cost')
+            cost = 0 # change later
+            self.cyber_table.add({'name':name, 'hl':hl, 'cost':cost})
+
+        self.items_frame.grid(column=0, row=0, sticky=(N, W))
+        self.cyber_frame.grid(column=1, row=0)
+        self.wpns_frame.grid(column=0, row=1)
+
+class LifepathComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.lifepath_table = ListTable(self.frame, self.contr, ['age', 'description'])
+        self.lp = self.contr.get_char_attribute('lifepath')
+        number_array = self.lp.events
+        events = self.lp.read_array_to_text(number_array)
+
+        for i in range(1, 100):
+
+            for text in events:
+                splitted = text.split(' ' , -1)
+                age = splitted[0]
+                description = text[2:]
+                if i == int(age):
+                    self.lifepath_table.add({'age':age, 'description':description})
+        
+
+        
+
+
+
 class CharacterSheet(UIObject):
     def __init__(self, master, controller):
          super().__init__(master, controller)
          self.contr.add_ui_component("character sheet",self)
 
-         #BASIC STATS
-         basic_stats_frame = ttk.Labelframe(self.frame, text='Primary stats')
-         stats_group = ttk.Panedwindow(basic_stats_frame, orient = HORIZONTAL)
-        
-         #Mental group
-         self.mental_frame = ttk.Labelframe(stats_group, text='Mental')
-         self.mental_group = ttk.Panedwindow(self.mental_frame, orient=VERTICAL)
+         self.tabsframe = ttk.Notebook(self.frame)
+         self.overview_frame = ttk.Frame(self.tabsframe)
+         self.personality_frame = ttk.Frame(self.tabsframe)
+         self.stats_frame = ttk.Frame(self.tabsframe)
+         self.skills_frame = ttk.Frame(self.tabsframe)
+         self.merits_frame = ttk.Frame(self.tabsframe)
+         self.social_frame = ttk.Frame(self.tabsframe)
+         self.items_frame = ttk.Frame(self.tabsframe)
+         self.lifepath_frame = ttk.Frame(self.tabsframe)
 
-         self.Int = label_and_value(self.mental_group, self.contr, 'Int', 5)
-         self.Will = label_and_value(self.mental_group, self.contr, 'Will', 5)
-         self.Pre = label_and_value(self.mental_group, self.contr, 'Pre', 5)
+         self.overview_ui()
+         self.stats_window(self.stats_frame, self.contr)
+         self.skills_window(self.skills_frame, self.contr)
+         self.personality_window(self.personality_frame, self.contr)
+         self.merits_window(self.merits_frame, self.contr)
+         self.items_window(self.items_frame, self.contr)
+         self.lifepath_window(self.lifepath_frame, self.contr)
 
-         #Physical group
-         self.physical_frame = ttk.Labelframe(stats_group, text='Physical')
-         self.physical_group = ttk.Panedwindow(self.physical_frame, orient=VERTICAL)
+         self.tabsframe.add(self.overview_frame, text='Overview')
+         self.tabsframe.add(self.personality_frame, text='Personality')
+         self.tabsframe.add(self.stats_frame, text='Stats')
+         self.tabsframe.add(self.skills_frame, text='Skills')
+         self.tabsframe.add(self.merits_frame, text='Merits and Flaws')
+         self.tabsframe.add(self.items_frame, text='Items')
+         self.tabsframe.add(self.lifepath_frame, text='Lifepath')
 
-         self.Con = label_and_value(self.physical_group, self.contr, 'Con', 5)
-         self.Str = label_and_value(self.physical_group, self.contr, 'Str', 5)
-         self.Body = label_and_value(self.physical_group, self.contr, 'Body', 5)
 
-         #Combat group
-         self.combat_frame = ttk.Labelframe(stats_group, text='Combat')
-         self.combat_group = ttk.Panedwindow(self.combat_frame, orient=VERTICAL)
+         self.tabsframe.grid(column=0, row=0)
+         
+    def overview_ui(self):
 
-         self.Ref = label_and_value(self.combat_group, self.contr, 'Ref', 5)
-         self.Dex = label_and_value(self.combat_group, self.contr, 'Dex', 5)
-         self.Tech = label_and_value(self.combat_group, self.contr, 'Tech', 5)
+         #INFO
+         info_frame = ttk.Labelframe(self.overview_frame, text='Basic info')
+         info_group = ttk.Panedwindow(info_frame, orient = VERTICAL)
 
-         #Movement
-         self.movement_frame = ttk.Labelframe(stats_group, text='Movement')
-         self.movement_group = ttk.Panedwindow(self.movement_frame, orient = VERTICAL)
+         self.player = label_and_value(info_group, self.contr, 'Player')
+         self.char_name = label_and_value(info_group, self.contr, 'Character')
+         self.age = label_and_value(info_group, self.contr, 'Age')
 
-         self.Move = label_and_value(self.movement_group, self.contr, 'Move', 5)
+
+         self.basic_stats = BasicStatsComponent(self.overview_frame, self.contr)
+         basic_stats_frame = self.basic_stats.basic_stats_frame
 
          #DERIVED STATS
-         derived_frame = ttk.Labelframe(self.frame, text='Derived stats')
-         self.Luck = label_and_value(derived_frame, self.contr, 'Luck', 5)
-         self.Hum = label_and_value(derived_frame, self.contr, 'Hum', 5)
-         self.Rec = label_and_value(derived_frame, self.contr, 'Rec', 5)
-         self.End = label_and_value(derived_frame, self.contr, 'End', 5)
-
-         self.Run = label_and_value(derived_frame, self.contr, 'Run', 5)
-         self.Sprint = label_and_value(derived_frame, self.contr, 'Sprint', 5)
-         self.Swim = label_and_value(derived_frame, self.contr, 'Swim', 5)
-         self.Leap = label_and_value(derived_frame, self.contr, 'Leap', 5)
-
-         self.Stun = label_and_value(derived_frame, self.contr, 'Stun', 5)
-         self.Hits = label_and_value(derived_frame, self.contr, 'Hits', 5)
-         self.Sd = label_and_value(derived_frame, self.contr, 'SD', 5)
-         self.Res = label_and_value(derived_frame, self.contr, 'Res', 5)
+         #self.derived_stats = DerivedStatsComponent(self.overview_frame, self.contr)
+         #derived_frame = self.derived_stats.frame
 
          self.load_character()
 
          #SKILLS
-         self.skill_frame = ttk.Labelframe(self.frame, text='Skills')
+         self.skill_frame = ttk.Labelframe(self.overview_frame, text='Skills')
          self.skill_group = ttk.Panedwindow(self.skill_frame, orient=VERTICAL)
          skill_list = self.contr.get_char_stat_list('skill')
          self.skill_ui_components = {}
@@ -202,74 +589,68 @@ class CharacterSheet(UIObject):
          for key in sorted_list:
              self.skill_group.add(self.skill_ui_components[key].frame)
 
-
-        
-
-         basic_stats_frame.grid(column=0, row=0)
-         derived_frame.grid(column=0, row=1, sticky=(W))
-         self.skill_frame.grid(column=0, row=2, sticky=(W))
+         info_frame.grid(column=0, row=0)
+         info_group.grid(column=0, row=0)
+         basic_stats_frame.grid(column=0, row=1)
+         #derived_frame.grid(column=0, row=2, sticky=(W))
+         self.skill_frame.grid(column=0, row=3, sticky=(W))
          self.skill_group.grid(column=0, row=0)
-         stats_group.grid(column=0, row=0)
-         self.mental_frame.grid(column=0, row=0)
-         self.mental_group.grid(column=0, row=0)
-         self.physical_frame.grid(column=0, row=0)
-         self.physical_group.grid(column=0, row=0)
-         self.combat_frame.grid(column=0, row=0)
-         self.combat_group.grid(column=0, row=0)
-         self.movement_frame.grid(column=0, row=0)
-         self.movement_group.grid(column=0, row=0)
 
-         stats_group.add(self.mental_frame)
-         stats_group.add(self.physical_frame)
-         stats_group.add(self.combat_frame)
-         stats_group.add(self.movement_frame)
+         info_group.add(self.player.frame)
+         info_group.add(self.char_name.frame)
+         info_group.add(self.age.frame)
+    
+    def stats_window(self, master, controller):
+        self.basic_stats_detailed = BasicStatsComponent(master, controller)
+        derived_stats = DerivedStatsComponent(master, controller)
 
-         self.mental_group.add(self.Int.frame)
-         self.mental_group.add(self.Will.frame)
-         self.mental_group.add(self.Pre.frame)
+        basic_stats_frame = self.basic_stats_detailed.frame
+        derived_stats_frame = derived_stats.frame
 
-         self.physical_group.add(self.Con.frame)
-         self.physical_group.add(self.Str.frame)
-         self.physical_group.add(self.Body.frame)
+        basic_stats_frame.grid(column=0, row=0, sticky=(W))
+        derived_stats_frame.grid(column=0, row=1, sticky=(W))
 
-         self.combat_group.add(self.Ref.frame)
-         self.combat_group.add(self.Dex.frame)
-         self.combat_group.add(self.Tech.frame)
+    def skills_window(self, master, controller):
+        self.skills_detailed = SkillComponent(master, controller)
 
-         self.movement_group.add(self.Move.frame)
+        skill_frame = self.skills_detailed.frame
 
-         self.Luck.frame.grid(column=0, row=0)
-         self.Hum.frame.grid(column=0, row=1)
-         self.Rec.frame.grid(column=0, row=2)
-         self.End.frame.grid(column=0, row=3)
+        skill_frame.grid(column=0, row=0)
 
-         self.Run.frame.grid(column=1, row=0)
-         self.Sprint.frame.grid(column=1, row=1)
-         self.Swim.frame.grid(column=1, row=2)
-         self.Leap.frame.grid(column=1, row=3)
+    def personality_window(self, master, controller):
+        self.personality_detailed = PersonalityComponent(master, controller)
 
-         self.Stun.frame.grid(column=2, row=0)
-         self.Hits.frame.grid(column=2, row=1)
-         self.Sd.frame.grid(column=2, row=2)
-         self.Res.frame.grid(column=2, row=3)
+        personality_frame = self.personality_detailed.frame
+        personality_frame.grid(column=0, row=0)
 
-         self.contr.add_ui_component('character_sheet', self)
+    def merits_window(self, master, controller):
+        self.merits_detailed = MeritsComponent(master, controller)
 
+        merits_frame = self.merits_detailed.frame
+        merits_frame.grid(column=0, row=0)
+
+    def items_window(self, master, controller):
+        self.items_detailed = ItemsComponent(master, controller)
+
+        items_frame = self.items_detailed.frame
+        items_frame.grid(column=0, row=0)
+
+    def lifepath_window(self, master, controller):
+        self.lifepath_detailed = LifepathComponent(master, controller)
+
+        lifepath_frame = self.lifepath_detailed.frame
+        lifepath_frame.grid(column=0, row=0)
 
          
-
     def load_character(self):
-        self.contr.load_character('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
-        Int  = self.contr.get_char_stat('int','lvl')
-        Will  = self.contr.get_char_stat('will','lvl')
-        Pre  = self.contr.get_char_stat('pre','lvl')
-        Con= self.contr.get_char_stat('con','lvl')
-        Str= self.contr.get_char_stat('str','lvl')
-        Body= self.contr.get_char_stat('body','lvl')
-        Ref= self.contr.get_char_stat('ref','lvl')
-        Dex= self.contr.get_char_stat('dex','lvl')
-        Tech= self.contr.get_char_stat('tech','lvl')
-        Move= self.contr.get_char_stat('move','lvl')
+        self.contr.load_character('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
+
+        player = self.contr.get_char_attribute('player')
+        fname = self.contr.get_char_attribute('fname')
+        sname = self.contr.get_char_attribute('sname')
+        lname = self.contr.get_char_attribute('lname')
+        alias = self.contr.get_char_attribute('alias')
+        age = self.contr.get_char_attribute('age')
 
         Luck = self.contr.get_char_stat('luck', 'lvl')
         Hum = self.contr.get_char_stat('hum', 'lvl')
@@ -284,29 +665,25 @@ class CharacterSheet(UIObject):
         Sd = self.contr.get_char_stat('sd', 'lvl')
         Res = self.contr.get_char_stat('res', 'lvl')
 
-        self.Int.set(str(Int))
-        self.Ref.set(str(Ref))
-        self.Tech.set(str(Tech))
-        self.Dex.set(str(Dex))
-        self.Pre.set(str(Pre))
-        self.Con.set(str(Con))
-        self.Str.set(str(Str))
-        self.Move.set(str(Move))
-        self.Body.set(str(Body))
-        self.Will.set(str(Will))
+        self.player.set(str(player))
+        full_name = fname + ' ' + sname + ' ' + alias + ' ' + lname
+        self.char_name.set(str(full_name))
+        self.age.set(str(age))
 
-        self.Luck.set(str(Luck))
-        self.Hum.set(str(Hum))
-        self.Rec.set(str(Rec))
-        self.End.set(str(End))
-        self.Run.set(str(Run))
-        self.Sprint.set(str(Sprint))
-        self.Swim.set(str(Swim))
-        self.Leap.set(str(Leap))
-        self.Stun.set(str(Stun))
-        self.Hits.set(str(Hits))
-        self.Sd.set(str(Sd))
-        self.Res.set(str(Res))
+        
+
+        '''self.derived_stats.Luck.set(str(Luck))
+        self.derived_stats.Hum.set(str(Hum))
+        self.derived_stats.Rec.set(str(Rec))
+        self.derived_stats.End.set(str(End))
+        self.derived_stats.Run.set(str(Run))
+        self.derived_stats.Sprint.set(str(Sprint))
+        self.derived_stats.Swim.set(str(Swim))
+        self.derived_stats.Leap.set(str(Leap))
+        self.derived_stats.Stun.set(str(Stun))
+        self.derived_stats.Hits.set(str(Hits))
+        self.derived_stats.Sd.set(str(Sd))
+        self.derived_stats.Res.set(str(Res))'''
 
         
          

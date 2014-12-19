@@ -137,7 +137,7 @@
 		<event age="17" type="Nothing Happened That Year" />
 		<event age="18" type="Nothing Happened That Year" />
 		<event age="19" cause="Caused a physical disability" enemy_type="Boostergang member" reaction="Go into a murderous, killing rage and rip his face off!" relation="They hate you" resources="A large Corp or entire Enclave" type="enemy" />
-		<event age="20" lucky_type="" type="lucky" />
+		<event age="20" lucky_type="sensei" type="lucky" />
 		<event age="21" type="Nothing Happened That Year" />
 		<event age="22" lucky_type="nomads" type="lucky" />
 		<event age="23" type="Nothing Happened That Year" />
