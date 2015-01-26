@@ -88,6 +88,7 @@ class XmlController(object):
             if cell.tag==node_name:
                 return cell.text
 
+
     def get_cyberwear_from_character(self):
         sub_elements = []
         for node in self.root.iter('cyberwears'):
@@ -113,7 +114,7 @@ class XmlController(object):
         return itemlist
 
 
-    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = None, dict_tag_name='name', simple=False, simple_no_dict=False, tag_collection_with_dict=False):
+    def get_dataset(self, collection_name, dictionary=True, sub_collection=False, tag_collection=False, tag_params = None, dict_tag_name='name', simple=False, simple_no_dict=False, tag_collection_with_dict=False, simple_with_param=False, simple_param='none'):
         data = []
         dict = {}
         
@@ -131,12 +132,17 @@ class XmlController(object):
             if simple_no_dict:
                 keys = []
                 values = []
+                params = []
                 for cell in data:
                     keys.append(cell.tag)
                     values.append(cell.text)
+                    if simple_with_param:
+                        params.append(str(cell.get(simple_param)))
                 array = []
                 array.append(keys)
                 array.append(values)
+                if simple_with_param:
+                    array.append(params)
                 return array    
             else:
                 for cell in data:

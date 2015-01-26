@@ -1,0 +1,148 @@
+<Character>
+	<info>
+		<player>Toni</player>
+		<first_name>Elias</first_name>
+		<second_name>Josue</second_name>
+		<last_name>Good</last_name>
+		<alias>Ultra Arm</alias>
+		<age>30</age>
+	</info>
+	<family>
+		<family_rank>Wealthy</family_rank>
+		<parents>Father</parents>
+		<parent_status>Something has happened to one or both parents.</parent_status>
+		<parent_event>Your parent(s) were murdered</parent_event>
+		<family_status>Family status in danger</family_status>
+		<family_event>Family lost everything through bad management</family_event>
+		<childhood_enviroment>Grew up in boarding school.</childhood_enviroment>
+		<childhood_trauma_fortune>Was horribly humiliated in front of peers.</childhood_trauma_fortune>
+		<family_contact>Only annual contact with one family member.</family_contact>
+		<siblings />
+		<sibling age="31" gender="Female" relation="They hate you">Ashanti Tiara Cheap Crock Good</sibling>
+		<sibling age="29" gender="Female" relation="They hero  worship you">Kemberly Jordan Metal Jaw Good</sibling>
+		<sibling age="28" gender="Female" relation="They hero  worship you">Coral Linn Acid Piranha Good</sibling>
+	</family>
+	<personality>
+		<prime_motivation>Personal Egotism</prime_motivation>
+		<most_valued_person>Lover</most_valued_person>
+		<most_valued_posession>momento</most_valued_posession>
+		<feels_about_people>I hate almost everyone</feels_about_people>
+		<inmode>Pessimist</inmode>
+		<exmode>Diplomatic/Courteous</exmode>
+		<quirk>Hypochondriac</quirk>
+		<quirk>Precise</quirk>
+		<quirk>Seducer</quirk>
+		<disorder>Multiple Personalities</disorder>
+		<phobia>Technophobia (technology)</phobia>
+		<hair>Short, Neat</hair>
+		<clothes>High Fashion</clothes>
+		<clothes>Tribal Dress</clothes>
+		<affection>Weird Lenses</affection>
+		<affection>Spiked Gloves</affection>
+	</personality>
+	<skills>
+		<skill type="Perform">3</skill>
+		<skill type="Wardrobe &amp; Style">2</skill>
+		<skill type="Handgun">6</skill>
+		<skill type="Awarness / Notice">4</skill>
+		<skill type="Endurance">3</skill>
+		<skill type="Human Perception">3</skill>
+		<skill type="Streetwise">4</skill>
+		<skill type="First Aid">3</skill>
+		<skill type="Education &amp; Gen Know">3</skill>
+		<skill type="Brawling / Hand To Hand">4</skill>
+		<skill type="Social Etiquette">3</skill>
+		<skill type="Resistance">5</skill>
+		<skill type="Persuasion &amp; Fast Talk">4</skill>
+		<skill type="Driving">2</skill>
+		<skill type="Coding">3</skill>
+		<skill type="Dodge &amp; Escape">2</skill>
+	</skills>
+	<attributes>
+		<attribute type="Dex">3</attribute>
+		<attribute type="Con">7</attribute>
+		<attribute type="Str">4</attribute>
+		<attribute type="Will">9</attribute>
+		<attribute type="Swim">6</attribute>
+		<attribute type="Tech">5</attribute>
+		<attribute type="Hits">35</attribute>
+		<attribute type="Fun">0</attribute>
+		<attribute type="Run">12</attribute>
+		<attribute type="Int">7</attribute>
+		<attribute type="Leap">6</attribute>
+		<attribute type="Pre">8</attribute>
+		<attribute type="Stun">35</attribute>
+		<attribute type="Res">27</attribute>
+		<attribute type="Rec">5.5</attribute>
+		<attribute type="Ref">4</attribute>
+		<attribute type="SD">14</attribute>
+		<attribute type="Hum">90</attribute>
+		<attribute type="Luck">5.5</attribute>
+		<attribute type="Move">6</attribute>
+		<attribute type="Sprint">18</attribute>
+		<attribute type="Hunger">0</attribute>
+		<attribute type="End">14</attribute>
+		<attribute type="Body">7</attribute>
+		<attribute type="Tiredness">0</attribute>
+	</attributes>
+	<perks>
+		<perk type="Favor(Claribel Blanch Looney Broccoli Holder)">1</perk>
+		<perk type="Streetdeal">4</perk>
+		<perk type="Contact(Alejandro Fermin Angry Asparagus Boyd)">2</perk>
+		<perk type="Contact(Eugenio Deshawn Soft Medicine Gardner)">3</perk>
+	</perks>
+	<talents>
+		<talent type="Beatiful / Handsome">1</talent>
+		<talent type="Combat Sense">1</talent>
+	</talents>
+	<complications>
+		<complication frequency="5" importance="2" intensity="5" type="Vocal Impairment">5.0</complication>
+		<complication frequency="15" importance="2" intensity="10" type="Obsessed">12.5</complication>
+		<complication frequency="10" importance="2" intensity="15" type="Impulsiveness">12.5</complication>
+		<complication frequency="10" importance="5" intensity="10" type="Outsider">4.0</complication>
+		<complication frequency="10" importance="2" intensity="10" type="Split Personality">10.0</complication>
+		<complication frequency="15" importance="2" intensity="10" type="Code of Honor">12.5</complication>
+	</complications>
+	<cyberwears>
+		<cyberwear name="Standard Cyberarm">9.0<option name="Armor">2.0</option>
+			<option name="Weapon Mount &amp; Link">3.0</option>
+			<option name="Storage Space">0.5</option>
+		</cyberwear>
+		<cyberwear name="Biomonitor">1.0</cyberwear>
+		<cyberwear name="Adrenal Booster">7.0</cyberwear>
+		<cyberwear name="Subdermal Armor">4.0</cyberwear>
+		<cyberwear name="Cyberoptic">11.0<option name="Image Enhancement">1.0</option>
+		</cyberwear>
+		<cyberwear name="Toxin Binders">2.0</cyberwear>
+		<cyberwear name="Grafted Muscle">11.0</cyberwear>
+	</cyberwears>
+	<items>
+		<item type="weapon">Ruger MKII Standard</item>
+		<item type="weapon">Nova Arms "Eastwood"</item>
+		<item type="armor">fibremesh ballistic cloth fashionware trenchcoat</item>
+		<item type="item">Armored Trenchcoat (Sp10)</item>
+		<item type="item">Fighting Knife</item>
+		<item type="item">Light Handgun (Choose Type)</item>
+		<item type="item">Agent (Basic)</item>
+		<item type="item">Bivvybag (For Nights On The Street/Road)</item>
+		<item type="item">Ammo (50 Rounds)</item>
+	</items>
+	<lifepath>
+		<event age="15" lucky_type="nomads" type="lucky" />
+		<event age="16" cause="Caused a physical disability" enemy_type="Partner or co-worker" reaction="Backstab him indirectly" relation="They hate you" resources="Themselves and a few friends" type="enemy" />
+		<event age="17" love_type="happy" type="love" />
+		<event age="18" lucky_type="combat teacher" type="lucky" />
+		<event age="19" amount="-900" disaster_type="debt" type="disaster" />
+		<event age="20" lucky_type="boostergang" type="lucky" />
+		<event age="21" friend_type="A teacher or mentor" type="friend" />
+		<event age="22" cause="Caused the other to lose face or status" enemy_type="Childhood enemy" reaction="Ignore the scum" relation="The feeling's mutual" resources="An entire Altcult" type="enemy" />
+		<event age="23" type="Nothing Happened That Year" />
+		<event age="24" type="Nothing Happened That Year" />
+		<event age="25" corporation_type="It's a big, national corp with agents in most major cities" disaster_type="corporation" type="disaster" />
+		<event age="26" love_type="tragic love" mutual_feelings="No feeling's either way; it's over" tragic_type="Lover imprisoned or exile" type="love" />
+		<event age="27" friend_type="A teacher or mentor" type="friend" />
+		<event age="28" love_type="tragic love" mutual_feelings="You still love them" tragic_type="Lover kidnapped" type="love" />
+		<event age="29" love_type="tragic love" mutual_feelings="You hate them" tragic_type="It didn't work out" type="love" />
+		<event age="30" death_type="They died accidentally." disaster_type="death" type="disaster" />
+	</lifepath>
+</Character>

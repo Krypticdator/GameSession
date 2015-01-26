@@ -238,7 +238,7 @@ class BasicStatsComponent(UIObject):
 
     def update(self):
         #print('updating basic stats')
-        self.contr.load_character('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
+        self.contr.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         Int  = self.contr.get_char_stat('int','lvl')
         Will  = self.contr.get_char_stat('will','lvl')
         Pre  = self.contr.get_char_stat('pre','lvl')
@@ -477,6 +477,8 @@ class ItemsComponent(UIObject):
         #itemlist ...
         inventory  = self.contr.get_char_inventory()
         cyberlist = []
+        wpnlist = []
+        itemlist = []
 
         for key, value in inventory.items():
             type = value.get_attribute('type')
@@ -485,16 +487,47 @@ class ItemsComponent(UIObject):
                 options = value.get_attribute('options')
                 for name, option in options.items():
                     cyberlist.append(option)
+            elif type == 'item':
+                itemlist.append(value)
+            elif type == 'weapon':
+                wpnlist.append(value)
 
         for cyber in cyberlist:
             name = cyber.get_attribute('name')
             hl = cyber.get_attribute('hum_cost')
             cost = 0 # change later
             self.cyber_table.add({'name':name, 'hl':hl, 'cost':cost})
+        for item in itemlist:
+            name = item.get_attribute('name')
+            location='carried'
+            cost = 0
+            weight = 0
+            quantity = 1
+            self.item_table.add({'name':name, 'location':location, 'cost':cost, 'weight':weight, 'quantity':quantity})
+
+        for weapon in wpnlist:
+            #name', 'wa', 'con', 'av', 'dmg', 'shts', 'rof', 'rel', 'range', 'cost'
+            name = weapon.get_attribute('name')
+            wa = 0
+            con = 'NA'
+            av = 'NA'
+            dmg = 0
+            shts = 0
+            rof = 0
+            rel = 'ST'
+            range = 0
+            cost = 0
+
+            self.wpns_table.add({'name':name, 'wa':wa, 'con':con, 'av':av, 'dmg':dmg, 'shts':shts, 'rof':rof, 'rel':rel, 'range':range, 'cost':cost})
 
         self.items_frame.grid(column=0, row=0, sticky=(N, W))
         self.cyber_frame.grid(column=1, row=0)
         self.wpns_frame.grid(column=0, row=1)
+
+class ArmorComponent(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+
 
 class LifepathComponent(UIObject):
     def __init__(self, master, controller):
@@ -531,6 +564,7 @@ class CharacterSheet(UIObject):
          self.merits_frame = ttk.Frame(self.tabsframe)
          self.social_frame = ttk.Frame(self.tabsframe)
          self.items_frame = ttk.Frame(self.tabsframe)
+         self.armor_frame = ttk.Frame(self.tabsframe)
          self.lifepath_frame = ttk.Frame(self.tabsframe)
 
          self.overview_ui()
@@ -635,6 +669,9 @@ class CharacterSheet(UIObject):
         items_frame = self.items_detailed.frame
         items_frame.grid(column=0, row=0)
 
+    def armor_window(self, master, controller):
+        self.armor_detailed = ItemsComponent(master, controller)
+
     def lifepath_window(self, master, controller):
         self.lifepath_detailed = LifepathComponent(master, controller)
 
@@ -643,7 +680,7 @@ class CharacterSheet(UIObject):
 
          
     def load_character(self):
-        self.contr.load_character('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
+        self.contr.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
 
         player = self.contr.get_char_attribute('player')
         fname = self.contr.get_char_attribute('fname')

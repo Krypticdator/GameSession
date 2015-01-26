@@ -7,16 +7,19 @@ class Controller(object):
     """description of class"""
     def __init__(self):
         self.prefs = Preferences()
-        self.sql = SQLController()
+        self.sql = SQLController('testikanta')
         self.__ui_components = {}
         self.__pc_roster = {}
         self.__skill_shorts = {}
         pc_filepaths = []
         #pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
-        pc_filepaths.append('preferences/Siri_Bast Izar Itzal Cat Goddes Riggs.xml')
+        pc_filepaths.append('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         self.load_pc_roster(pc_filepaths)
 
         self.prepare_skill_shorts()
+
+        self.sql.create_table('kissat', ['nimi', 'ika', 'color'], ['TEXT', 'TEXT', 'TEXT'])
+        self.sql.insert('kissat', ['nimi', 'ika', 'color'], {'nimi':'leevi', 'ika':'15', 'color':'red'}) 
         
         start = StartMenu(self)
         

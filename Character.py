@@ -1,4 +1,5 @@
 from GameObject import GameObject
+from GameObject import Item
 import copy
 class Character(GameObject):
     """description of class"""
@@ -108,7 +109,13 @@ class Character(GameObject):
             self.__inventory[name] = cyberwear
         for key, value in self.__inventory.items():
             #print(str(value))  
-            pass          
+            pass
+
+    def add_item_collection(self, itemlist):
+        for i in range(0, len(itemlist[0])):
+            item = Item(itemlist[1][i])
+            item.set_attribute('type', itemlist[2][i])
+            self.__inventory[item.get_attribute('name')] = item  
 
     def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
         skill = object()

@@ -63,7 +63,7 @@ class Preferences(FileControl):
             pass
 
 
-        print(effects)
+        #print(effects)
 
     def save_skills(self):
         x = XmlController()
@@ -220,7 +220,7 @@ class Preferences(FileControl):
         sibling_num=0
         for array in siblings_array:
             if len(array)!=0:
-                print(sibling_num)
+                #print(sibling_num)
                 character.add_sibling(names[sibling_num], array[1], array[0], array[2])
                     
                 sibling_num = sibling_num + 1
@@ -236,6 +236,8 @@ class Preferences(FileControl):
         for array in complications:
             character.add_complication(array[0], array[3], array[1], array[2])
 
+        
+
 
         character.set_attribute('player',player)
         character.set_attribute('fname', fname)
@@ -245,12 +247,15 @@ class Preferences(FileControl):
         character.set_attribute('age', age)
         character.add_stat_collection(stats, 'stat')
         character.add_stat_collection(skills, 'skill')
-        print(str(talents))
+        #print(str(talents))
         character.add_stat_collection(talents, 'talent')
         character.add_stat_collection(perks, 'perk')
 
         cyberwear = x.get_cyberwear_from_character()
         character.add_cyberwear_collection(copy.deepcopy(cyberwear))
+
+        items = x.get_dataset('items', False, False, False, simple=True, simple_no_dict=True, simple_with_param=True, simple_param='type')
+        character.add_item_collection(copy.deepcopy(items))
 
         lp = Lifepath(self)
         lp.convert_from_xml(filepath)
@@ -472,7 +477,7 @@ class Lifepath:
         for event in lifepath_array:
             text = ''
             type = event[1]
-            print('lifepath array' + str(event))
+            #print('lifepath array' + str(event))
 
             if type == '1':
                 luck_or_disaster = event[2]
@@ -571,6 +576,7 @@ class Lifepath:
                     tragic_table = self.prefs.table('love_tragic')
                     mutual_feelings = self.prefs.table('love_mutual')
                     txt = tragic_table.get_option(event[3])
+                    #print(len(event))
                     feelings = mutual_feelings.get_option(event[4])
                     text = text + '. ' + txt + '. ' + feelings
                 elif relationship == '3':
@@ -618,7 +624,7 @@ class Lifepath:
             #print('type is ' +type)
 
             if type == 'disaster' or type== 'lucky':
-                print('if statements for disaster and lucky')
+                #print('if statements for disaster and lucky')
                 datakeys.append('1')
                 if type == 'lucky':
                     datakeys.append('1')
@@ -805,16 +811,21 @@ class Lifepath:
                     tragic_type = str.lower(event['tragic_type'])
                     mutuals = str.lower(event['mutual_feelings'])
                     tragic_table = self.prefs.table('love_tragic')
-                    for i in range(1,10):
+
+                    for i in range(1,11):
                         text = str.lower(tragic_table.get_option(i))
+                        #print(text + ' == ' + tragic_type)
                         if text == tragic_type:
                             datakeys.append(str(i))
 
                     mutual_table = self.prefs.table('love_mutual')
-                    for i in range(1, 10):
+                    for i in range(1, 11):
                         text = str.lower(mutual_table.get_option(i))
                         if text == mutuals:
                             datakeys.append(str(i))
+
+                    #print(datakeys)
+                    #print(event)
                 elif love_type == 'with problems':
                     datakeys.append('3')
                     problem = str.lower(event['problem'])
