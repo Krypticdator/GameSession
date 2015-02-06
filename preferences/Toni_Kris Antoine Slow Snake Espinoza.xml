@@ -1,0 +1,96 @@
+<Character>
+	<info>
+		<player>Toni</player>
+		<first_name>Kris</first_name>
+		<second_name>Antoine</second_name>
+		<last_name>Espinoza</last_name>
+		<alias>Slow Snake</alias>
+		<age>32</age>
+	</info>
+	<family>
+		<family_rank>Well-to-Do</family_rank>
+		<parents>Both Parents</parents>
+		<parent_status>Both parents are living.</parent_status>
+		<parent_event>nothing bad happened to parents</parent_event>
+		<family_status>Family status in danger</family_status>
+		<family_event>Family exiled or otherwise driven from their original home/nation/corporation</family_event>
+		<childhood_enviroment>Spent on the street with no adult supervision.</childhood_enviroment>
+		<childhood_trauma_fortune>You were best in your class</childhood_trauma_fortune>
+		<family_contact>Only annual contact with core family.</family_contact>
+		<siblings />
+		<sibling age="31" gender="Male" relation="Sibling dislikes you">Sammie Carol Cheap Riddle Espinoza</sibling>
+		<sibling age="30" gender="Female" relation="Sibling neutral">Laurena Karole Soft Pig Espinoza</sibling>
+		<sibling age="33" gender="Female" relation="Sibling dislikes you">Tony Jeanne Dandy Blood Espinoza</sibling>
+		<sibling age="29" gender="Male" relation="They hate you">Whitney Jesus Black Asparagus Espinoza</sibling>
+		<sibling age="28" gender="Male" relation="Sibling likes you">Felipe Arnold Yellow Strike Espinoza</sibling>
+		<sibling age="27" gender="Male" relation="Sibling likes you">Elliott Sebastian Greatest Chicken Espinoza</sibling>
+	</family>
+	<personality>
+		<prime_motivation>Knowledge</prime_motivation>
+		<most_valued_person>Lover</most_valued_person>
+		<most_valued_posession>tool</most_valued_posession>
+		<feels_about_people>I like almost everyone</feels_about_people>
+		<inmode>Scheming</inmode>
+		<exmode>Silly/Manic</exmode>
+		<quirk>Gambler</quirk>
+		<quirk>Compulsive</quirk>
+		<disorder>None</disorder>
+		<phobia>Herpetophobia (reptiles or creepy, crawly things)</phobia>
+		<hair>Striped</hair>
+		<clothes>Leisure Wear</clothes>
+		<affection>Shades/Glasses</affection>
+	</personality>
+	<skills>
+		<skill type="Resistance">3</skill>
+		<skill type="Athletics">1</skill>
+		<skill type="Pick Pocket">7</skill>
+		<skill type="Awarness / Notice">7</skill>
+		<skill type="Brawling / Hand To Hand">4</skill>
+		<skill type="Gamble">6</skill>
+		<skill type="Forgery">5</skill>
+		<skill type="Disguise">6</skill>
+		<skill type="Handgun">5</skill>
+		<skill type="Intimidate">6</skill>
+		<skill type="Streetwise">3</skill>
+		<skill type="Melee">5</skill>
+		<skill type="Persuasion &amp; Fast Talk">7</skill>
+		<skill type="Pick Lock">4</skill>
+	</skills>
+	<attributes>
+		<attribute type="Rec">4.0</attribute>
+		<attribute type="Luck">9.0</attribute>
+		<attribute type="Hum">90</attribute>
+		<attribute type="Con">4</attribute>
+		<attribute type="Tech">10</attribute>
+		<attribute type="Move">8</attribute>
+		<attribute type="Dex">8</attribute>
+		<attribute type="Will">9</attribute>
+		<attribute type="Str">4</attribute>
+		<attribute type="Sprint">24</attribute>
+		<attribute type="Int">10</attribute>
+		<attribute type="Ref">8</attribute>
+		<attribute type="Leap">8</attribute>
+		<attribute type="Fun">0</attribute>
+		<attribute type="Pre">9</attribute>
+		<attribute type="Stun">20</attribute>
+		<attribute type="SD">8</attribute>
+		<attribute type="Hunger">0</attribute>
+		<attribute type="Hits">20</attribute>
+		<attribute type="Body">4</attribute>
+		<attribute type="Tiredness">0</attribute>
+		<attribute type="Res">27</attribute>
+		<attribute type="Swim">8</attribute>
+		<attribute type="End">8</attribute>
+		<attribute type="Run">16</attribute>
+	</attributes>
+	<perks>
+		<perk type="Streetdeal">3</perk>
+	</perks>
+	<talents />
+	<complications />
+	<cyberwears />
+	<items />
+	<lifepath>
+		<event accusation="The accusation is lying or betrayel" age="15" disaster_type="false accusation" type="disaster" />
+	</lifepath>
+</Character>

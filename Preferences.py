@@ -4,6 +4,7 @@ from Character import Stat
 from Character import Effect
 from random import randrange
 from FileController import FileControl
+from GameObject import Weapon
 class Preferences(FileControl):
     """description of class"""
     def __init__(self):
@@ -17,6 +18,7 @@ class Preferences(FileControl):
         self.__tables = {}
         self.__probability_tables = {}
         self.__effects = {}
+        self.__weapons = []
 
         self.load_tables()
         self.load_stats()
@@ -335,7 +337,26 @@ class Preferences(FileControl):
     def get_new_dice(self, dices, sides, fuzion=False):
         d = Dice(dices, sides, fuzion)
         return copy.deepcopy(d)
-            
+
+    def transfer_wpns_from_txt_to_sql(self):
+        f = FileControl()
+        wpn_arrays = []
+
+        l_pistols_array = f.read_file_to_segments('data/wpns/txtfiles/l_pistols.txt', ';', True)
+        
+        wpn_arrays.append(l_pistols_array)
+        
+        for array in wpn_arrays:
+            for w in array:
+                #print(w[0])
+                wpn = Weapon(w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11])
+                validation = wpn.validate()
+                if validation == False:
+                    #print('successful validation of weapon')
+                    self.__weapons.append(wpn)
+        return self.__weapons
+
+
 
 class Table(object):
     def __init__(self, dice_sides=10, dice_dices=1):

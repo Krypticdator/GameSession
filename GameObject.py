@@ -1,3 +1,4 @@
+from Validation import ValidateWeapon
 class GameObject(object):
     """description of class"""
     def __init__(self, dictionary=True):
@@ -94,6 +95,39 @@ class CyberItem(GameObject):
                     print('error ' + hum_cost_text)
         #print('hum at the end of validation is ' + str(type(hum)) + ' ' + str(hum))
         return hum
+
+class Weapon(Item):
+    
+    #'name', 'type',  'wa',   'con',  'av',   'dmg',  'ammo', 'shts', 'rof',  'rel',  'range', 'cost'
+    def __init__(self, name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight=0):
+        super().__init__(name, weight=weight)
+        self.set_attribute('type', type)
+        self.set_attribute('wa', wa)
+        self.set_attribute('con', con)
+        self.set_attribute('av', av)
+        self.set_attribute('dmg', dmg)
+        self.set_attribute('ammo', ammo)
+        self.set_attribute('shts', shts)
+        self.set_attribute('rof', rof)
+        self.set_attribute('rel', rel)
+        self.set_attribute('range', range)
+        self.set_attribute('cost', cost)
+
+    def validate(self):
+        type = self.get_attribute('type')
+        wa = self.get_attribute('wa')
+        con = self.get_attribute('con')
+        av= self.get_attribute('av')
+        dmg= self.get_attribute('dmg')
+        shts= self.get_attribute('shts')
+        rof= self.get_attribute('rof')
+        rel= self.get_attribute('rel')
+        range= self.get_attribute('range')
+        cost= self.get_attribute('cost')
+
+        test = ValidateWeapon()
+        fail = test.run_tests(type, wa, con, av, dmg, shts, rof, rel, range, cost)
+        return fail
 
         
 

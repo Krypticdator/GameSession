@@ -1,0 +1,13 @@
+Light Pistols
+Medium Pistols
+Heavy Pistols
+Very Heavy Pistols
+Light Submachineguns
+Medium Submachineguns
+Heavy Submachineguns
+Shotguns
+Assault Rifles
+Sniper Rifles
+Other Rifles
+Machineguns
+Failed

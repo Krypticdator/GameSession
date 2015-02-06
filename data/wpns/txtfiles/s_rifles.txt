@@ -1,0 +1,13 @@
+Arasaka WSSA;RIF;+3/5;N;P;6d6;(3.5 FF)(B3);40;2;VR;600m;2400;SOF2
+FR-F6;RIF;+3;N;P;6d6+2;(7.62)(B4);10;2;ST;500m;1100;ES
+WA 2001 Sniper Rifle;RIF;+3;N;R;6d6+2;(7.62 C)(B4);10;1;VR;1000m;900;UK
+Towa Type-00-Kai;RIF;+3/6;N;R;9d6+3;(7.62 ET)(B5);6;1;VR;1200m;3000;PAC
+Set Arasaka WSE Kajiya;RIF;+1;N;R;9d6+3;(7.62 ET)(B5);5;1;VR;500m;1000;SW
+Arasaka WSSX;RIF;+3/5;N;R;4d6x1d3*;(20mm FF);13;1;VR;600m;3600;SF
+Barrett-Arasaka 20mm;HVY;+0;N;R;4d10@;(20mm)(B4);10;1;VR;450m;2000;CP20
+Arasaka Sniper Rifle;HVY;0/+2;N;R;4d10@;(20mm)(B4);10;1;VR;450m;2800;PAC
+Barrett M-90 Sniper Rifle;RIF;+3;N;R;6d10;(12.7 BMG)(B6);10;1;VR;1000m;1500;HoB
+Nomad "Long Rifle";RIF;+1;N;P;7d10;(15 BMG)(B7);9;1;ST;900m;3000;NEO
+Remington Gyro-Rifle;RIF;+2;N;P;7d6API;(18mm G);6;1;ST;600m;1000;P&S
+Barrett-Arasaka WSSE;RIF;+1;N;R;8d10+3;(.50 ET)(B9);10;1;VR;1000m;2500;SW
+Arasaka 12.7 WSSE/R;RIF;+2;N;R;9d10;(.50 ET)(B9);5;1;VR;1200m;2000;SW

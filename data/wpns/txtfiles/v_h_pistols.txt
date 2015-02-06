@@ -1,0 +1,21 @@
+.44 Mag Revolver;P;+0;J;P;4d6;(.44 C);6;1;VR;50m;375;NEO
+Llama Commanche;P;+0;J;C;4d6;(.44 C);6;1;ST;50m;250;CP20
+C.A. "Bulldog";P;+0;P;C;4d6;(.44 C);5;1;VR;50m;200;CP13
+.44 Automag;P;+1;J;P;4d6;(.44 C);7;2;UR;50m;250;CP13
+Armalite 44;P;+0;J;E;4d6+1;(12mm);8;1;ST;50m;450;CP20
+Colt AMT Model 2000;P;+0;J;C;4d6+1;(12mm);8;1;VR;50m;500;CP20
+Vz/101;P;+0;J;P;4d6+1;(12mm);8;1;VR;50m;450;ET
+Enfield Spitfire;P;+1;J;P;4d6+1;(12mm);12;1;VR;50m;550;UK
+Enfield Spitfire doubletap;P;+1;J;R;4d6+1;(12mm);12;2;VR;50m;700;UK
+Paltik Pistol;P;+0;J;C;4d6+1;(12mm);10;1/5;ST;50m;50+;PAC
+Constitution Arms MAP;P;+0;J;P;Varies;(12mm;C);5;1;VR;50m;525;P&S
+454 Magnum Disposable;P;-2;P;R;4d6+3;(.454);2;1;VR;40m;100;I1.1
+Ameritech Magnum;P;+1;J;R;4d6+3;(.454);5;2;VR;50m;1000;I1.1
+Fed Arms "Super Chief";P;+0;J;P;4d6+3;(.454 C);5;1;VR;50m;375;Chr1
+Rhinemettal 1540se;P;+1;J;R;5d5;(5.56);(B10);8;2;VR;50m;2300;P2
+Nova Arms "Stallone";P;+1;J;P;4d6;(.357 ET);6;2;VR;60m;999;SOF2
+Nova Arms "Bronson";P;+1;J;P;5d6;(.41 ET);6;2;VR;80m;1199;SOF2
+Nova Arms "Eastwood";P;+1;J;P;6d6;(.44 ET);6;2;VR;80m;1499;SOF2
+Nova Arms "Arno";P;+1;J;P;6d6+3;(.454 ET);6;2;VR;100m;1799;SOF2
+Militech Boomer-Buster;P;+1/-1;L/J;P;5d6@;(.477);4;1;VR;50m;450;SOF
+Malorian Arms 3516;P;-1;J;R;6d6;(14mm)(B12);6;1;VR;50m;4525;Chr1

@@ -1,0 +1,12 @@
+Arasaka Arms Half-Bow;BOW;-1;L;P;3d6;12;1;VR;100m;100;SOF2
+Eagletech "WIldcat";BOW;+0;N;E;3d6;(20kg);12;1;VR;100m;35;SOF2
+Eagletech "Tomcat";BOW;+0;N;C;4d6;(40/20kg);12;1;VR;150m;150;SOF2
+TomKatt Hunting Bow;BOW;+0;N;C;4d6;12;1;VR;150m;150;CGen
+Cougar Lamilar Hunting;BOW;+1;N;C;5d6;12;1;VR;150m;150;CGen
+Eagletech "Tigercat";BOW;+1;N;P;6d6;(60/30kg);12;1;VR;150m;500;SOF2
+Eagletech "Bearcat";BOW;+1;N;P;6d6;(60kg);12;1;VR;150m;500;SOF2
+Nomad Hand Crossbow;XBO;+0;N;R;1d6+1~;1;1;ST;20m;100;NEO
+Eagletech "Handbow";XBO;-1;J;E;1d6+2;12;1;VR;25m;75;SOF2
+Eagletech "Stryker";XBO;-1;N;C;3d6+3;12;1;VR;50m;220;SOF2
+Eagletech "Arbelest";XBO;+0;N;P;5d6;12;1/2;VR;150m;500;SOF2
+Eagletech "Scorpion";XBO;+0;N;P;7d6;6;1/2;VR;200m;1500;SOF2

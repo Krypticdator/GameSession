@@ -1,0 +1,20 @@
+Militech Ninja;RIF;+1;L;C;1d6;(5mm/.22)(B1);30;3/30;VR;250m;650;SOF
+Nomad .357 Mag Lever;RIF;+2;L;C;2d6+3;(.357 C)(B2);9;2;VR;100m;300;NEO
+Nomad .357 Mag Auto;RIF;+0/1;L;C;2d6+3;(.357 C)(B2);30;2/3;VR;100m;400;NEO
+Tsunami Arms Ramjet;RIF;+4;N;P;Varies;(8.5 RJ);9;3;VR;800m;1230;Chr2
+Calico 9mm Rifle;RIF;+1;L/N;C;2d6+1;(9mm C)(B2);50/100;2;VR;400m;650;NEO
+H&K HK77UK;RIF;+0/1;J/L;P;2d6+4;(9mm L)(B3);30;3/30;VR;250m;750+;SOF2
+H&K HK77SD3;RIF;+1;L;P;3d6+3;(7.7mm)(B4);154;3/30;VR;250m;880;SF
+Nomad .44 Mag Lever;RIF;+1;L;C;4d6+2;(.44 C)(B3);8;2;VR;200m;650;NEO
+Remington MAS;SHT;+0;N;P;4d6;(12ga)(B6);20;10;VR;50m;1800;P1
+Winchester M70;RIF;+3;N;C;5d6+1;(30-06 C)(B3);5;1;VR;500m;250;CP20
+M-1 Garand;RIF;+2;N;C;5d6+1;(30-06 C)(B3);8;3;ST;400m;250;CP13
+Winchester .30-.30;RIF;+2;N;E;5d6+1;(30-30 C)(B3);5;2;ST;400m;250;CP13
+M-99 EVAW;RIF;+5;N;R;6d6AP;(12mm R);30;2;ST;400m;5000;HoB
+Polymer 1-Shot Cannon;RIF;-2;L;C;4d6+2;(13mm)(B3);1;1;UR;100m;90;Chr2
+S&W "Cyborg Assault";RIF;+0;L;P;Varies;(13mm)(B3);8;1;VR;100m;1650;Chr1
+Gattling SS-9 - Rifle;RIF;+1;N;R;6d6+2;(7.62)(B7);32;20;VR;400m;4899;P2
+Nomad 7.62 Bolt-Action;RIF;+2;N;C;6d6+2;(7.62 C)(B4);6;1;VR;400m;500;NEO
+Militech Cyborg Rifle;RIF;+1;N;P;7d6+3;(.300M)(B8);30;20;ST;500m;800;Chr2
+Hughes Rocket Rifle;RIF;-1;N;R;3d10HEAT;(18mm);3;1;ST;500m;750;HoB
+Malorian Assault Cannon;RIF;+3;N;-;7d10+4;(.75)(B8);14;2;VR;400m;-;SW

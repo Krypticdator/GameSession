@@ -1,0 +1,12 @@
+Czar Skorpion SMG;-2;L;C;1d6;(5mm);20;25;UR;150m;350;PB
+Militech Mini-Gat;SMG;+0;L;P;1d6;(.22/5mm);120;40;ST;150m;695;Chr1
+Fed.Arms Tech Assault;SMG;+1;J;E;1d6;(.22);30;10/30;UR;100m;160;SOF
+Vz61 Skorpion;SMG;+2;J;P;1d6+1;(.25 C);20;25;VR;150m;200;CP20
+Fed.Arms Tech Assault 2;SMG;+1;J;C;1d6+1;(6mm);50;25;ST;150m;400;CP20
+Setsuko-Arasaka PMS;SMG;+1;L;P;1d6+2;(7mm);40;20;ST;150m;950;Chr1
+Ingram MAC 11;SMG;-1;J;C;1d6+2;(.380 C);32;35;UR;150m;250;CP13
+Surnam Machine Pistol;SMG;+0;J/L;C;1d6+4;(.177);25/50;50;UR;150m;375;SOF2
+Uzi Miniauto 9;SMG;+1;J;E;2d6+1;(9mm);30;35;VR;150m;475;CP20
+H&K MPK-9;SMG;+1;J;C;2d6+1;(9mm);35;25;ST;150m;520;CP20
+UZI;SMG;+2;J;C;2d6+1;(9mm C);30;20;VR;150m;250;CP20
+Mini UZI;SMG;+1;J;C;2d6+1;(9mm C);30;35;VR;150m;250;CP13

@@ -1,0 +1,16 @@
+BudgetArms C-13;P;-1;P;E;1d6;(5mm);8;2;ST;50m;75;CP20
+Astra Style-6;P;-1;P;E;1d6;(5mm);6;2;UR;50m;75;ES
+Czar Beretta;P;-1;P;C;1d6;(5mm);8;2;UR;40m;50;PB
+Federated Arms Impact;P;+1;J;E;1d6;(.22);10;2;VR;50m;60;SOF
+Federated Arms .22;P;+0;J;E;1d6;(.22);10;2;ST;50m;50;SOF
+HI Standard Derringer;P;-1;P;C;1d6;(.22 C);2;1;ST;50m;25;CP13
+Ruger MKII Standard;P;+2;J;C;1d6;(.22lng C);13;2;ST;50m;25;CP13
+Tokarev 1933 TT-33;P;+1;J;C;1d6+1;(7.65 C);8;2;VR;50m;50;CP13
+Mauser M 1896;P;+2;J;E;1d6+1;(7.65 C);10;2;ST;50m;50;CP13
+Browning .25;P;+1;J;E;1d6+1;(.25 C);5;2;UR;50m;20;CP13
+Dai Lung Cybermag 15;P;-1;P;C;1d6+1;(6mm);10;2;UR;50m;50;CP20
+Federated Arms X-22;P;+0;J;E;1d6+1;(6mm);10;2;ST;50m;50-150;CP20
+Towa 12 Police Pistol;P;+3;J;P;1d6+1;(6mm);8;2;VR;50m;450;PAC
+H&K P-11;P;+0;J;P;4d6+1;(6mm R);5;1;VR;50m;700;ES
+Colt .38 "Detective";P;+1;J;C;1d6+2;(.38 C);6;1;VR;50m;50;CP20
+Federated Arms X-38;P;+1;J;E;2d6;(.38);10;2;ST;50m;35;SOF

@@ -1,0 +1,20 @@
+Malorian Sub-Flechette;SMG;+2;J;C;1d6x1d6;(flec);10/30;3/35;VR;200m;795;Chr1
+"Sten";SMG;-2;L;E;(.22 to 12mm);30;3/30;ST;100m;200;NEO
+Beretta M-24;SMG;SMG;+2;L;P;2d6+1;(9mm);50;25;VR;200m;950+;Chr1
+Calico Submachinegun;SMG;+0;L;C;2d6+1;(9mm C);50/100;3/20;ST;200m;750;NEO
+H&K MP5/MP5K;SMG;+1;L;C;2d6+1;(9mm C);30;20;ST;200m;300;CP13
+L2A3 Sterling;SMG;+0;L;C;2d6+1;(9mm C);10/34;20;VR;200m;200;UK
+Ingram MAC 10;SMG;-1;J;C;2d6+2;(.45 C);30;5;UR;200m;250;CP20
+M3 "Grease Gun";SMG;-1;L;C;2d6+2;(.45 C);30;30;ST;200m;250;CP13
+Militech-10 .45;SMG;+1;J;E;2d6+2;(.45 ACP);30;20;ST;200m;455;Chr1
+Arasaka Minami 10;SMG;+0;J;E;2d6+3;(10mm);40;20;VR;200m;500;CP20
+Militech Viper;SMG;+0;J;P;2d6+3;(10mm);40;30;VR;200m;600;HoB
+Arasaka WMA (Silenced);SMG;-1;L;E;2d6+3;(10mm);40;20;VR;200m;700;CB1
+Stolbovoy StS SMG;SMG;-1;J;C/R;2d6+3;(10mm);35;30;VR*;100m;600;CB3
+Medusa 2000;SMG;+0;N;P;2d6+3;(10mm);40;20;VR;200m;2500;I2.1
+Beretta 1010 MP;SMG;+0;J/P;C;2d6+3;(10mm);30/15;15;ST;100m;475;UK
+H&K MP-2013;SMG;+1;J;C;2d6+3;(10mm);35;32;ST;200m;450;CP20
+IMI "Gamdaii";SMG;+2;N;E;2d6+3;(10mm);35x2;25;VR;200m;950;SOF2
+Mustang Arms ARS-5C;SMG;+1;J;C;2d6+3;(10mm);40;3/40;VR;100m;600;CB3
+Guardian;SMG;+0;N;C;2d6+3;(10mm);35;25;ST;200m;450;PB
+Militech-10;SMG;+1;J;E;2d6+3;(10mm C);30;20;ST;200m;455;Chr1

@@ -1,0 +1,57 @@
+Militech Arms Avenger;P;+0;J;E;2d6+1;(9mm);10;2;VR;50m;250;CP20
+Federated Arms X-9;P;+0;J;E;2d6+1;(9mm);12;2;ST;50m;300;CP20
+BudgetArms Laser-9;MP;+1*;J/L;P;2d6+1;(9mm);15/35;1/3/20;ST;50m;675;Chr1
+Goncz-Taurus Pistol;P;+0;J;E;2d6+1;(9mm);15;2;ST;50m;200+;Chr1
+Goncz-Taurus MP;MP;-1;J;C;2d6+1;(9mm);15/30;2/10;ST;50m;300+;Chr1
+Fashion Gun 9;P;+0;P;E;2d6+1;(9mm);7;2;UR;25m;35-40;SOF
+Generic Wondernine;P;+1;J;E;2d6+1;(9mm);d6+14;2;VR;50m;d6+240;SOF2
+Beretta M97P;P;+2*;J;P;2d6+1;(9mm);18;2;VR;50m;480;ES
+CCMMC Goaxing CM-3;P;+0;J;C;2d6+1;(9mm);8;2;ST;50m;75;PAC
+Kang Tao Type 97;P;+1;J;E;2d6+1;(9mm);10;2;UR;50m;35;SOF
+Sci Fi Starrior 4;P;+0;J;E;2d6+1;(9mm);12;2;UR;50m;60;SOF
+Teen Dreem;P;-1;J;E;2d6+1;(9mm);10;2/10;UR;50m;36;SOF
+Beretta Plas 9 Fashion;P;-1;P;P;2d6+1;(9mm);10;1;ST;50m;200;UK
+Towa 14 Pistol;MP;+2;J;P;2d6+1;(9mm);16;3/16;VR;50m;520;PAC
+Czar Makarov;P;-1;J;E;2d6+1;(9mm);12;2;UR;50m;200;PB
+Texas Arms 351 Gyrojet;P;+0;J;P;2d6+1;(9mm G);8;2;UR;50m;420;DS
+Calico Assault Pistol;P;+0/-1;L;C;2d6+1;(9mm C);50/100;2;VR;50m;450;NEO
+FN High Power;P;+1;J;C;2d6+1;(9mm C);14;2;VR;50m;150;UK
+Browning Hi-Power;P;+1;J;E;2d6+1;(9mm C);13;2;VR;50m;150;CP13
+Beretta M92F;P;+1;J;R;2d6+1;(9mm C);7;2;ST;50m;100;CP13
+Glock 17;P;+2;J;C;2d6+1;(9mm C);17;2;VR;50m;150;CP13
+Walther PPK;P;+1;P;C;2d6+1;(9mm C);7;2;ST;50m;100;CP13
+HK P9S;P;+1;P;C;2d6+1;(9mm C);9;2;VR;50m;100;CP13
+Beretta M1951;P;+0;J;C;2d6+1;(9mm C);8;1;ST;50m;150;CP13
+Luger Parabellum;P;+0;J;C;2d6+1;(9mm C);8;1;ST;50m;150;CP13
+Styer GB80;P;+1;J;P;2d6+1;(9mm C);18;2;ST;50m;200;CP13
+Mamba;P;+1;J;C;2d6+1;(9mm C);15;1;ST;50m;150;CP13
+Mamba Auto-Pistol;P;+1;J;R;2d6+1;(9mm C);15;5;ST;50m;200;CP13
+Sig Sauer P-210-2;P;+2;J;P;2d6+1;(9mm C);8;2;VR;50m;150;CP13
+BudgetArms C-41;P;+1;J;E;2d6+1;(.41 C);10;3;VR;50m;600;SOF
+Colt Alpha-Omega .45;P;+2;J;C;2d6+2;(.45 ACP);10;2;VR;50m;500;Chr1
+Colt .45 "Peacemaker";P;+0;J;R;2d6+2;(.45 C);6;1;VR;50m;200;CP20
+.45 Colt Automatic;P;+1;J;E;2d6+2;(.45 C);7;2;VR;50m;200;CP13
+Dai Lung Streetmaster;P;+0;J;E;2d6+3;(10mm);12;2;UR;50m;250;CP20
+Colt Alpha-Omega 10;P;+2;J;C;2d6+3;(10mm);10;2;VR;50m;500;Chr1
+Glock 30 MP;MP;+2;P/J;C;2d6+3;(10mm);20/30;1/3;VR;50m;705;Chr1
+IMI Gamad;P;0/+1*;P/J;E;2d6+3;(10mm);7/15;2;VR;50m;575;SOF2
+Colt Enforcement 10;P;+1;J;C;2d6+3;(10mm);14;2;VR;50m;550+;CB;3
+FN Browning "3-Spot";MP;+1;J;C;2d6+3;(10mm);24;3;ST;50m;425;UK
+LeRoi Maxi-10;P;-1;J;E;2d6+3;(10mm);10;2;UR;50m;150;ET
+Arasaka WSA;P;+0;J;C;2d6+3;(10mm);15;2;VR;50m;400;CB1
+Sternmeyer P-41;P;+0;J;C;2d6+3;(10mm);12;2;VR;50m;425;CB1
+Stolbovoy St-2 Pistol;P;+0;J;R;2d6+3;(10mm);14;2;VR*;50m;450;CB3
+Surprising Stranger;P;+0;P;E;2d6+3;(10mm);4;2;ST;25m;50;SOF
+Towa 13 Police Pistol;P;+2;J;P;2d6+3;(10mm);12;2;VR;50m;500;PAC
+S&W Combat Magnum;P;+1;J;C;2d6+3;(.357 C);6;2;VR;50m;150;CP20
+C.O.P. Derringer;P;+0;P;C;2d6+3;(.357 C);4;2;VR;50m;100;CP20
+Desert Eagle;P;+1;J;C;2d6+3;(.357 C);9;2;VR;50m;250;CP13
+Colt Python;P;+1;J;E;2d6+3;(.357 C);6;1;ST;50m;250;CP13
+S&W Model 29;P;+1;J;C;2d6+3;(.357 C);6;2;VR;50m;200;CP13
+.357 Magnum Revolver;P;+0;J;C;2d6+3;(.357mag C);6;2;VR;50m;250;NEO
+.357 Magnum Autoloader;P;+0;J;C;2d6+3;(.357mag C);8;2;VR;50m;300;NEO
+S&W "Tri-Star";P;+0;J;C;2d6x3;(.410ga);6;2;ST;50m;275;Chr2
+Tsunami Express;P;+3;L;P;2d6+3;(5.2 ET);24;3;VR;75m;5300;SOF2
+Hammer M-11 Bolt Pistol;P;+2;J;P;1d6+2;(9mm Bolt);10;2;ST;30m;320;DS
+Militech Black Widow;P;+1;J;P;1/2d6;(Flec);10;2;ST;30m;400;DS
+Militech Silver Shadow;P;+0;J;P;d6/2+2x1d6/3;(Flec);8;2;ST;30m;300;DS

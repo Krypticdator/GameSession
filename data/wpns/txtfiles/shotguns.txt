@@ -1,0 +1,22 @@
+Militech Crusher SSG;SHT;-1/-3;J;C;3d6;(20ga)(B9);6;2;ST;12/25m;450;Chr1
+Mustang Arms Close 20;SHT;-1;N;P;3d6;(20ga)(B3);15;2;ST;50m;350;SOF2
+Arasaka WCAA Rapid 12;SHT;-1;N;C;4d6;(12ga)(B6);20;2/10;ST;50m;900;CP20
+CCMMC Qi-15;SHT;-2;N;P;4d6;(12ga)(B6);15;2/10;ST;50m;150;PAC
+Enfield LastChance;SHT;+0;J;C;4d6;(12ga)(B12);1;1;UR;25m;60;ES
+Luigi Franchi P.16;SHT;+1;L;R;4d6;(12ga)(B6);20;2/10;ST;50m;980;ES
+M-12 Close Assault;SHT;+0;N;P;4d6;(12ga)(B6);20;3/10;VR;50m;950;HoB
+Militech Bulldog;SHT;+0;L;P;4d6;(12ga)(B6);21;3/10;ST;50m;1000;CB2
+Militech Military/Police;SHT;0/-1;N/L;C;4d6;(12ga)(B3);8;2;ST;50m;300;Chr1
+Mustang Arms "Raider";SHT;+0;L/N;C;4d6;(12ga)(B3);5/9;2;ST;50m;400;CB3
+Sternmeyer Stakeout 10;SHT;-2;L;R;4d6;(12ga)(B3);10;2;ST;50m;450;CP20
+CAWS;SHT;+0;N;R;4d6;(12ga)(B6);10;10;ST;50m;500;CP20
+Ithaca Stakeout;SHT;-1;L;C;4d6;(12ga)(B6);8;2;ST;50m;200;CP13
+Atchison Assault;SHT;-1;N;R;4d6;(12ga)(B6);20;10;ST;50m;500;CP13
+H&K CAWS 11;SHT;+1;N;R;4d6;(12ga)(B6);30;10;ST;50m;800;UK
+"Whippet" Scattergun;SHT;-3;J;P;4d6;(12ga)(B6);2;2;VR;15m;200;NEO
+Constitution Hurricane;SHT;+0;N;P;4d6;(12ga)(B6);40;4/20;ST;70m;1000;P&S
+Double Barrel Shotgun;SHT;+0;N;C;4d6;(12ga)(B3);2;2;VR;50m;200;UK
+Sawn-off Shotgun;SHT;-1;J;C;4d6;(12ga)(B6);2;2;VR;10m;100;UK
+Tsunami "Ragnarok";SHT;+0;N;R;6d6;(12ga ET)(B8);40;2/20;ST;70m;4500;PAC
+Meta Warhammer;SHT;-1;N;P;4d6+3;(12ga M)(B6);16;1/3;VR;75m;700;NEO
+Luigi Franchi "King Buck";SHT;-1;N;P;6d6;(10ga)(B8);4;2/4;VR;50m;800;Chr2

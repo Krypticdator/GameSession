@@ -1,0 +1,22 @@
+Constitution Deluge;HVY;+0;N;P;1-2pts+Drugs;400;35;ST;60m;800;P&S
+Arasaka "Crowd Control";HVY;+0;N;E;1d3+1;(1d3 hits)(B3);500;50;ST;200m;1000;LD
+Militech High Power 15;RIF;+2;N;P;2d6+4;(9mm L)(B4);180;20/60;ST;200m;1600;SOF
+Dover GA-1112 Autogun;HVY;+1;N;R;4d6+4;(12mm L)(B7);400;80;ST;400m;1110+;SOF2
+FN MG-6 "One-on-One";HVY;+1;N;P;5d6;(5.56)(B7);100;40;VR;450m;1800;ES
+Militech M-232 SAW;HVY;+0;N;P;5d6;(5.56)(B5);100/35;20;VR;400m;1000;HoB
+5.56mm Machinegun;HVY;+1;N;P;5d6;(5.56)(B5);100;10;VR;450m;1200;MM
+RPK Soviet SAW;HVY;+1;N;P;5d6;(7.62 sov C)(B5);75;5;VR;500m;1000;SOF
+H&K G-6 SAW;HVY;+1;N;P;5d6@;(6mm)(B5);100;30;VR;450m;2050;Chr1
+Fabrica M-2012HB SAW;HVY;+2;N;P;5d6+3;(6.5mm)(B6);100;30;VR;450m;1600;SOF
+Militech Renegade SAW;HVY;+0;N;R;6d6-1;(6.5 H)(B6);200/35;20;ST;400m;1100;CB2
+Constitution Cyclone;HVY;+1;N;P;6d6+2;(7.62)(B8);100;35;VR;500m;1200;P&S
+M-60D Machinegun;HVY;+1;N;P;6d6+2;(7.62)(B7);100;20;VR;500m;1000;HoB
+FN-MAG Machinegun;HVY;+0;N;R;6d6+2;(7.62 C)(B7);100/250;30;VR;1000m;1500;UK
+Sternmeyer M-5A SAW;HVY;-1;N;R;6d6+2;(7.62)(B7);200;20;ST;500m;1000;CB1
+Towa Type-8;HVY;+1;N;P;6d6+2;(7.62)(B8);100;35;VR;500m;2500;PAC
+7.62mm Machinegun;HVY;+0;N;P;6d6+2;(7.62)(B6);100;10;VR;500m;1200;MM
+Militech RRCR Archer;HVY;+1;L;P;6d6+2;(7.62)(B8);100+;33;ST;400m;3300;SW
+M2A5HB Browning .50;HVY;+0;N;P;6d10;(12.7)(B11);100;10;VR;600m;2000;HoB
+12.7mm/50. Machinegun;HVY;+0;N;R;6d10;(12.7)(B11);100;10;VR;600m;2000;MM
+14.5mm Machinegun;HVY;+0;N;P;7d10;(14.5)(B13);100;10;VR;550m;2500;MM
+Militech 20L Autocannon;HVY;+0;N;R;8d10;(20mm)(B14);100;10;VR;500m;3000;HoB

@@ -1,0 +1,67 @@
+Bagn Nakhs;Punch;+2;P;P;1d6/3*;-;-;-;1m;15;PAC
+Hyo;MEL;-2;P;C;1d6/3@;Ref/2;-;-;Throw;5;PAC
+Switchblade;MEL;+0;P;C;1d6/2*;-;-;-;1m;15;CP20
+Teko;Punch;+0;J;C;1d6/2*;-;-;-;1m;25;PAC
+Tetsubishi;Cast;-1;P;C;1d6/2*;-;-;-;Throw;3-6;PAC
+Juji-Shuriken;MEL;+0;P;C;1d6/2*;-;-;-;Throw;2-3;PAC
+Club;MEL;+0;L;C;1d6;-;-;-;1m;2;CP20
+Knife;MEL;+0;P;C;1d6*;-;-;-;Throw;1-20;CP20
+Bayonet/Survival Knife;MEL;+0;J;C;1d6*;-;-;VR;0.5m;50;NEO
+Bo-Shuriken;MEL;+0;P;C;1d6*;-;-;-;Throw;4-7;PAC
+Exploding Shuriken;MEL;+1;P;R;1d6*/4d6;HE;1;1;ST;Throw;200;P2
+Spiked Cestus;Punch;+0;P;P;1d6*;-;-;-;1m;20;PAC
+Ba Zhan Shuang (dagger);MEL;+0;L;C;1d6*;-;-;-;1m;45;PAC
+Ashiko Kick;+0;J;C;1d6*;-;-;-;1m;28;PAC
+Steel Bayonet;MEL;-2;J;C;1d6*/3d6*;-;-;VR;1m;15;HoB
+Mystic Tech Spring Knife;MEL;+0;P;C;1d6*;-;-;ST;5m;125;Chr2
+Spawnblade;MEL;+0;J;P;1d6/1d6+4*;-;-;ST;1m;450;Chr2
+Brass Knuckles;Punch;+0;P;C;1d6+2;-;-;-;1m;10;CP20
+Smartwhip;MEL;+0;J;C;1d6+2;-;-;ST;1m;600;NEO
+Tessen (metal fan);MEL;+0;J;C;1d6+2;-;-;-;1m;60;PAC
+Spiked Boots;Kick;+0;N;C;1d6+2*;-;-;-;1m;20;PAC
+Electro-Knux;Punch;+0;P;C;1d6+2/Stun;-2;-;-;-;1m;100;P1
+Combat Knife;MEL;+1;J;P;1d6+3*;-;-;-;1m;70;PAC
+Utility Sword/Machete;MEL;+0;L;C;1d6+3*;-;-;VR;0.5m;60;NEO
+Leg & Knee Spikes;Kick;+0;N;C;1d6+3*;-;-;-;1m;10-25;PAC
+Ri Yue Hu Xing Jian;MEL;-1;J;P;1d6+3/1d6/2*;-;-;-;1m;25;PAC
+SPM-1 Battleglove;Punch;-2;N;P;2d6/3d6;-;-;VR;1m;900;CP20
+SPM-2 Battleglove+;Punch;-1;N;P;2d6*/3d6;-;-;VR;1m;970;PAC
+Hambo (100cm stick);MEL;+1;L;C;2d6;-;-;-;1m;30;PAC
+Jitte;MEL;+0;L;C;2d6;-;-;-;1m;30;PAC
+Zhi Dao (thin sword);MEL;+0;L;C;2d6*;-;-;-;1m;100-200;PAC
+Kusari-gama;(sickle);MEL;-1;L;C;2d6*/3d6;-;-;-;2m;100;PAC
+Wu Cha (thin spear);MEL;-1;N;P;2d6*,;3d6;-;-;-;2m;100;PAC
+Kendachi Monoknife;MEL;+1;P;P;2d6#;-;-;VR;1m;200;CP20
+Kendachi Monowhip;MEL;+0;J;P;2d6#;-;-;ST;1-3m;350;Chr2
+IMI "Chainknife";MEL;+0;J;P;2d6+1*;-;-;VR;1m;120;Chr2
+Flexible Rubber Baton;MEL;+0;J;C;2d6+1;-;-;-;1m;15;ET
+Sword;MEL;+0;N;C;2d6+2*;-;-;-;1m;20-200;CP20
+Sai;MEL;+0;J;C;2d6+2*;-;-;-;1m;20;PAC
+Manrikigusari;MEL;+0;J;P;2d6+3;-;-;-;1m;30;PAC
+Arasaka Wakizashi;MEL;+1;L;R;2d6+3*;(Hard;SP/2);-;-;VR;1m;-;SW
+Excalibur Nightstick;MEL;+0;J;P;2d6+3;-;-;VR;1m;80;P&S
+Excalibur Taserstick;MEL;+0;J;P;2d6+3/Stun;-2;8;1;ST;1m;80;P&S
+Excalibur Macestick;MEL;+0;J;P;2d6+3/Mace;6;1;ST;1m;80;P&S
+Axe;MEL;-1;N;C;2d6+3*;-;-;-;1m;20;CP20
+Nunchaku;MEL;+0;L;C;3d6;-;-;-;1m;15;CP20
+Tonfa;MEL;+0;L;C;3d6;-;-;-;1m;15;PAC
+Jiu Jie Bian;MEL;-2;L;C;3d6;-;-;-;2m;120;PAC
+Mystic Nunchaku/Blade;MEL;+0;L;P;3d6/1d6+1/2d6+1*;-;-;VR;1m;200;SOF2
+Fang Tian Ji (spear);MEL;+0;N;P;3d6*;-;-;-;2m;95;PAC
+Naginata;MEL;+0;N;P;3d6*;-;-;-;2m;100;CP20
+Arasaka Katana;MEL;+2;N;R;3d6*;(Hard;SP/2);-;-;VR;1m;-;SW
+Kukri;MEL;+0;L;P;3d6*;-;-;-;1m;50-150;PAC
+Machete;MEL;+0;L;C;3d6*;-;-;VR;1m;30;NE
+Monosword Cane;MEL;+1;L;P;3d6#;-;-;VR;1m;255;SOF2
+Monowire;MEL;+0;P;R;3d6#;-;-;VR;1m;60/m;Chr2
+Liu Chi Bang/Bo/6ft Stick;MEL;+1;L;C;3d6+2;-;-;-;2m;40;PAC
+San Jie Gun;MEL;+0;N;C;3d6+2;-;-;-;2m;50;PAC
+3/6;MEL;+0;N;C;3d6+2;-;-;VR;2/3m;150;PAC
+Titanium Katana;MEL;+1;L;R;3d6+2*;-;-;VR;1m;2850;P1
+Qing Long Dao/Scimitar;MEL;-2;N;P;3d6+3*;-;-;-;1m;250;PAC
+Sledgehammer;MEL;-1;N;C;4d6;-;-;-;1m;20;CP20
+Chainsaw;MEL;-3;N;C;4d6*;-;-;-;2m;80;CP20
+Kendachi MonoNaginata;MEL;+0;N;R;4d6#;-;-;VR;2m;400;CP20
+Kendachi MonoKatana;MEL;+1;N;R;4d6#;-;-;VR;1m;600;CP20
+Kendachi Powersword;MEL;+0;L;R;4d6;(Sx1/4,;Hx1/2);-;-;ST;1m;860;Chr1
+Kendachi Mono-Two;MEL;+1;J/N;P/R;2d6#/4d6#;-;-;VR;1m;650/700;Chr1

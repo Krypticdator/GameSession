@@ -151,6 +151,7 @@ class StartMenu(object):
         menu_settings.add_command(label='DV table', command=self.dv_settings)
         menu_settings.add_command(label='Skills', command=self.skill_manager)
         menu_edit.add_command(label='Task handler', command=self.task_handler)
+        menu_edit.add_command(label='Weapon inspector', command=self.weapon_inspector)
         self.root.mainloop()
 
     def load_char(self):
@@ -165,6 +166,10 @@ class StartMenu(object):
     def task_handler(self):
         window = Toplevel(self.root)
         th = TaskHandler(window, self.contr)
+
+    def weapon_inspector(self):
+        window = Toplevel(self.root)
+        wi = WeaponManager(window, self.contr)
 
 class BasicStatsComponent(UIObject):
     def __init__(self, master, controller):
@@ -965,6 +970,64 @@ class PlayerLine(UIObject):
         self.prob_var.set(str(percent))
 
 
+class WeaponManager(UIObject):
+    def __init__(self, master, controller):
+        super().__init__(master, controller)
+        self.weaponlist = CustomListBox(self.frame, self.contr)
+
+        self.edit_group = CustomPanedWindow(self.frame, self.contr, True)
+        self.edit_group2 = CustomPanedWindow(self.frame, self.contr, True)
+        self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
+        #'name', 'type', 'wa', 'con', 'av', 'dmg', 'ammo', 'shts', 'rof', 'rel', 'range', 'cost', 
+        #'weight', 'flags', 'options', 'alt_munitions', 'description', 'category'
+        self.name = text_and_inputfield(self.edit_group.frame, 'name', width_num = 20, controller=self.contr)
+        self.type = text_and_inputfield(self.edit_group.frame, 'type', width_num = 20, controller=self.contr)
+        self.wa = text_and_inputfield(self.edit_group.frame, 'wa', width_num = 20, controller=self.contr)
+        self.con = text_and_inputfield(self.edit_group.frame, 'con', width_num = 20, controller=self.contr)
+        self.av = text_and_inputfield(self.edit_group.frame, 'av', width_num = 20, controller=self.contr)
+        self.dmg = text_and_inputfield(self.edit_group.frame, 'dmg', width_num = 20, controller=self.contr)
+        self.ammo = text_and_inputfield(self.edit_group.frame, 'ammo', width_num = 20, controller=self.contr)
+        self.shts = text_and_inputfield(self.edit_group.frame, 'shts', width_num = 20, controller=self.contr)
+        self.rof = text_and_inputfield(self.edit_group.frame, 'rof', width_num = 20, controller=self.contr)
+        self.rel = text_and_inputfield(self.edit_group.frame, 'rel', width_num = 20, controller=self.contr)
+        self.range = text_and_inputfield(self.edit_group.frame, 'range', width_num = 20, controller=self.contr)
+        self.cost = text_and_inputfield(self.edit_group.frame, 'cost', width_num = 20, controller=self.contr)
+
+        self.weight = text_and_inputfield(self.edit_group2.frame, 'weight', width_num = 20, controller=self.contr)
+        self.flags = text_and_inputfield(self.edit_group2.frame, 'flags', width_num = 20, controller=self.contr)
+        self.options = text_and_inputfield(self.edit_group2.frame, 'options', width_num = 20, controller=self.contr)
+        self.altmunitions = text_and_inputfield(self.edit_group2.frame, 'altmunitions', width_num = 20, controller=self.contr)
+        self.category = text_and_inputfield(self.edit_group2.frame, 'category', width_num = 20, controller=self.contr)
+        self.description = TextBox(self.edit_group2.frame, self.contr, 'description', 20, 10)
+
+        self.edit_group2.add('weight', self.weight.frame)
+        self.edit_group2.add('flags', self.flags.frame)
+        self.edit_group2.add('options', self.options.frame)
+        self.edit_group2.add('altmunitions', self.altmunitions.frame)
+        self.edit_group2.add('category', self.category.frame)
+        self.edit_group2.add('description', self.description.frame)
+        
+        self.edit_group.add('name', self.name.frame)
+        self.edit_group.add('type', self.type.frame)
+        self.edit_group.add('wa', self.wa.frame)
+        self.edit_group.add('con', self.con.frame)
+        self.edit_group.add('av', self.av.frame)
+        self.edit_group.add('dmg', self.dmg.frame)
+        self.edit_group.add('ammo', self.ammo.frame)
+        self.edit_group.add('shts', self.shts.frame)
+        self.edit_group.add('rof', self.rof.frame)
+        self.edit_group.add('rel', self.rel.frame)
+        self.edit_group.add('range', self.range.frame)
+        self.edit_group.add('cost', self.cost.frame)
+
+        self.weaponlist.frame.grid(column=0, row=0, sticky=(N, W))
+        self.edit_group.frame.grid(column=1, row=0, sticky=(N, W))
+        self.edit_group2.frame.grid(column=2, row=0, sticky=(N, W))
+        self.btn_save.grid(column=2, row=1, sticky=(E, S))
+    def save(self):
+        pass
+    def update(self):
+        pass
 
 class SkillManager(UIObject):
     def load_skills(self):

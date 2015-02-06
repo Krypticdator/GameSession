@@ -1,13 +1,12 @@
 from GUIFactory import StartMenu
 from Preferences import Preferences
 from XmlController import XmlController
-from SQLController import SQLController
+from SQLController import SQLController, WeaponSqlController
 from Character import Character
 class Controller(object):
     """description of class"""
     def __init__(self):
         self.prefs = Preferences()
-        self.sql = SQLController('testikanta')
         self.__ui_components = {}
         self.__pc_roster = {}
         self.__skill_shorts = {}
@@ -18,9 +17,27 @@ class Controller(object):
 
         self.prepare_skill_shorts()
 
-        self.sql.create_table('kissat', ['nimi', 'ika', 'color'], ['TEXT', 'TEXT', 'TEXT'])
-        self.sql.insert('kissat', ['nimi', 'ika', 'color'], {'nimi':'leevi', 'ika':'15', 'color':'red'}) 
-        
+        weapons = self.prefs.transfer_wpns_from_txt_to_sql()
+
+        self.__wpn_db = WeaponSqlController()
+
+        #print(weapons)
+        for weapon in weapons:
+            name = str(weapon.get_attribute('name'))
+            type = str(weapon.get_attribute('type'))
+            wa = str(weapon.get_attribute('wa'))
+            con = str(weapon.get_attribute('con'))
+            av = str(weapon.get_attribute('av'))
+            dmg = str(weapon.get_attribute('dmg'))
+            ammo = str(weapon.get_attribute('ammo'))
+            shts = str(weapon.get_attribute('shts'))
+            rof = str(weapon.get_attribute('rof'))
+            rel = str(weapon.get_attribute('rel'))
+            range = str(weapon.get_attribute('range'))
+            cost = str(weapon.get_attribute('cost'))
+            self.__wpn_db.insert_weapon(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost)
+        #self.wpn_db.insert_weapon('testiase', 'P', '-1', 'P', 'E', '1d6','9mm','6','2','ST','50','40')
+        #self.__wpn_db.print_weapons_table()
         start = StartMenu(self)
         
     def load_pc_roster(self, filepath_table):
