@@ -975,6 +975,8 @@ class WeaponManager(UIObject):
         super().__init__(master, controller)
         self.weaponlist = CustomListBox(self.frame, self.contr)
 
+        self.weaponlist.box.bind('<<ListboxSelect>>', self.show_wpn)
+
         self.edit_group = CustomPanedWindow(self.frame, self.contr, True)
         self.edit_group2 = CustomPanedWindow(self.frame, self.contr, True)
         self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
@@ -1024,10 +1026,65 @@ class WeaponManager(UIObject):
         self.edit_group.frame.grid(column=1, row=0, sticky=(N, W))
         self.edit_group2.frame.grid(column=2, row=0, sticky=(N, W))
         self.btn_save.grid(column=2, row=1, sticky=(E, S))
+
+        wpns = self.contr.load_wpn_sql_table()
+        for wpn in wpns:
+            self.weaponlist.add(wpn.name)
+        #self.update()
     def save(self):
-        pass
-    def update(self):
-        pass
+        #name, type, wa, con, av, dmg, ammo, shts, rof, 
+        #rel, range, cost, weight, flags, options, 
+        #alt_munitions, description, category
+        name = self.name.variable.get()
+        type = self.type.variable.get()
+        wa = self.wa.variable.get()
+        con = self.con.variable.get()
+        av = self.av.variable.get()
+        dmg = self.dmg.variable.get()
+        ammo = self.ammo.variable.get()
+        shts = self.shts.variable.get()
+        rof = self.rof.variable.get()
+        rel = self.rel.variable.get()
+        range = self.range.variable.get()
+        cost = self.cost.variable.get()
+        weight = self.weight.variable.get()
+        flags = self.flags.variable.get()
+        options = self.options.variable.get()
+        alt_munitions = self.altmunitions.variable.get()
+        description = self.description.box.get(1.0, 'end')
+        category = self.category.variable.get()
+        self.contr.update_sql_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight, flags, options, alt_munitions, description, category)
+        self.update(name)
+
+    def update(self, wpn_name):
+        wpn = self.contr.load_single_sql_wpn(wpn_name)
+        self.name.variable.set(wpn.name)
+        self.type.variable.set(wpn.type)
+        self.wa.variable.set(wpn.wa)
+        self.con.variable.set(wpn.con)
+        self.av.variable.set(wpn.av)
+        self.dmg.variable.set(wpn.dmg)
+        self.ammo.variable.set(wpn.ammo)
+        self.shts.variable.set(wpn.shts)
+        self.rof.variable.set(wpn.rof)
+        self.rel.variable.set(wpn.rel)
+        self.range.variable.set(wpn.range)
+        self.cost.variable.set(wpn.cost)
+        self.weight.variable.set(wpn.weight)
+        self.flags.variable.set(wpn.flags)
+        self.options.variable.set(wpn.options)
+        self.altmunitions.variable.set(wpn.alt_munitions)
+        self.description.new_text(wpn.description)
+        self.category.variable.set(wpn.category)
+
+    def show_wpn(self, *args):
+        id = self.weaponlist.box.curselection()
+        luku = int(id[0])
+        text = self.weaponlist.box.get(luku)
+        self.update(text)
+
+        
+
 
 class SkillManager(UIObject):
     def load_skills(self):

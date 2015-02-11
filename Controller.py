@@ -1,7 +1,7 @@
 from GUIFactory import StartMenu
 from Preferences import Preferences
 from XmlController import XmlController
-from SQLController import SQLController, WeaponSqlController
+from SQLController import WeaponSqlController, WeaponBlueprint
 from Character import Character
 class Controller(object):
     """description of class"""
@@ -18,8 +18,9 @@ class Controller(object):
         self.prepare_skill_shorts()
 
         weapons = self.prefs.transfer_wpns_from_txt_to_sql()
+        wpn_table=WeaponBlueprint()
 
-        self.__wpn_db = WeaponSqlController()
+        #self.__wpn_db = WeaponSqlController()
 
         #print(weapons)
         for weapon in weapons:
@@ -35,9 +36,14 @@ class Controller(object):
             rel = str(weapon.get_attribute('rel'))
             range = str(weapon.get_attribute('range'))
             cost = str(weapon.get_attribute('cost'))
-            self.__wpn_db.insert_weapon(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost)
-        #self.wpn_db.insert_weapon('testiase', 'P', '-1', 'P', 'E', '1d6','9mm','6','2','ST','50','40')
-        #self.__wpn_db.print_weapons_table()
+            wpn_table.add_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost)
+        #wpn_table.print_table()
+            
+
+        
+       
+
+     
         start = StartMenu(self)
         
     def load_pc_roster(self, filepath_table):
@@ -47,6 +53,18 @@ class Controller(object):
             player = c.get_attribute('player')
             self.__pc_roster[player] = c
             #print(str(c))
+
+    def load_wpn_sql_table(self):
+        wpn = WeaponBlueprint()
+        return wpn.query_all()
+
+    def load_single_sql_wpn(self, name):
+        wpn = WeaponBlueprint()
+        return wpn.search_with_name(name)
+
+    def update_sql_wpn(self, name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight, flags, options, alt_munitions, description, category):
+        wpn_table = WeaponBlueprint()
+        wpn_table.update_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight, flags, options, alt_munitions, description, category)
 
     def prepare_skill_shorts(self):
         skills = self.prefs.get_skills_dictionary()
