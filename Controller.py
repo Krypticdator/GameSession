@@ -1,12 +1,13 @@
 from GUIFactory import StartMenu
 from Preferences import Preferences
 from XmlController import XmlController
-from SQLController import WeaponSqlController, WeaponBlueprint
+from SQLController import SQLController
 from Character import Character
 class Controller(object):
     """description of class"""
     def __init__(self):
         self.prefs = Preferences()
+        self.db = SQLController()
         self.__ui_components = {}
         self.__pc_roster = {}
         self.__skill_shorts = {}
@@ -14,11 +15,12 @@ class Controller(object):
         #pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         pc_filepaths.append('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         self.load_pc_roster(pc_filepaths)
+        print(str(self.__pc_roster['Toni']))
 
         self.prepare_skill_shorts()
 
         weapons = self.prefs.transfer_wpns_from_txt_to_sql()
-        wpn_table=WeaponBlueprint()
+        wpn_table=self.db.table('wpn_blueprints')
 
         #self.__wpn_db = WeaponSqlController()
 
@@ -36,14 +38,16 @@ class Controller(object):
             rel = str(weapon.get_attribute('rel'))
             range = str(weapon.get_attribute('range'))
             cost = str(weapon.get_attribute('cost'))
-            wpn_table.add_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost)
+            source = str(weapon.get_attribute('source'))
+            category = str(weapon.get_attribute('category'))
+            wpn_table.add_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, category=category, source=source)
         #wpn_table.print_table()
             
 
         
        
 
-     
+        self.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         start = StartMenu(self)
         
     def load_pc_roster(self, filepath_table):

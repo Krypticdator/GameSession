@@ -26,7 +26,7 @@ class text_and_inputfield(UIObject):
         self.textlabel.grid(column=0, row=0 )
         self.entry.grid(column=1, row=0)
 
-class label_and_value(UIObject):
+class LabelAndValue(UIObject):
     def __init__(self, master, controller, label_text, label_length=10):
         super().__init__(master, controller)
         self.variable = StringVar()
@@ -183,31 +183,31 @@ class BasicStatsComponent(UIObject):
         self.mental_frame = ttk.Labelframe(stats_group, text='Mental')
         self.mental_group = ttk.Panedwindow(self.mental_frame, orient=VERTICAL)
 
-        self.Int = label_and_value(self.mental_group, self.contr, 'Int', 5)
-        self.Will = label_and_value(self.mental_group, self.contr, 'Will', 5)
-        self.Pre = label_and_value(self.mental_group, self.contr, 'Pre', 5)
+        self.Int = LabelAndValue(self.mental_group, self.contr, 'Int', 5)
+        self.Will = LabelAndValue(self.mental_group, self.contr, 'Will', 5)
+        self.Pre = LabelAndValue(self.mental_group, self.contr, 'Pre', 5)
 
         #Physical group
         self.physical_frame = ttk.Labelframe(stats_group, text='Physical')
         self.physical_group = ttk.Panedwindow(self.physical_frame, orient=VERTICAL)
 
-        self.Con = label_and_value(self.physical_group, self.contr, 'Con', 5)
-        self.Str = label_and_value(self.physical_group, self.contr, 'Str', 5)
-        self.Body = label_and_value(self.physical_group, self.contr, 'Body', 5)
+        self.Con = LabelAndValue(self.physical_group, self.contr, 'Con', 5)
+        self.Str = LabelAndValue(self.physical_group, self.contr, 'Str', 5)
+        self.Body = LabelAndValue(self.physical_group, self.contr, 'Body', 5)
 
         #Combat group
         self.combat_frame = ttk.Labelframe(stats_group, text='Combat')
         self.combat_group = ttk.Panedwindow(self.combat_frame, orient=VERTICAL)
 
-        self.Ref = label_and_value(self.combat_group, self.contr, 'Ref', 5)
-        self.Dex = label_and_value(self.combat_group, self.contr, 'Dex', 5)
-        self.Tech = label_and_value(self.combat_group, self.contr, 'Tech', 5)
+        self.Ref = LabelAndValue(self.combat_group, self.contr, 'Ref', 5)
+        self.Dex = LabelAndValue(self.combat_group, self.contr, 'Dex', 5)
+        self.Tech = LabelAndValue(self.combat_group, self.contr, 'Tech', 5)
 
         #Movement
         self.movement_frame = ttk.Labelframe(stats_group, text='Movement')
         self.movement_group = ttk.Panedwindow(self.movement_frame, orient = VERTICAL)
 
-        self.Move = label_and_value(self.movement_group, self.contr, 'Move', 5)
+        self.Move = LabelAndValue(self.movement_group, self.contr, 'Move', 5)
 
         self.basic_stats_frame.grid(column=0, row=0)
         stats_group.grid(column=0, row=0)
@@ -243,7 +243,7 @@ class BasicStatsComponent(UIObject):
 
     def update(self):
         #print('updating basic stats')
-        self.contr.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
+        #self.contr.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         Int  = self.contr.get_char_stat('int','lvl')
         Will  = self.contr.get_char_stat('will','lvl')
         Pre  = self.contr.get_char_stat('pre','lvl')
@@ -270,20 +270,20 @@ class DerivedStatsComponent(UIObject):
     def __init__(self, master, controller):
         super().__init__(master, controller)
         self.frame = ttk.Labelframe(master, text='Derived stats')
-        self.Luck = label_and_value(self.frame, self.contr, 'Luck', 5)
-        self.Hum = label_and_value(self.frame, self.contr, 'Hum', 5)
-        self.Rec = label_and_value(self.frame, self.contr, 'Rec', 5)
-        self.End = label_and_value(self.frame, self.contr, 'End', 5)
+        self.Luck = LabelAndValue(self.frame, self.contr, 'Luck', 5)
+        self.Hum = LabelAndValue(self.frame, self.contr, 'Hum', 5)
+        self.Rec = LabelAndValue(self.frame, self.contr, 'Rec', 5)
+        self.End = LabelAndValue(self.frame, self.contr, 'End', 5)
 
-        self.Run = label_and_value(self.frame, self.contr, 'Run', 5)
-        self.Sprint = label_and_value(self.frame, self.contr, 'Sprint', 5)
-        self.Swim = label_and_value(self.frame, self.contr, 'Swim', 5)
-        self.Leap = label_and_value(self.frame, self.contr, 'Leap', 5)
+        self.Run = LabelAndValue(self.frame, self.contr, 'Run', 5)
+        self.Sprint = LabelAndValue(self.frame, self.contr, 'Sprint', 5)
+        self.Swim = LabelAndValue(self.frame, self.contr, 'Swim', 5)
+        self.Leap = LabelAndValue(self.frame, self.contr, 'Leap', 5)
 
-        self.Stun = label_and_value(self.frame, self.contr, 'Stun', 5)
-        self.Hits = label_and_value(self.frame, self.contr, 'Hits', 5)
-        self.Sd = label_and_value(self.frame, self.contr, 'SD', 5)
-        self.Res = label_and_value(self.frame, self.contr, 'Res', 5)
+        self.Stun = LabelAndValue(self.frame, self.contr, 'Stun', 5)
+        self.Hits = LabelAndValue(self.frame, self.contr, 'Hits', 5)
+        self.Sd = LabelAndValue(self.frame, self.contr, 'SD', 5)
+        self.Res = LabelAndValue(self.frame, self.contr, 'Res', 5)
 
         self.Luck.frame.grid(column=0, row=0, sticky=(W))
         self.Hum.frame.grid(column=0, row=1, sticky=(W))
@@ -301,6 +301,37 @@ class DerivedStatsComponent(UIObject):
         self.Res.frame.grid(column=2, row=3, sticky=(W))
 
         self.frame.grid(column=0, row=0)
+        self.update()
+
+    def update(self):
+        print('updating derived stats')
+        Luck = self.contr.get_char_stat('luck','lvl')
+        Hum = self.contr.get_char_stat('hum', 'lvl')
+        Rec = self.contr.get_char_stat('rec','lvl')
+        End = self.contr.get_char_stat('end','lvl')
+        Run = self.contr.get_char_stat('run','lvl')
+        Sprint = self.contr.get_char_stat('sprint','lvl')
+        Swim = self.contr.get_char_stat('swim','lvl')
+        Leap = self.contr.get_char_stat('leap','lvl')
+        Stun = self.contr.get_char_stat('stun','lvl')
+        Hits = self.contr.get_char_stat('hits','lvl')
+        Sd = self.contr.get_char_stat('sd','lvl')
+        Res = self.contr.get_char_stat('res','lvl')
+
+        self.Luck.set(str(Luck))
+        self.Hum.set(str(Hum))
+        self.Rec.set(str(Rec))
+        self.End.set(str(End))
+        self.Run.set(str(Run))
+        self.Sprint.set(str(Sprint))
+        self.Swim.set(str(Swim))
+        self.Leap.set(str(Leap))
+        self.Stun.set(str(Stun))
+        self.Hits.set(str(Hits))
+        self.Sd.set(str(Sd))
+        self.Res.set(str(Res))
+
+        print(str(self.Res.get()))
         
 class SkillComponent(UIObject):
     def __init__(self, master, controller):
@@ -323,7 +354,7 @@ class SkillComponent(UIObject):
             self.category_group[category].grid(column=0, row=0)
         for key, value in self.skill_list.items():
             category = value.get_attribute('category')
-            self.skill_components[key] = label_and_value(self.category_group[category], self.contr, key, 30)
+            self.skill_components[key] = LabelAndValue(self.category_group[category], self.contr, key, 30)
             self.skill_components[key].set(value.get_attribute('lvl'))
             #print(str(skill_component.get()))
             self.category_group[category].add(self.skill_components[key].frame)
@@ -362,12 +393,12 @@ class PersonalityComponent(UIObject):
         self.affections_group = ttk.Panedwindow(self.affections_frame, orient = VERTICAL)
 
 
-        self.motivation = label_and_value(self.personality_group, self.contr, 'prime motivation', 25)
-        self.person = label_and_value(self.personality_group, self.contr, 'most valued person', 25)
-        self.posession = label_and_value(self.personality_group, self.contr, 'most valued posession', 25)
-        self.people = label_and_value(self.personality_group, self.contr, 'feels about most people', 25)
-        self.inmode = label_and_value(self.personality_group, self.contr, 'inmode', 25)
-        self.exmode = label_and_value(self.personality_group, self.contr, 'exmode', 25)
+        self.motivation = LabelAndValue(self.personality_group, self.contr, 'prime motivation', 25)
+        self.person = LabelAndValue(self.personality_group, self.contr, 'most valued person', 25)
+        self.posession = LabelAndValue(self.personality_group, self.contr, 'most valued posession', 25)
+        self.people = LabelAndValue(self.personality_group, self.contr, 'feels about most people', 25)
+        self.inmode = LabelAndValue(self.personality_group, self.contr, 'inmode', 25)
+        self.exmode = LabelAndValue(self.personality_group, self.contr, 'exmode', 25)
 
         self.personality_group.add(self.motivation.frame)
         self.personality_group.add(self.person.frame)
@@ -597,9 +628,9 @@ class CharacterSheet(UIObject):
          info_frame = ttk.Labelframe(self.overview_frame, text='Basic info')
          info_group = ttk.Panedwindow(info_frame, orient = VERTICAL)
 
-         self.player = label_and_value(info_group, self.contr, 'Player')
-         self.char_name = label_and_value(info_group, self.contr, 'Character')
-         self.age = label_and_value(info_group, self.contr, 'Age')
+         self.player = LabelAndValue(info_group, self.contr, 'Player')
+         self.char_name = LabelAndValue(info_group, self.contr, 'Character')
+         self.age = LabelAndValue(info_group, self.contr, 'Age')
 
 
          self.basic_stats = BasicStatsComponent(self.overview_frame, self.contr)
@@ -619,7 +650,7 @@ class CharacterSheet(UIObject):
 
          sorted_list = []
          for key, value in skill_list.items():
-             self.skill_ui_components[key] = label_and_value(self.skill_group, self.contr, key, 20)
+             self.skill_ui_components[key] = LabelAndValue(self.skill_group, self.contr, key, 20)
              self.skill_ui_components[key].set(value.get_attribute('lvl'))
              sorted_list.append(key)
              #self.skill_group.add(self.skill_ui_components[key].frame)
@@ -628,7 +659,7 @@ class CharacterSheet(UIObject):
          for key in sorted_list:
              self.skill_group.add(self.skill_ui_components[key].frame)
 
-         info_frame.grid(column=0, row=0)
+         info_frame.grid(column=0, row=0, sticky=(W))
          info_group.grid(column=0, row=0)
          basic_stats_frame.grid(column=0, row=1)
          #derived_frame.grid(column=0, row=2, sticky=(W))
@@ -641,10 +672,10 @@ class CharacterSheet(UIObject):
     
     def stats_window(self, master, controller):
         self.basic_stats_detailed = BasicStatsComponent(master, controller)
-        derived_stats = DerivedStatsComponent(master, controller)
+        self.derived_stats = DerivedStatsComponent(master, controller)
 
         basic_stats_frame = self.basic_stats_detailed.frame
-        derived_stats_frame = derived_stats.frame
+        derived_stats_frame = self.derived_stats.frame
 
         basic_stats_frame.grid(column=0, row=0, sticky=(W))
         derived_stats_frame.grid(column=0, row=1, sticky=(W))

@@ -99,7 +99,7 @@ class CyberItem(GameObject):
 class Weapon(Item):
     
     #'name', 'type',  'wa',   'con',  'av',   'dmg',  'ammo', 'shts', 'rof',  'rel',  'range', 'cost'
-    def __init__(self, name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight=0):
+    def __init__(self, name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight=0, source='none', category='none'):
         super().__init__(name, weight=weight)
         self.set_attribute('type', type)
         self.set_attribute('wa', wa)
@@ -112,6 +112,8 @@ class Weapon(Item):
         self.set_attribute('rel', rel)
         self.set_attribute('range', range)
         self.set_attribute('cost', cost)
+        self.set_attribute('source', source)
+        self.set_attribute('category', category)
 
     def validate(self):
         type = self.get_attribute('type')

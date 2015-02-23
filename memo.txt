@@ -1,0 +1,6 @@
+'''Character, player='NA', fname='NA', sname='NA', lname='NA', alias='NA', gender='NA', age=0, 
+                     prime_motivation='NA', valued_person='NA', valued_posession='NA', other_people='NA', inmode='NA', exmode='NA', 
+                     quirks='NA', phobias='NA', disorders='NA', clothes='NA', hair='NA', affections='NA',
+                     Int='0', Ref='0', Tech='0', Dex='0', Pre='0', Str='0', Con='0', Move='0', Body='0', Will='0',
+                     family_rank='NA', parents='NA', parent_event='NA', family_event='NA', childhood='NA', childhood_event='NA', family_contact='NA', 
+                     born='NA', origin='NA', Class='NA', money=0, flags='NA''''

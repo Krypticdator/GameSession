@@ -40,5 +40,8 @@
     <Compile Include="Preferences.py" />
     <Compile Include="XmlController.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="memo.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

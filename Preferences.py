@@ -349,7 +349,7 @@ class Preferences(FileControl):
         for array in wpn_arrays:
             for w in array:
                 #print(w[0])
-                wpn = Weapon(w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11])
+                wpn = Weapon(w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11], '0', w[12], w[13])
                 validation = wpn.validate()
                 if validation == False:
                     #print('successful validation of weapon')
