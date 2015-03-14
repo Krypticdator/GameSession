@@ -27,7 +27,8 @@ class Character(GameObject):
             return self.__fuz_dice.latest_resultset()
         else:
             return self.__fuz_dice.roll()
-
+    def set_stat(self, name, attribute):
+        pass
     def get_stat(self, name, attribute, category_search=False, return_all=False):
         if category_search:
             all_results = []

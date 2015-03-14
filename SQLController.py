@@ -2,10 +2,10 @@ import sqlite3
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///masterdb.db')
+engine = create_engine('sqlite:///system.db')
 Base = declarative_base()
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import sessionmaker
 
 class dbCharacter(Base):
@@ -126,9 +126,26 @@ class dbCharacter(Base):
             Swim = self.convert_stat(Character.get_stat('swim', 'lvl'))
             Hits = self.convert_stat(Character.get_stat('hits', 'lvl'))
             Stun = self.convert_stat(Character.get_stat('stun', 'lvl'))
-            SD = self.convert_stat(Character.get_stat('SD', 'lvl'))
+            SD = self.convert_stat(Character.get_stat('sd', 'lvl'))
             Res = self.convert_stat(Character.get_stat('res', 'lvl'))
 
+            family_rank = Character.get_attribute('family_rank')
+            parents = Character.get_attribute('parents')
+            parent_event = Character.get_attribute('parent_event')
+            family_event = Character.get_attribute('family_event')
+            childhood =  Character.get_attribute('childhood_enviroment')
+            childhood_event = Character.get_attribute('childhood_trauma_fortune')
+            family_contact = Character.get_attribute('family_contact')
+
+            c = dbCharacter(full_name=full_name, first_name=fname, second_name=sname, last_name=lname, alias=alias,
+                            age=age, prime_motivation=prime_motivation, valued_person=valued_person, valued_posession=valued_posession,
+                            other_people=other_people, inmode=inmode, exmode=exmode, quirks=quirks, disorders=disorders,
+                            phobias=phobias, clothes=clothes, hair=hair, affections=affections, Int=Int, Ref=Ref, Tech=Tech, Dex=Dex,
+                            Pre=Pre, Str=Str, Con=Con, Move=Move, Body=Body, Will=Will, Luck=Luck, Hum=Hum, Rec=Rec, End=End, Run=Run, 
+                            Sprint=Sprint, Leap=Leap, Swim=Swim, Hits=Hits, Stun=Stun, SD=SD, Res=Res, family_rank=family_rank, 
+                            parents=parents, parent_event=parent_event, family_event=family_event, childhood=childhood, 
+                            childhood_event=childhood_event, family_contact=family_contact)
+            self.session.commit()
             
 
     def convert_stat(self, stat):
@@ -147,13 +164,6 @@ class dbCharacter(Base):
 
     def setSession(self, session):
         self.session = session
-
-
-
-        
-        
-
-
 
 
 class WeaponBlueprint(Base):       
@@ -234,7 +244,67 @@ class WeaponBlueprint(Base):
     def setSession(self, session):
         self.session = session;
         
-         
+class SkillBlueprints(Base):
+    __tablename__ = 'skill_blueprints'
+    id = Column(Integer, primary_key=True)     
+    name = Column(String)
+    stat = Column(String)
+    short = Column(String)
+    diff = Column(String)
+    category = Column(String)
+    chip = Column(String)
+    description = Column(String)
+    flags = Column(String)
+
+    def add(self, name, stat, short, diff, category, chip, description):
+        exists=False
+        for name, in self.session.query(SkillBlueprints.name).\
+            filter(SkillBlueprints.name ==name):
+            exists=True
+        if exists:
+            pass
+        else:
+            skill = SkillBlueprints(name=name, stat=stat, short=short, diff=diff, category=category, chip=chip, description=description)
+            self.session.add(skill)
+            self.session.commit()
+
+    def update(self, name, stat, short, diff, category, chip, description):
+        query = self.session.query(SkillBlueprints).filter(SkillBlueprints.name==name)
+        skill = query.first()
+        skill.name = name
+        skill.stat = stat
+        skill.short = short
+        skill.diff = diff
+        skill.category = category
+        skill.chip = chip
+        skill.description = description
+        self.session.commit()
+
+    def query_all(self):
+        query = self.session.query(SkillBlueprints).order_by(SkillBlueprints.id)
+        return query.all()
+    def setSession(self, session):
+        self.session = session
+
+class Skills(Base):
+    __tablename__ = 'skills'
+    id = Column(Integer, primary_key=True)
+    blueprint_id = Column(Integer)
+    character_id = Column(Integer)
+    chipped = Column(Boolean)
+    ip_cap = Column(Integer)
+    ip = Column(Integer)
+    lvl = Column(Integer)
+    field = Column(String)
+    flags = Column(String)
+    cost = Column(Integer)
+
+    def add(self, blueprint_id, character_id, chipped, ip_cap, ip, lvl, field='NA', flags='NA', cost=0):
+        skill = Skills(blueprint_id, character_id, chipped, ip_cap, ip, lvl, field, flags, cost)
+
+    def setSession(self, session):
+        self.session = session
+
 
 class SQLController():
     """description of class"""
@@ -245,8 +315,14 @@ class SQLController():
             Base.metadata.create_all(engine)
             self.__db = {}
             wpn = WeaponBlueprint()
+            skillBP = SkillBlueprints()
+            chars = dbCharacter()
             wpn.setSession(self.session)
+            skillBP.setSession(self.session)
+            chars.setSession(self.session)
             self.add_table('wpn_blueprints', wpn)
+            self.add_table('skill_blueprints', skillBP)
+            self.add_table('characters', chars)
             
              
             
@@ -257,6 +333,21 @@ class SQLController():
         finally:
             #self.db.close()
             pass
+    def add_skill_to_character(self, character_name, skill_name, lvl, chipped):
+        query = self.session.query(dbCharacter).filter(dbCharacter.full_name==character_name)
+        character = query.first()
+        query2 = self.session.query(SkillBlueprints).filter(SkillBlueprints.name==skill_name)
+        skillBp = query2.first()
+
+        blueprint_id = skillBp.id
+        character_id = character.id
+        skills = Skills()
+        skills.add(buelprint_id, character_id, chipped, 0, 0, lvl)
+
+    def add_character_to_database(self, character):
+        c = self.table('characters')
+        c.addCharacter(character)
+
     def __del__(self):
         self.session.close()
 

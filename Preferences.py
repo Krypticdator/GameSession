@@ -68,7 +68,9 @@ class Preferences(FileControl):
         #print(effects)
 
     def save_skills(self):
-        x = XmlController()
+        pass
+
+        '''x = XmlController()
         system = 'modified fuzion'
         x.create_root('skills')
         x.set_value('system', system,'root')
@@ -112,10 +114,11 @@ class Preferences(FileControl):
                 x.set_text(skill.get_attribute('short'), 'short')
             except Exception:
                 x.set_text('not found','short')
-        x.save_file('preferences/skills.xml')
+        x.save_file('preferences/skills.xml')'''
 
     def load_skills(self):
-        x = XmlController()
+        pass
+        '''x = XmlController()
         try:
             x.load_file('preferences/skills.xml')
         except Exception:
@@ -128,7 +131,12 @@ class Preferences(FileControl):
                 skill.set_attribute('short', array[6])
             except Exception:
                 skill.set_attribute('short', 'not found') 
-            self.__skills[str.lower(array[0])]=skill
+            self.__skills[str.lower(array[0])]=skill'''
+
+    def set_skill_blueprint(self, name, stat, category, description, isChippable, diff, short):
+        skill = Stat(name=name, stat=stat, category=category, description=description, isChippable=isChippable, diff=diff)
+        skill.set_attribute('short', short)
+        self.__skills[name] = skill
 
 
         #print(self.__skills)

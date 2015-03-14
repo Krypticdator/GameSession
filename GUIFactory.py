@@ -13,18 +13,19 @@ class UIObject(object):
 
         self.frame.grid(column=0, row=0)
 
-class text_and_inputfield(UIObject):
+class TextAndEntryfield(UIObject):
     def __init__(self, master, topic, width_label=15, width_num=2, controller='None'):
         super().__init__(master, controller)
         self.variable = StringVar()
-        self.frame = ttk.Frame(master)
         self.textlabel = ttk.Label(self.frame, text=topic,width=width_label)
         self.entry = ttk.Entry(self.frame, textvariable=self.variable, width=width_num)
         
-
-        self.frame.grid(column = 0, row = 0)
         self.textlabel.grid(column=0, row=0 )
         self.entry.grid(column=1, row=0)
+    def set(self, value):
+        self.variable.set(value)
+    def get(self):
+        return self.variable.get()
 
 class LabelAndValue(UIObject):
     def __init__(self, master, controller, label_text, label_length=10):
@@ -371,9 +372,10 @@ class SkillComponent(UIObject):
         #self.frame.grid(column=0, row=0)
 
 class PersonalityComponent(UIObject):
-    def __init__(self, master, controller):
+    def __init__(self, master, controller, read_only=False):
         super().__init__(master, controller)
         self.personality_frame = ttk.Labelframe(self.frame, text='personality')
+        self.family_frame = ttk.Labelframe(self.frame, text='family')
         self.frame2 = ttk.Frame(self.frame)
         self.frame3 = ttk.Frame(self.frame)
 
@@ -385,6 +387,7 @@ class PersonalityComponent(UIObject):
         self.affections_frame = ttk.Labelframe(self.frame3, text='affections')
 
         self.personality_group = ttk.Panedwindow(self.personality_frame, orient = VERTICAL)
+        self.family_group = ttk.Panedwindow(self.family_frame, orient = VERTICAL)
         self.quirks_group = ttk.Panedwindow(self.quirks_frame, orient = VERTICAL)
         self.disorders_group = ttk.Panedwindow(self.disorders_frame, orient = VERTICAL)
         self.phobias_group = ttk.Panedwindow(self.phobias_frame, orient = VERTICAL)
@@ -393,12 +396,20 @@ class PersonalityComponent(UIObject):
         self.affections_group = ttk.Panedwindow(self.affections_frame, orient = VERTICAL)
 
 
-        self.motivation = LabelAndValue(self.personality_group, self.contr, 'prime motivation', 25)
-        self.person = LabelAndValue(self.personality_group, self.contr, 'most valued person', 25)
-        self.posession = LabelAndValue(self.personality_group, self.contr, 'most valued posession', 25)
-        self.people = LabelAndValue(self.personality_group, self.contr, 'feels about most people', 25)
-        self.inmode = LabelAndValue(self.personality_group, self.contr, 'inmode', 25)
-        self.exmode = LabelAndValue(self.personality_group, self.contr, 'exmode', 25)
+        if read_only:
+            self.motivation = LabelAndValue(self.personality_group, self.contr, 'prime motivation', 25)
+            self.person = LabelAndValue(self.personality_group, self.contr, 'most valued person', 25)
+            self.posession = LabelAndValue(self.personality_group, self.contr, 'most valued posession', 25)
+            self.people = LabelAndValue(self.personality_group, self.contr, 'feels about most people', 25)
+            self.inmode = LabelAndValue(self.personality_group, self.contr, 'inmode', 25)
+            self.exmode = LabelAndValue(self.personality_group, self.contr, 'exmode', 25)
+        else:
+            self.motivation = TextAndEntryfield(self.personality_group, 'prime motivation', 25, 20, self.contr)
+            self.person = TextAndEntryfield(self.personality_group, 'most valued person', 25, 20, self.contr)
+            self.posession = TextAndEntryfield(self.personality_group, 'most valued posession', 25, 20, self.contr)
+            self.people = TextAndEntryfield(self.personality_group, 'feels about most people', 25, 20, self.contr)
+            self.inmode = TextAndEntryfield(self.personality_group, 'inmode', 25, 20, self.contr)
+            self.exmode = TextAndEntryfield(self.personality_group, 'exmode', 25, 20, self.contr)
 
         self.personality_group.add(self.motivation.frame)
         self.personality_group.add(self.person.frame)
@@ -406,6 +417,22 @@ class PersonalityComponent(UIObject):
         self.personality_group.add(self.people.frame)
         self.personality_group.add(self.inmode.frame)
         self.personality_group.add(self.exmode.frame)
+
+        self.family_rank = LabelAndValue(self.family_group, self.contr, 'family rank', 21)
+        self.parents = LabelAndValue(self.family_group, self.contr, 'parents', 21)
+        self.parent_event = LabelAndValue(self.family_group, self.contr, 'parent status', 21)
+        self.family_event = LabelAndValue(self.family_group, self.contr, 'family status', 21)
+        self.childhood_envi = LabelAndValue(self.family_group, self.contr, 'childhood enviroment', 21)
+        self.childhood_event = LabelAndValue(self.family_group, self.contr, 'childhood event', 21)
+        self.family_contact = LabelAndValue(self.family_group, self.contr, 'family contact', 21)
+
+        self.family_group.add(self.family_rank.frame)
+        self.family_group.add(self.parents.frame)
+        self.family_group.add(self.parent_event.frame)
+        self.family_group.add(self.family_event.frame)
+        self.family_group.add(self.childhood_envi.frame)
+        self.family_group.add(self.childhood_event.frame)
+        self.family_group.add(self.family_contact.frame)
 
         quirks = self.contr.get_char_stat('quirk', 'quirk', True, True)
         disorders = self.contr.get_char_stat('disorder', 'disorder', True, True)
@@ -433,8 +460,10 @@ class PersonalityComponent(UIObject):
         for affe in affes:
             self.affections_group.add(ttk.Label(self.affections_group, text=affe))
 
-        self.personality_group.grid(column=0, row=0)
-        self.personality_frame.grid(column=0, row=0)
+        self.personality_group.grid(column=0, row=0, sticky=(W))
+        self.personality_frame.grid(column=0, row=0, sticky=(W))
+        self.family_group.grid(column=0, row=0, sticky=(W))
+        self.family_frame.grid(column=1, row=0, sticky=(W, N))
         self.frame2.grid(column=0, row=1, sticky=(W))
         self.frame3.grid(column=0, row=2, sticky=(W))
         self.quirks_group.grid(column=0, row=0)
@@ -463,6 +492,15 @@ class PersonalityComponent(UIObject):
         inmode = self.contr.get_char_stat('inmode', 'inmode', True)
         exmode = self.contr.get_char_stat('exmode', 'exmode', True)
 
+        #family_rank = self.contr.get_char_stat('family_rank', 'family_rank', True)
+        family_rank = self.contr.get_char_attribute('family_rank')
+        parents = self.contr.get_char_attribute('parents')
+        parent_event = self.contr.get_char_attribute('parent_event')
+        family_event = self.contr.get_char_attribute('family_event')
+        childhood_envi = self.contr.get_char_attribute('childhood_enviroment')
+        childhood_event = self.contr.get_char_attribute('childhood_trauma_fortune')
+        family_contact = self.contr.get_char_attribute('family_contact')
+
 
         self.motivation.set(motivation)
         self.person.set(person)
@@ -470,6 +508,14 @@ class PersonalityComponent(UIObject):
         self.people.set(people)
         self.inmode.set(inmode)
         self.exmode.set(exmode)
+
+        self.family_rank.set(family_rank)
+        self.parents.set(parents)
+        self.parent_event.set(parent_event)
+        self.family_event.set(family_event)
+        self.childhood_envi.set(childhood_envi)
+        self.childhood_event.set(childhood_event)
+        self.family_contact.set(family_contact)
 
 
 class MeritsComponent(UIObject):
@@ -766,12 +812,12 @@ class ModifyDvValues(UIObject):
     def __init__(self, master, controller):
         super().__init__(master, controller)
         #self.frame = ttk.Frame(master)
-        self.challenged =    text_and_inputfield(self.frame, 'easy')
-        self.everyday =      text_and_inputfield(self.frame, 'everyday')
-        self.competent =     text_and_inputfield(self.frame, 'challenging')
-        self.heroic =        text_and_inputfield(self.frame, 'hard')
-        self.incredible =    text_and_inputfield(self.frame, 'very hard')
-        self.legendary =     text_and_inputfield(self.frame, 'extreme')
+        self.challenged =    TextAndEntryfield(self.frame, 'easy')
+        self.everyday =      TextAndEntryfield(self.frame, 'everyday')
+        self.competent =     TextAndEntryfield(self.frame, 'challenging')
+        self.heroic =        TextAndEntryfield(self.frame, 'hard')
+        self.incredible =    TextAndEntryfield(self.frame, 'very hard')
+        self.legendary =     TextAndEntryfield(self.frame, 'extreme')
 
         self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
 
@@ -1013,24 +1059,24 @@ class WeaponManager(UIObject):
         self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
         #'name', 'type', 'wa', 'con', 'av', 'dmg', 'ammo', 'shts', 'rof', 'rel', 'range', 'cost', 
         #'weight', 'flags', 'options', 'alt_munitions', 'description', 'category'
-        self.name = text_and_inputfield(self.edit_group.frame, 'name', width_num = 20, controller=self.contr)
-        self.type = text_and_inputfield(self.edit_group.frame, 'type', width_num = 20, controller=self.contr)
-        self.wa = text_and_inputfield(self.edit_group.frame, 'wa', width_num = 20, controller=self.contr)
-        self.con = text_and_inputfield(self.edit_group.frame, 'con', width_num = 20, controller=self.contr)
-        self.av = text_and_inputfield(self.edit_group.frame, 'av', width_num = 20, controller=self.contr)
-        self.dmg = text_and_inputfield(self.edit_group.frame, 'dmg', width_num = 20, controller=self.contr)
-        self.ammo = text_and_inputfield(self.edit_group.frame, 'ammo', width_num = 20, controller=self.contr)
-        self.shts = text_and_inputfield(self.edit_group.frame, 'shts', width_num = 20, controller=self.contr)
-        self.rof = text_and_inputfield(self.edit_group.frame, 'rof', width_num = 20, controller=self.contr)
-        self.rel = text_and_inputfield(self.edit_group.frame, 'rel', width_num = 20, controller=self.contr)
-        self.range = text_and_inputfield(self.edit_group.frame, 'range', width_num = 20, controller=self.contr)
-        self.cost = text_and_inputfield(self.edit_group.frame, 'cost', width_num = 20, controller=self.contr)
+        self.name = TextAndEntryfield(self.edit_group.frame, 'name', width_num = 20, controller=self.contr)
+        self.type = TextAndEntryfield(self.edit_group.frame, 'type', width_num = 20, controller=self.contr)
+        self.wa = TextAndEntryfield(self.edit_group.frame, 'wa', width_num = 20, controller=self.contr)
+        self.con = TextAndEntryfield(self.edit_group.frame, 'con', width_num = 20, controller=self.contr)
+        self.av = TextAndEntryfield(self.edit_group.frame, 'av', width_num = 20, controller=self.contr)
+        self.dmg = TextAndEntryfield(self.edit_group.frame, 'dmg', width_num = 20, controller=self.contr)
+        self.ammo = TextAndEntryfield(self.edit_group.frame, 'ammo', width_num = 20, controller=self.contr)
+        self.shts = TextAndEntryfield(self.edit_group.frame, 'shts', width_num = 20, controller=self.contr)
+        self.rof = TextAndEntryfield(self.edit_group.frame, 'rof', width_num = 20, controller=self.contr)
+        self.rel = TextAndEntryfield(self.edit_group.frame, 'rel', width_num = 20, controller=self.contr)
+        self.range = TextAndEntryfield(self.edit_group.frame, 'range', width_num = 20, controller=self.contr)
+        self.cost = TextAndEntryfield(self.edit_group.frame, 'cost', width_num = 20, controller=self.contr)
 
-        self.weight = text_and_inputfield(self.edit_group2.frame, 'weight', width_num = 20, controller=self.contr)
-        self.flags = text_and_inputfield(self.edit_group2.frame, 'flags', width_num = 20, controller=self.contr)
-        self.options = text_and_inputfield(self.edit_group2.frame, 'options', width_num = 20, controller=self.contr)
-        self.altmunitions = text_and_inputfield(self.edit_group2.frame, 'altmunitions', width_num = 20, controller=self.contr)
-        self.category = text_and_inputfield(self.edit_group2.frame, 'category', width_num = 20, controller=self.contr)
+        self.weight = TextAndEntryfield(self.edit_group2.frame, 'weight', width_num = 20, controller=self.contr)
+        self.flags = TextAndEntryfield(self.edit_group2.frame, 'flags', width_num = 20, controller=self.contr)
+        self.options = TextAndEntryfield(self.edit_group2.frame, 'options', width_num = 20, controller=self.contr)
+        self.altmunitions = TextAndEntryfield(self.edit_group2.frame, 'altmunitions', width_num = 20, controller=self.contr)
+        self.category = TextAndEntryfield(self.edit_group2.frame, 'category', width_num = 20, controller=self.contr)
         self.description = TextBox(self.edit_group2.frame, self.contr, 'description', 20, 10)
 
         self.edit_group2.add('weight', self.weight.frame)
@@ -1134,13 +1180,13 @@ class SkillManager(UIObject):
         super().__init__(master, controller)
         self.skillslist = CustomListBox(self.frame, controller)
         self.edit_group = ttk.Panedwindow(self.frame, orient=VERTICAL)
-        self.name = text_and_inputfield(self.edit_group, 'name', 15, 15)
-        self.stat = text_and_inputfield(self.edit_group, 'stat', 6, 6)
-        self.short = text_and_inputfield(self.edit_group, 'short', 6,6)
-        self.category = text_and_inputfield(self.edit_group, 'category', 15, 15)
+        self.name = TextAndEntryfield(self.edit_group, 'name', 15, 15)
+        self.stat = TextAndEntryfield(self.edit_group, 'stat', 6, 6)
+        self.short = TextAndEntryfield(self.edit_group, 'short', 6,6)
+        self.category = TextAndEntryfield(self.edit_group, 'category', 15, 15)
         self.description = TextBox(self.edit_group, controller, 'description', 40, 10)
-        self.chippable = text_and_inputfield(self.edit_group, 'chip', 6,6)
-        self.diff = text_and_inputfield(self.edit_group, 'diff', 6,6)
+        self.chippable = TextAndEntryfield(self.edit_group, 'chip', 6,6)
+        self.diff = TextAndEntryfield(self.edit_group, 'diff', 6,6)
 
         self.btn_save = ttk.Button(self.frame, text='save', command=self.save)
 
@@ -1196,7 +1242,7 @@ class SkillManager(UIObject):
 
     def short_changes(self, *args):
         short = self.short.variable.get()
-        print('variable short is ' + short)
+        #print('variable short is ' + short)
         
         number_of_same = 0
         saved_short = ''
@@ -1208,7 +1254,7 @@ class SkillManager(UIObject):
             #print('saved short is ' + saved_short)
             if saved_short !='null':
                 if short==saved_short:
-                    print('saved and local short are the same')
+                    #print('saved and local short are the same')
                     number_of_same = number_of_same + 1
                     print(str(number_of_same))
                 else:
@@ -1239,4 +1285,4 @@ class SkillManager(UIObject):
         self.short.variable.set(short)
 
     def save(self):
-        self.contr.prefs.save_skills()
+        self.contr.update_skill_bp_to_db()

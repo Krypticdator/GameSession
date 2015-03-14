@@ -8,6 +8,7 @@ class Controller(object):
     def __init__(self):
         self.prefs = Preferences()
         self.db = SQLController()
+        self.load_skill_bp_into_prefs()
         self.__ui_components = {}
         self.__pc_roster = {}
         self.__skill_shorts = {}
@@ -15,14 +16,17 @@ class Controller(object):
         #pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         pc_filepaths.append('preferences/Toni_Elias Josue Ultra Arm Good.xml')
         self.load_pc_roster(pc_filepaths)
-        print(str(self.__pc_roster['Toni']))
+        #print(str(self.__pc_roster['Toni']))
 
         self.prepare_skill_shorts()
 
         weapons = self.prefs.transfer_wpns_from_txt_to_sql()
         wpn_table=self.db.table('wpn_blueprints')
 
+        skills = self.prefs.get_skills_dictionary()
+        skill_bp_table = self.db.table('skill_blueprints')
         #self.__wpn_db = WeaponSqlController()
+        self.add_skills_bp_to_db(skills, skill_bp_table)
 
         #print(weapons)
         for weapon in weapons:
@@ -48,8 +52,19 @@ class Controller(object):
        
 
         self.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
+        self.db.add_character_to_database(self.c)
         start = StartMenu(self)
-        
+    def add_skills_bp_to_db(self, skill_list, skill_table):
+        for key, value in skill_list.items():
+            name = value.get_attribute('name')
+            stat = value.get_attribute('stat')
+            short = value.get_attribute('short')
+            diff = value.get_attribute('diff')
+            category = value.get_attribute('category')
+            description = value.get_attribute('description')
+            chip = value.get_attribute('ischippable')
+            
+            skill_table.add(name, stat, short, diff, category, chip, description) 
     def load_pc_roster(self, filepath_table):
         for path in filepath_table:
             c = Character(self.prefs)
@@ -59,15 +74,15 @@ class Controller(object):
             #print(str(c))
 
     def load_wpn_sql_table(self):
-        wpn = WeaponBlueprint()
+        wpn = self.db.table('wpn_blueprints')
         return wpn.query_all()
 
     def load_single_sql_wpn(self, name):
-        wpn = WeaponBlueprint()
+        wpn = self.db.table('wpn_blueprints')
         return wpn.search_with_name(name)
 
     def update_sql_wpn(self, name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight, flags, options, alt_munitions, description, category):
-        wpn_table = WeaponBlueprint()
+        wpn_table = self.db.table('wpn_blueprints')
         wpn_table.update_wpn(name, type, wa, con, av, dmg, ammo, shts, rof, rel, range, cost, weight, flags, options, alt_munitions, description, category)
 
     def prepare_skill_shorts(self):
@@ -99,7 +114,8 @@ class Controller(object):
         search_for = str.strip(player)
         return self.__pc_roster[search_for].fuz_roll(detailed)
     
-            
+    def set_char_stat(self, name):
+        pass       
         
     def get_char_stat(self, name, attribute, search_category=False, return_all=False):
         if search_category:
@@ -151,6 +167,27 @@ class Controller(object):
     def calc_dv_probabilities(self, bp, dv):
         percent = self.prefs.get_probability(bp, dv)
         return percent
+
+    def load_skill_bp_into_prefs(self):
+        skill_table = self.db.table('skill_blueprints')
+        skills = skill_table.query_all()
+        for skill in skills:
+            self.prefs.set_skill_blueprint(skill.name, skill.stat, skill.category, skill.description, skill.chip, skill.diff, skill.short)
+
+    def update_skill_bp_to_db(self):
+        skill_table = self.db.table('skill_blueprints')
+
+        for key, value in self.prefs.get_skills_dictionary().items():
+            name = value.get_attribute('name')
+            stat = value.get_attribute('stat')
+            short = value.get_attribute('short')
+            diff = value.get_attribute('diff')
+            category = value.get_attribute('category')
+            description = value.get_attribute('description')
+            chip = value.get_attribute('ischippable')
+
+            skill_table.update(name, stat, short, diff, category, chip, description)
+
 
 
 
