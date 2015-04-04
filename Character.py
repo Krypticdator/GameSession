@@ -27,8 +27,41 @@ class Character(GameObject):
             return self.__fuz_dice.latest_resultset()
         else:
             return self.__fuz_dice.roll()
-    def set_stat(self, name, attribute):
-        pass
+    def set_stat(self, name, attribute, value):
+        try:
+            stat = self.get_attribute(name)
+            stat.set_attribute(attribute, value)
+        except Exception as e:
+            print("error setting stat in Character")
+            print(e)
+    def set(self, command, value):
+        try:
+            commands = command.split('.', -1)
+            command1 = commands[0]
+            #print(str(commands))
+
+            if(command1=='skill'):
+                self.set_stat(commands[1], commands[2], int(value))
+            if(command1=='personality'):
+                #print('command[0] = ' + command1 + ' command[1] = ' + commands[1])
+                stat = self.search_stat_with_attribute("category", commands[1])
+                stat.set_attribute('name', value)
+        except Exception as e:
+            print(e)
+
+    
+
+
+    def search_stat_with_attribute(self, search_from, searched_name):
+        for key, value in self.get_all_attributes().items():
+            try:
+                #print('search_from: ' + search_from + ' searched_name: ' +searched_name)
+                if value.get_attribute(search_from)==searched_name:
+                    #print('returning value')
+                    return value
+            except Exception:
+                pass
+            
     def get_stat(self, name, attribute, category_search=False, return_all=False):
         if category_search:
             all_results = []
@@ -118,17 +151,41 @@ class Character(GameObject):
             item.set_attribute('type', itemlist[2][i])
             self.__inventory[item.get_attribute('name')] = item  
 
-    def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default'):
+    def add_skill(self, name, lvl=0, isDefault=True, stat='null', diff=1, isChippable=False, category='default', ip=0, chipped=False):
         skill = object()
+        
+        try:
+            blueprint = copy.deepcopy(self.prefs.get_from_master(name))
+        except:
+            isDefault = False
         if isDefault:
             skill = copy.deepcopy(self.prefs.getSkill(name))
+            skill.set_attribute('type','skill')
             skill.set_attribute('lvl',lvl)
+            skill.set_attribute('ip', ip)
+            skill.set_attribute('chip', chipped)
         else:
-            skill = Stat(name, stat=stat, lvl=lvl, isChippable=isChippable, category=category, diff=diff)
+            skill = Stat(name, stat=stat, lvl=lvl, isChippable=isChippable, category=category, diff=diff, ip=ip, chip=chipped, type='skill')
 
         self.set_attribute(name, skill)
 
+    def remove_all_attributes_of_type(self, type, attribute):
+        '''removes all attributes of type, who have attribute == type
+        '''
+        to_be_removed = []
+        all_attributes = self.get_all_attributes()
+        for key, value in all_attributes.items():
+            try:
+                type2 = value.get_attribute(attribute)
+                if type2 == type:
+                    to_be_removed.append(key)
+            except Exception as e:
+                print(e)
+        for key in to_be_removed:
+            del(all_attributes[key])
+
     def add_personality(self, name, category, type='personality' ):
+        #print('name: ' + name + ' category: ' + category)
         stat = Stat(name = name, category= category, type=type)
         self.set_attribute(name, stat)
     

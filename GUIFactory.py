@@ -1,12 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 import decimal
-class GUIFactory(object):
-    """description of class"""
-    def __init__(self):
-        pass
+
 
 class UIObject(object):
+    '''Base class for all user interface components'''
     def __init__(self, master, controller= 'None'):
         self.frame = ttk.Frame(master)
         self.contr = controller
@@ -14,7 +12,8 @@ class UIObject(object):
         self.frame.grid(column=0, row=0)
 
 class TextAndEntryfield(UIObject):
-    def __init__(self, master, topic, width_label=15, width_num=2, controller='None'):
+    '''Basic textlabel combined with entry-widged'''
+    def __init__(self, master, topic, width_label=15, width_num=2, controller='None', command='None', trace=False):
         super().__init__(master, controller)
         self.variable = StringVar()
         self.textlabel = ttk.Label(self.frame, text=topic,width=width_label)
@@ -22,12 +21,25 @@ class TextAndEntryfield(UIObject):
         
         self.textlabel.grid(column=0, row=0 )
         self.entry.grid(column=1, row=0)
+        self.command = command
+        
+        if trace:
+            self.variable.trace("w", self.save)
+            self.last_value = "None"
     def set(self, value):
         self.variable.set(value)
+    def save(self, *args):
+        #print('here we are')
+        if self.command!='None':
+            value = self.variable.get()
+            if value != self.last_value:
+                self.contr.set_char_stat(self.command, value)
+                #print('value: ' + value)
     def get(self):
         return self.variable.get()
 
 class LabelAndValue(UIObject):
+    '''label combined with another label reserved for changing value'''
     def __init__(self, master, controller, label_text, label_length=10):
         super().__init__(master, controller)
         self.variable = StringVar()
@@ -45,13 +57,20 @@ class LabelAndValue(UIObject):
         
 
 class EntryField(UIObject):
+    '''basic inputfield wrapped in a class'''
     def __init__(self, master, width_num=15):
         super().__init__(master)
         self.variable = StringVar()
-        self.frame = ttk.Frame(master)
-        self.entry = ttk.Entry(self.frame, textvariable=variable, width = width_num)
+        #self.frame = ttk.Frame(master)
+        self.entry = ttk.Entry(self.frame, textvariable=self.variable, width = width_num)
+        self.entry.grid(column=0, row = 0)
+    def set(self, value):
+        self.variable.set(str(value))
+    def get(self):
+        return self.variable.get()
 
 class TextBox(UIObject):
+    '''Textbox widget wrapped in a class, ment to show information'''
     def __init__(self, master, controller, header, width_num, height_num, column_num=0, row_num=0, ):
         super().__init__(master, controller)
         self.frame = ttk.LabelFrame(master, text=header)
@@ -66,6 +85,7 @@ class TextBox(UIObject):
         self.box.insert(1.0, text)
 
 class CustomListBox(UIObject):
+    '''Listbox widget wrapped in a class'''
     def __init__(self, master, controller):
         super().__init__(master, controller)
         self.box = Listbox(self.frame, height=10, width=40)
@@ -80,6 +100,7 @@ class CustomListBox(UIObject):
         self.box.selection_set(0)
 
 class CustomPanedWindow(UIObject):
+    '''Paned'''
     def __init__(self, master, controller, vertical=True):
         super().__init__(master, controller)
         self.components = {}
@@ -89,6 +110,8 @@ class CustomPanedWindow(UIObject):
         else:
             self.group = ttk.Panedwindow(self.frame, orient=HORIZONAL)
             self.group.grid(column=0, row=0)
+
+          
 
     def add(self, name, component='none', from_array_to_labels=False, array='none'):
         if from_array_to_labels:
@@ -106,8 +129,13 @@ class ListTable(UIObject):
             headers = []
         self.columns = {}
         self.groups = {}
+        self.access_data = {}
+        self.entry_fields = []
+        self.headers = headers
+        self.data = {}
+        
 
-        if read_only:
+        if read_only: #TODO - remove this if statement
             for header in headers:
                 self.columns[header] = ttk.Labelframe(self.frame, text=header)
                 self.groups[header] = CustomPanedWindow(self.columns[header], self.contr)
@@ -119,15 +147,47 @@ class ListTable(UIObject):
             for header in headers:
                 self.columns[header].grid(column=column_num, row=row_num, sticky=(W,N))
                 column_num = column_num +1
+        
+    def add(self, data, write_access=False):
+        gobject = self.contr.get_slate_gameobject()
+        if write_access:
+            object_key = data[self.headers[0]]
+            for key, value in data.items():
+                entry = EntryField(self.groups[key].frame)
+                entry.set(value)
+                self.groups[key].add(key, entry.frame)
+                #entry.frame.grid(column=0, row=0)
+                self.entry_fields.append(entry)
+                gobject.set_attribute(key, entry.variable)
+            self.data[object_key] = gobject
+        else:
+            for key, value in data.items():
+                label = ttk.Label(self.groups[key].frame, text = value)
+                self.groups[key].add(key, label)
+    def add_write_access(self, use_dictionary=True, dictionary='None'):
+        pass
 
-    def add(self, data):
-        for key, value in data.items():
-            label = ttk.Label(self.groups[key].frame, text = value)
-            self.groups[key].add(key, label)
+    def save(self):
+        pass
 
+class SkillTable(ListTable):
+    def __init__(self, master, controller, headers):
+        super().__init__(master, controller, headers)
+        self.contr = controller
 
+    def commit(self):
+        self.contr.destroy_char_attributes_of_type('skill', 'type')
+        for key, value in self.data.items():
+            name = value.get_attribute('name')
+            lvl = value.get_attribute('lvl')
+            ip = value.get_attribute('ip')
+            chipped = value.get_attribute('chipped')
 
-
+            try:
+                self.contr.add_skill_to_char(name.get(), lvl.get(), ip.get(), chipped.get())
+            except Exception as e:
+                print(e)
+        
 
 
 
@@ -342,34 +402,29 @@ class SkillComponent(UIObject):
         self.category_group = {}
         self.skill_components = {}
         self.skill_list = self.contr.get_char_stat_list('skill')
-        for key, value in self.skill_list.items():
-            if value.get_attribute('category') in self.skill_categories:
-                pass
-            else:
-                self.skill_categories.append(value.get_attribute('category'))
-        self.skill_categories.sort()
-        #print(str(self.skill_categories))
-        for category in self.skill_categories:
-            self.category_frames[category] = ttk.Labelframe(self.frame, text=category)
-            self.category_group[category] = ttk.Panedwindow(self.category_frames[category], orient = VERTICAL)
-            self.category_group[category].grid(column=0, row=0)
-        for key, value in self.skill_list.items():
-            category = value.get_attribute('category')
-            self.skill_components[key] = LabelAndValue(self.category_group[category], self.contr, key, 30)
-            self.skill_components[key].set(value.get_attribute('lvl'))
-            #print(str(skill_component.get()))
-            self.category_group[category].add(self.skill_components[key].frame)
+        self.skill_array = []
 
-        row_num =0
-        col_num=0
-        for key, value in self.category_frames.items():
-            value.grid(column=col_num, row=row_num)
-            col_num = col_num +1
-            if col_num==2:
-                col_num = 0
-                row_num = row_num+1
-        #print('wow')
-        #self.frame.grid(column=0, row=0)
+        headers = ['name',  'lvl', 'ip', 'chipped', 'diff']
+        self.skill_table = SkillTable(self.frame, self.contr, headers)
+
+        for key, value in self.skill_list.items():
+            self.skill_array.append(key)
+        self.skill_array.sort()
+        #print(str(self.skill_array))
+        for cell in self.skill_array:
+            skill = self.skill_list[cell]
+            name = skill.get_attribute('name')
+            lvl = skill.get_attribute('lvl')
+            ip = skill.get_attribute('ip')
+            chip = skill.get_attribute('chip')
+            diff = skill.get_attribute('diff')
+            self.skill_table.add({'name':name, 'lvl':lvl,'ip':ip, 'chipped':chip, 'diff':diff}, True)
+
+        btn_commit = ttk.Button(self.frame, text='commit', command=self.skill_table.commit)
+        btn_commit.grid(column=1, row=1)
+        #self.skill_table.frame.grid(column=0, row=0)
+
+        
 
 class PersonalityComponent(UIObject):
     def __init__(self, master, controller, read_only=False):
@@ -404,7 +459,7 @@ class PersonalityComponent(UIObject):
             self.inmode = LabelAndValue(self.personality_group, self.contr, 'inmode', 25)
             self.exmode = LabelAndValue(self.personality_group, self.contr, 'exmode', 25)
         else:
-            self.motivation = TextAndEntryfield(self.personality_group, 'prime motivation', 25, 20, self.contr)
+            self.motivation = TextAndEntryfield(self.personality_group, 'prime motivation', 25, 20, self.contr, 'personality.prime_motivation', True)
             self.person = TextAndEntryfield(self.personality_group, 'most valued person', 25, 20, self.contr)
             self.posession = TextAndEntryfield(self.personality_group, 'most valued posession', 25, 20, self.contr)
             self.people = TextAndEntryfield(self.personality_group, 'feels about most people', 25, 20, self.contr)
@@ -762,7 +817,7 @@ class CharacterSheet(UIObject):
 
          
     def load_character(self):
-        self.contr.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
+        self.contr.load_character('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
 
         player = self.contr.get_char_attribute('player')
         fname = self.contr.get_char_attribute('fname')

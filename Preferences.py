@@ -540,7 +540,7 @@ class Lifepath:
                     elif event[3] == '4':
                         betrayel_table = self.prefs.table('betrayel_type')
                         betrayel = betrayel_table.get_option(event[4])
-                        text = text + '. ' + betrayel_text
+                        text = text + '. ' + betrayel
                     elif event[3] == '5':
                         accident_table = self.prefs.table('accident_type')
                         accident = accident_table.get_option(event[4])
@@ -610,7 +610,7 @@ class Lifepath:
                     text = text + '. ' + txt + '. ' + feelings
                 elif relationship == '3':
                     problem_table = self.prefs.table('love_problems')
-                    txt = problem_table.get_option(event[4])
+                    txt = problem_table.get_option(event[3])
                     text = text + '. ' + txt
                 elif relationship == '4':
                     pass

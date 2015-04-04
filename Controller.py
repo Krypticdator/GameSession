@@ -3,6 +3,7 @@ from Preferences import Preferences
 from XmlController import XmlController
 from SQLController import SQLController
 from Character import Character
+from GameObject import GameObject
 class Controller(object):
     """description of class"""
     def __init__(self):
@@ -14,7 +15,7 @@ class Controller(object):
         self.__skill_shorts = {}
         pc_filepaths = []
         #pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
-        pc_filepaths.append('preferences/Toni_Elias Josue Ultra Arm Good.xml')
+        pc_filepaths.append('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         self.load_pc_roster(pc_filepaths)
         #print(str(self.__pc_roster['Toni']))
 
@@ -27,7 +28,7 @@ class Controller(object):
         skill_bp_table = self.db.table('skill_blueprints')
         #self.__wpn_db = WeaponSqlController()
         self.add_skills_bp_to_db(skills, skill_bp_table)
-
+        
         #print(weapons)
         for weapon in weapons:
             name = str(weapon.get_attribute('name'))
@@ -51,7 +52,7 @@ class Controller(object):
         
        
 
-        self.load_character('preferences/Toni_Elias Josue Ultra Arm Good.xml')
+        self.load_character('preferences/Rasmus_Shawn Everette Slow Curve Manning.xml')
         self.db.add_character_to_database(self.c)
         start = StartMenu(self)
     def add_skills_bp_to_db(self, skill_list, skill_table):
@@ -114,8 +115,18 @@ class Controller(object):
         search_for = str.strip(player)
         return self.__pc_roster[search_for].fuz_roll(detailed)
     
-    def set_char_stat(self, name):
-        pass       
+    def set_char_stat(self, command, value):
+        self.c.set(command, value) 
+    
+    def destroy_char_attributes_of_type(self, type, attribute):
+        self.c.remove_all_attributes_of_type(type, attribute)
+
+    def add_skill_to_char(self, name, lvl, ip, chipped):
+        self.c.add_skill(name, lvl, ip=ip, chipped=chipped)
+    
+    def get_slate_gameobject(self):
+        o = GameObject()
+        return o   
         
     def get_char_stat(self, name, attribute, search_category=False, return_all=False):
         if search_category:

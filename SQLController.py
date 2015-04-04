@@ -342,7 +342,7 @@ class SQLController():
         blueprint_id = skillBp.id
         character_id = character.id
         skills = Skills()
-        skills.add(buelprint_id, character_id, chipped, 0, 0, lvl)
+        skills.add(blueprint_id, character_id, chipped, 0, 0, lvl)
 
     def add_character_to_database(self, character):
         c = self.table('characters')
