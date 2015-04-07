@@ -13,7 +13,7 @@ class UIObject(object):
 
 class TextAndEntryfield(UIObject):
     '''Basic textlabel combined with entry-widged'''
-    def __init__(self, master, topic, width_label=15, width_num=2, controller='None', command='None', trace=False):
+    def __init__(self, master, topic, width_label=15, width_num=2, controller='None', command='None', trace=False, save_to_character=True):
         super().__init__(master, controller)
         self.variable = StringVar()
         self.textlabel = ttk.Label(self.frame, text=topic,width=width_label)
@@ -192,7 +192,7 @@ class SkillTable(ListTable):
 
 
 
-class StartMenu(object):
+class StartMenu(object): #TODO - Move this to controller
     def __init__(self, contr):
         self.contr = contr
         self.root = Tk()
@@ -211,10 +211,13 @@ class StartMenu(object):
         menu_file.add_command(label='Load Character', command=self.load_char)
         menu_settings.add_command(label='DV table', command=self.dv_settings)
         menu_settings.add_command(label='Skills', command=self.skill_manager)
+        menu_settings.add_command(label='Skill shortcuts', command=self.skill_shorts)
         menu_edit.add_command(label='Task handler', command=self.task_handler)
         menu_edit.add_command(label='Weapon inspector', command=self.weapon_inspector)
         self.root.mainloop()
-
+    def skill_shorts(self):
+        window = Toplevel(self.root)
+        #s = 
     def load_char(self):
         window = Toplevel(self.root)
         c = CharacterSheet(window, self.contr)
@@ -744,28 +747,11 @@ class CharacterSheet(UIObject):
          self.load_character()
 
          #SKILLS
-         self.skill_frame = ttk.Labelframe(self.overview_frame, text='Skills')
-         self.skill_group = ttk.Panedwindow(self.skill_frame, orient=VERTICAL)
-         skill_list = self.contr.get_char_stat_list('skill')
-         self.skill_ui_components = {}
-
-         sorted_list = []
-         for key, value in skill_list.items():
-             self.skill_ui_components[key] = LabelAndValue(self.skill_group, self.contr, key, 20)
-             self.skill_ui_components[key].set(value.get_attribute('lvl'))
-             sorted_list.append(key)
-             #self.skill_group.add(self.skill_ui_components[key].frame)
-         sorted_list.sort()
-
-         for key in sorted_list:
-             self.skill_group.add(self.skill_ui_components[key].frame)
+         
 
          info_frame.grid(column=0, row=0, sticky=(W))
          info_group.grid(column=0, row=0)
          basic_stats_frame.grid(column=0, row=1)
-         #derived_frame.grid(column=0, row=2, sticky=(W))
-         self.skill_frame.grid(column=0, row=3, sticky=(W))
-         self.skill_group.grid(column=0, row=0)
 
          info_group.add(self.player.frame)
          info_group.add(self.char_name.frame)
@@ -1341,3 +1327,5 @@ class SkillManager(UIObject):
 
     def save(self):
         self.contr.update_skill_bp_to_db()
+
+

@@ -30,6 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Character.py" />
+    <Compile Include="Utilities.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Validation.py">
       <SubType>Code</SubType>
     </Compile>

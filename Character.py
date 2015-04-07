@@ -282,7 +282,7 @@ class Stat(GameObject):
         elif type=='complication':
             self.set_attribute('frequency', int(frequency))
             self.set_attribute('importance', int(importance))
-            self.set_attribute('importance', int(importance))
+            self.set_attribute('intensity', int(intensity))
             self.set_attribute('category', str.lower(category))
         elif type=='stat':
             self.set_attribute('original', original)

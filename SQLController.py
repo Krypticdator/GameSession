@@ -300,10 +300,27 @@ class Skills(Base):
     cost = Column(Integer)
 
     def add(self, blueprint_id, character_id, chipped, ip_cap, ip, lvl, field='NA', flags='NA', cost=0):
-        skill = Skills(blueprint_id, character_id, chipped, ip_cap, ip, lvl, field, flags, cost)
+        skill = Skills(blueprint_id=blueprint_id, character_id=character_id, chipped=chipped, ip_cap=ip_cap, ip=ip, lvl=lvl, field=field, flags=flags, cost=cost)
+        self.session.add(skill)
+        self.session.commit()
+    def setSession(self, session):
+        self.session = session
+
+class Complications(Base):
+    id = Column(Integer, primary_key=True)
+    character_id = Column(Integer)
+    name = Column(String)
+    intensity = Column(Integer)
+    frequency = Column(Integer)
+    importance = Column(Integer)
 
     def setSession(self, session):
         self.session = session
+
+    def add(self, character_id, name, intensity, frequency, importance):
+        comp = Complications(character_id=character_id, name=name, intensity=intensity, frequency=frequency, importance=importance)
+        self.session.add(comp)
+        self.session.commit()
 
 
 class SQLController():
