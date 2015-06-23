@@ -9,7 +9,7 @@ from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import sessionmaker
 
 class dbCharacter(Base):
-    __tablename__ = 'character'
+    __tablename__ = 'characters'
     id = Column(Integer, primary_key=True)
     player_id = Column(Integer)
     full_name= Column(String)
@@ -162,6 +162,12 @@ class dbCharacter(Base):
             text = text + cell + ';'
         return text
 
+    def get_by_name(self, name):
+        query = self.session.query(dbCharacter).filter(dbCharacter.full_name==name)
+        return query.first()
+
+
+
     def setSession(self, session):
         self.session = session
 
@@ -283,6 +289,9 @@ class SkillBlueprints(Base):
     def query_all(self):
         query = self.session.query(SkillBlueprints).order_by(SkillBlueprints.id)
         return query.all()
+    def search_by_name(self, name):
+        query =  self.session.query(SkillBlueprints).filter(SkillBlueprints.name == name)
+        return query.first()
     def setSession(self, session):
         self.session = session
 
@@ -299,14 +308,57 @@ class Skills(Base):
     flags = Column(String)
     cost = Column(Integer)
 
-    def add(self, blueprint_id, character_id, chipped, ip_cap, ip, lvl, field='NA', flags='NA', cost=0):
+    def add(self, blueprint_id, character_id, chipped, ip_cap, ip, lvl, field='NA', flags='NA', cost=0, search_with_skill_name= False, search_with_char_name=False, skill_name = None, char_name = None):
+        if(search_with_char_name):
+            dbchar = dbCharacter.get_by_name(char_name)
+            character_id = dbchar.id
+        if(search_with_skill_name):
+            dbskill = SkillBlueprints.search_by_name(skill_name)
+            blueprint_id = dbskill.id
+
+        for instance in self.session.query(Skills).order_by(Skills.id):
+            if instance.blueprint_id==blueprint_id and character_id==instance.character_id:
+                self.update(blueprint_id, character_id, chipped, ip_cap, ip, lvl, field, flags, cost)
+                return
+
         skill = Skills(blueprint_id=blueprint_id, character_id=character_id, chipped=chipped, ip_cap=ip_cap, ip=ip, lvl=lvl, field=field, flags=flags, cost=cost)
         self.session.add(skill)
         self.session.commit()
+
+
+    def update(self, blueprint_id, character_id, chipped, ip_cap, ip, lvl, field='NA', flags='NA', cost=0, skill_name = None, character_name = None):
+        updated = None
+        if(skill_name):
+            dbskill = SkillBlueprints.search_by_name(skill_name)
+            blueprint_id = dbskill.id
+        if(character_name):
+            dbchar = dbCharacter.get_by_name(character_name)
+            character_id = dbchar.id
+        for instance in self.session.query(Skills).order_by(Skills.character_id):
+            if(instance.blueprint_id==blueprint_id and character_id==instance.character_id):
+                updated = instance
+                break
+        if updated:
+            updated.chipped = chipped
+            updated.ip_cap = ip_cap
+            updated.ip = ip
+            updated.lvl = lvl
+            updated.field = field
+            updated.flags = flags
+            updated.cost = cost
+            self.session.commit()
+
+    def get(self, name):
+        skill = SkillBlueprints.search_by_name(name)
+        id = skill.id
+        query = self.session.query(Skills).filter(Skills.id==id)
+        return query.first()
+
     def setSession(self, session):
         self.session = session
 
 class Complications(Base):
+    __tablename__ = 'complications'
     id = Column(Integer, primary_key=True)
     character_id = Column(Integer)
     name = Column(String)
@@ -344,7 +396,7 @@ class SQLController():
              
             
         except Exception as e:
-            print('error connecting to database: ' +database)
+            print('error connecting to database')
             print(e)
             #self.db.close()
         finally:
@@ -364,6 +416,9 @@ class SQLController():
     def add_character_to_database(self, character):
         c = self.table('characters')
         c.addCharacter(character)
+
+
+
 
     def __del__(self):
         self.session.close()

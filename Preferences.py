@@ -5,6 +5,7 @@ from Character import Effect
 from random import randrange
 from FileController import FileControl
 from GameObject import Weapon
+
 class Preferences(FileControl):
     """description of class"""
     def __init__(self):
@@ -134,20 +135,23 @@ class Preferences(FileControl):
             self.__skills[str.lower(array[0])]=skill'''
 
     def set_skill_blueprint(self, name, stat, category, description, isChippable, diff, short):
-        skill = Stat(name=name, stat=stat, category=category, description=description, isChippable=isChippable, diff=diff)
+        skill = Stat(name=name, stat=stat, category=category, description=description, is_chippable=isChippable, diff=diff)
         skill.set_attribute('short', short)
         self.__skills[name] = skill
 
 
         #print(self.__skills)
-    def load_complications(self):
-        x = XmlController()
-        x.load_file('preferences/preferences.xml')
-        extract = x.get_dataset('complications',False, True)
+    def load_complications(self, sql=False):
+        if sql:
+            pass
+        else:
+            x = XmlController()
+            x.load_file('preferences/preferences.xml')
+            extract = x.get_dataset('complications',False, True)
 
-        for array in extract:
-            complication = Stat(name=array[0], category=array[1], description=array[2], type='complication')
-            self.__complications[array[0]]=complication
+            for array in extract:
+                complication = Stat(name=array[0], category=array[1], description=array[2], type='complication')
+                self.__complications[array[0]]=complication
 
     def load_perks_talents(self):
         x=XmlController()
@@ -190,7 +194,7 @@ class Preferences(FileControl):
         return copy.deepcopy(self.__tables[table_name].get_random_option())
         
 
-    def load_character(self, filepath, character):
+    def load_character(self, filepath, character, db=None):
         x=XmlController()
         x.load_file(filepath)
         player = x.get_node_value('info','player')
@@ -272,8 +276,13 @@ class Preferences(FileControl):
 
         character.set_attribute('lifepath', lp)
 
+        if(db):
+            db.table('characters').addCharacter(character)
+
         #print(str(character.get_stat('light sleeper', 'name')))
         #print(str(character))
+
+
    
     def get_stat(self, name):
         returned=Stat();

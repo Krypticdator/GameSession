@@ -108,7 +108,7 @@ class CustomPanedWindow(UIObject):
             self.group = ttk.Panedwindow(self.frame, orient=VERTICAL)
             self.group.grid(column=0, row=0)
         else:
-            self.group = ttk.Panedwindow(self.frame, orient=HORIZONAL)
+            self.group = ttk.Panedwindow(self.frame, orient=HORIZONTAL)
             self.group.grid(column=0, row=0)
 
           
@@ -185,14 +185,21 @@ class SkillTable(ListTable):
 
             try:
                 self.contr.add_skill_to_char(name.get(), lvl.get(), ip.get(), chipped.get())
+
             except Exception as e:
                 print(e)
-        
+        self.contr.save_char()
+
+class ItemTable(ListTable):
+    def __init__(self, master, controller, headers):
+        super().__init__(master, controller, headers)
 
 
+    def commit(self):
+        pass # TODO - destroy character inventory
 
 
-class StartMenu(object): #TODO - Move this to controller
+class StartMenu(object): # TODO - Move this to controller
     def __init__(self, contr):
         self.contr = contr
         self.root = Tk()
