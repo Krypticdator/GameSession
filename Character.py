@@ -160,6 +160,8 @@ class Character(GameObject):
         """
 
         :type name: str
+        :type lvl: int
+        :type is_default: bool
         """
         skill = object()
 
@@ -289,7 +291,7 @@ class Stat(GameObject):
     def __init__(self, name='undefined', type='skill', stat='int', lvl=0, ip=0, diff=1, chip=False, frequency=0,
                  importance=0, intensity=0, original=0, description='undefined', category='undefined',
                  is_chippable=False, source_stats=None, divider=1, multiplier=1, age=0, gender='male',
-                 relation='undefined'):
+                 relation='undefined', field=None):
         super().__init__()
         if source_stats is None:
             source_stats = []
@@ -304,6 +306,7 @@ class Stat(GameObject):
             self.set_attribute('chip', chip)
             self.set_attribute('category', str.lower(category))
             self.set_attribute('ischippable', is_chippable)
+            self.set_attribute('field', field)
         elif type == 'complication':
             self.set_attribute('frequency', int(frequency))
             self.set_attribute('importance', int(importance))

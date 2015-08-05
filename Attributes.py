@@ -14,10 +14,13 @@ def Property(name, expected_type):
         setattr(self, storage_name, value)
         return prop
 
-class Stat():
+class Stat(object):
     name = Property('name', str)
     def __init__(self, name):
         self.name = name
+        va
+
+
 
 
 class StatOld():

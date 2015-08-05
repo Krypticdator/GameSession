@@ -159,13 +159,13 @@ class Preferences(FileControl):
         extract = x.get_dataset('perks',False, True)
 
         for array in extract:
-            perk = Stat(name=array[0], description=array[1])
+            perk = Stat(name=array[0], description=array[1], type='perk')
             self.__perks[array[0]]=perk
 
         extract = x.get_dataset('talents', False, True)
 
         for array in extract:
-            talent = Stat(name=array[0], description=array[1])
+            talent = Stat(name=array[0], description=array[1], type='talent')
             self.__talents[array[0]]=talent
 
     def load_table(self, table_name):
@@ -277,7 +277,7 @@ class Preferences(FileControl):
         character.set_attribute('lifepath', lp)
 
         if(db):
-            db.table('characters').addCharacter(character)
+            db.table('characters').saveCharacter(character)
 
         #print(str(character.get_stat('light sleeper', 'name')))
         #print(str(character))

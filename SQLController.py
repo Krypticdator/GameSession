@@ -71,8 +71,7 @@ class dbCharacter(Base):
 
     flags = Column(String)
     faction = Column(Integer)
-
-    def addCharacter(self, Character):
+    def saveCharacter(self, Character):
         player = Character.get_attribute('player')
         fname = Character.get_attribute('fname')
         sname = Character.get_attribute('sname')
@@ -145,7 +144,32 @@ class dbCharacter(Base):
                             Sprint=Sprint, Leap=Leap, Swim=Swim, Hits=Hits, Stun=Stun, SD=SD, Res=Res, family_rank=family_rank, 
                             parents=parents, parent_event=parent_event, family_event=family_event, childhood=childhood, 
                             childhood_event=childhood_event, family_contact=family_contact)
+            self.add_skills(Character, c.id)
+
             self.session.commit()
+
+    def add_skills(self, Character, id):
+        cskills = Character.get_stat_list('skill')
+        for key, value in cskills.items():
+            name = value.get_attribute('name')
+            chipped = value.get_attribute('chipped')
+            ip_cap = value.get_attribute('lvl')
+            ip = value.get_attribute('ip')
+            lvl = value.get_attribute('lvl')
+            skill_id = SkillBlueprints.search_by_name(name)
+            s = Skills()
+            s.add(skill_id, id, chipped, ip_cap, ip, lvl)
+
+    def add_complications(self, Character, id):
+        complications = Character.get_stat_list('complication')
+        for key, value in complications:
+            name = value.get_attribute('name')
+            intensity = value.get_attribute('intensity')
+            frequency = value.get_attribute('frequency')
+            importance = value.get_attribute('importance')
+            c = Complications()
+            c.add(id, name, intensity, frequency, importance)
+
             
 
     def convert_stat(self, stat):
@@ -365,14 +389,28 @@ class Complications(Base):
     intensity = Column(Integer)
     frequency = Column(Integer)
     importance = Column(Integer)
+    flags = Column(String)
 
     def setSession(self, session):
         self.session = session
 
-    def add(self, character_id, name, intensity, frequency, importance):
+    def add(self, character_id, name, intensity, frequency, importance, flags=None):
         comp = Complications(character_id=character_id, name=name, intensity=intensity, frequency=frequency, importance=importance)
         self.session.add(comp)
         self.session.commit()
+    def update(self, character_id, name, intensity, frequency, importance, flags=None):
+        pass
+    def save(self, character_id, name, intensity, frequency, importance, flags=None):
+        for comp in self.session.query(Complications).\
+                filter(Complications.name==name).\
+                filter(Complications.character_id ==character_id):
+            comp.intensity = intensity
+            comp.frequency = frequency
+            comp.importance = importance
+            comp.flags = flags
+        self.session.commit()
+
+
 
 
 class SQLController():
@@ -415,7 +453,7 @@ class SQLController():
 
     def add_character_to_database(self, character):
         c = self.table('characters')
-        c.addCharacter(character)
+        c.saveCharacter(character)
 
 
 
